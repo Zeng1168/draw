@@ -81,11 +81,6 @@ public class DrawBroad extends JScrollPane implements MouseMotionListener, Mouse
                 this.repaint();
             }break;
             case FILL_RECTANGEL: {
-                /**
-                 * 例子 绘制实心矩形
-                 * 1.在鼠标按下监听中，先把图像和按下时的坐标点，保存在pressedPoint、pressedImage中
-                 * 2.鼠标拖动时，把原来保存的图像复制一份，在复制的图像上根据按下的点和当前点绘制形状
-                 */
                 imageChange(imageCopy(pressedImage));
                 Integer X1 , X2, Y1, Y2;
                 if(pressedPoint.X > e.getX() ){
