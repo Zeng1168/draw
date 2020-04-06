@@ -1,4 +1,4 @@
-package coms;
+package view.drawMainView;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * 画笔、画布设置
  */
-public class TopTools extends JToolBar{
+public class TopToolBar extends JToolBar{
 	TopToolListener listener;  // 自定义监听
 
     JButton penColorBtn; // 画笔颜色选择按钮
@@ -23,7 +23,7 @@ public class TopTools extends JToolBar{
     JTextField groundSizeYEdit; // 画布高度
 
 
-    public TopTools(Params params){
+    public TopToolBar(Color penColor, Color backColor, int width, int height){
         // 创建图形组件
         JPanel penPanel = new JPanel();	// 画笔属性
         JPanel canvaPanel = new JPanel();	// 画布属性
@@ -34,7 +34,7 @@ public class TopTools extends JToolBar{
         // 添加画笔颜色选择按钮、画笔颜色预览块
         penColorBtn = new JButton("颜色");	// 颜色标签
         penColorDisp = new JTextField(3);
-        penColorDisp.setBackground(params.getPenColor());
+        penColorDisp.setBackground(penColor);
         penPanel.add(penColorBtn);
         penPanel.add(penColorDisp);
         // 添加画笔粗细标签、画笔粗细输入框
@@ -48,12 +48,12 @@ public class TopTools extends JToolBar{
         // 添加背景颜色选择按钮、背景颜色预览块
         backColorBtn = new JButton("颜色");
         backColorDisp = new JTextField(3);
-        backColorDisp.setBackground(params.getBackgroundColor());
+        backColorDisp.setBackground(backColor);
         canvaPanel.add(backColorBtn);
         canvaPanel.add(backColorDisp);
         // 添加尺寸设置组件
-        groundSizeXEdit = new JTextField(String.valueOf(params.getGroundSizeX()),2);
-        groundSizeYEdit = new JTextField(String.valueOf(params.getGroundSizeY()),2);
+        groundSizeXEdit = new JTextField(String.valueOf(width),2);
+        groundSizeYEdit = new JTextField(String.valueOf(height),2);
         changeSizeBtn = new JButton("改变尺寸");
         canvaPanel.add(new JLabel("尺寸"));   // 尺寸（标签）
         canvaPanel.add(groundSizeXEdit);    // 长（输入框）

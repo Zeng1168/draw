@@ -1,4 +1,4 @@
-package coms;
+package entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,8 @@ public enum DrawMode {
     TRIANGLE(" 三角形 ", CursorTool.AIM_CURSOR),
     RECTANGEL("  矩形  ", CursorTool.AIM_CURSOR),
     FILL_RECTANGEL("实心矩形", CursorTool.AIM_CURSOR),
-    CIRCLE("  圆形  ", CursorTool.AIM_CURSOR);
+    CIRCLE("  圆形  ", CursorTool.AIM_CURSOR),
+    ROSE("  玫瑰  ", CursorTool.AIM_CURSOR);
 
     // 鼠标形状
     static class CursorTool {
