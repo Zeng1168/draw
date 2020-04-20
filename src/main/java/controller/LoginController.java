@@ -5,6 +5,7 @@ import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import service.UserService;
 import utils.AlertUtil;
 import utils.Result;
@@ -37,8 +38,9 @@ public class LoginController extends BaseController<UserService> {
                      if(loginResult.getStatus() == ResultCode.SUCCESS.getCode()){    // 登录成功
                          try {
                              new DrawMainController();
-
-
+                             //通过stage方式操作窗口，因为一个新的窗口就是一个新的stage
+                             Stage stage = (Stage)username.getScene().getWindow();
+                             stage.close();
                          } catch (Exception e2) {
                              e2.printStackTrace();
                          }
@@ -46,7 +48,6 @@ public class LoginController extends BaseController<UserService> {
                          AlertUtil.alertWarn("登陆状态提示", null,loginResult.getMsg());
                      }
                  }
-
         }
 
     }
@@ -54,7 +55,6 @@ public class LoginController extends BaseController<UserService> {
     public void btnRegist(ActionEvent e) {
         String strUsername = username.getText();
         String strPsw = password.getText();
-
 
         if(strUsername.equals("")){
             AlertUtil.alertWarn("注册状态提示", null,"用户名不能为空");
@@ -64,15 +64,21 @@ public class LoginController extends BaseController<UserService> {
             User user=new User();
             user.setName(strUsername);
             user.setPassword(strPsw);
-//            userMapper=new UserDao();
-//            String result=userMapper.insertUser(user);
+
+            if(getServiceInstance()){
+                Result signResult = service.userSign(user);
+                if(signResult.getStatus() == ResultCode.SUCCESS.getCode()){
+                    AlertUtil.alertInfo("注册状态提示", null,"注册成功！");
+                }else {
+                    AlertUtil.alertWarn("注册状态提示", null,signResult.getMsg());
+                }
             }
         }
+    }
 
     @FXML
     public void btnCancle(ActionEvent e){
         System.exit(0);
-
     }
 
 }

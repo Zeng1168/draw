@@ -1,9 +1,13 @@
 package controller;
 
 import entity.User;
+import service.UserService;
+import utils.AlertUtil;
+import utils.Result;
+import utils.ResultCode;
 import view.UserModifyView;
 
-public class UserModifyController implements UserModifyView.UserModifyListener {
+public class UserModifyController extends BaseController<UserService> implements UserModifyView.UserModifyListener {
     private UserModifyView userModifyView;
 
     public UserModifyController() {
@@ -28,9 +32,16 @@ public class UserModifyController implements UserModifyView.UserModifyListener {
             user.setPassword(password);
             user.setPasswordOld(passwordOld);
 
-//            UserDao userMapper = new UserDao();
-//            userModifyView.showMessageDialog(userMapper.updateUser(user));
-            userModifyView.dispose();
+            if(getServiceInstance()){
+                Result updateResult = service.changePassword(user);
+                if(updateResult.getStatus() == ResultCode.SUCCESS.getCode()){
+                    userModifyView.showMessageDialog(updateResult.getMsg());
+                    userModifyView.dispose();
+                }else {
+                    userModifyView.showMessageDialog(updateResult.getMsg());
+                }
+            }
+
         }
     }
 }

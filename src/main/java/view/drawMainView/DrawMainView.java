@@ -64,12 +64,10 @@ public class DrawMainView extends JFrame {
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
 
         // 设置
-        this.setBounds(100,100,800,600);	// 设置窗体位置和大小
+        int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
         this.setVisible(true);	// 设置窗体可见性
-    }
-
-    public void showMessageDialog(String msg){
-        JOptionPane.showMessageDialog(this, msg);
     }
 
     public BranchGroup getDrawGroup() {
