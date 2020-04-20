@@ -1,8 +1,12 @@
-import controller.LoginController2;
+import controller.LoginController;
 
 import javax.swing.*;
 
 public class ApplicationStart {
+    // Zeng
+    //添加二行
+    // 添加一行
+
     public static void main(String[] args) {
 //        new DrawMainController();
 //        new LoginController();
@@ -17,7 +21,7 @@ public class ApplicationStart {
 
 
             try {
-                LoginController2.launch(LoginController2.class);
+                LoginController.launch(LoginController.class);
 
             }catch (Exception e){
                 e.printStackTrace();

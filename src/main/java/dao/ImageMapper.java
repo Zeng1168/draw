@@ -1,4 +1,4 @@
-package mapper;
+package dao;
 
 import entity.Image;
 import utils.DateUtil;
