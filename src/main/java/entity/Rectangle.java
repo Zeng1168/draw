@@ -8,7 +8,7 @@ public class Rectangle {
     private Integer width;  // 宽度
     private Integer height; // 高度
     private Color color;    // 颜色
-    private BasicStroke stroke; // 厚度
+    private Float stroke; // 厚度
 
     public Integer getX() {
         return x;
@@ -50,11 +50,11 @@ public class Rectangle {
         this.color = color;
     }
 
-    public BasicStroke getStroke() {
+    public Float getStroke() {
         return stroke;
     }
 
-    public void setStroke(BasicStroke stroke) {
+    public void setStroke(Float stroke) {
         this.stroke = stroke;
     }
 }

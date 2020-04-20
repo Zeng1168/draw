@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class RectangleDraw {
     Rectangle rectangle;
 
-    public RectangleDraw(MousePoint p1, MousePoint p2, Color penColor, BasicStroke lineStroke){
+    public RectangleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
         rectangle = new Rectangle();
 
         /**
@@ -42,7 +42,7 @@ public class RectangleDraw {
         Graphics2D g2 = buffImg.createGraphics();   // 获取Graphics2D
 
         g2.setColor(rectangle.getColor());
-        g2.setStroke(rectangle.getStroke());
+        g2.setStroke(new BasicStroke(rectangle.getStroke()));
         g2.drawRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
         g2.dispose();
 

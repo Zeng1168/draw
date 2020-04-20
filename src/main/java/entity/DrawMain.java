@@ -7,7 +7,7 @@ import java.util.Stack;
 public class DrawMain {
     // 绘图参数
     private DrawMode drawMode;  // 绘图模式
-    private BasicStroke lineStroke;   // 线条粗细
+    private Float lineStroke;   // 线条粗细
     private Color penColor; // 画笔颜色
     private Color backgroundColor;  // 背景颜色
     private Integer groundSizeX;    // 画布宽度
@@ -35,11 +35,11 @@ public class DrawMain {
         this.drawMode = drawMode;
     }
 
-    public BasicStroke getLineStroke() {
+    public Float getLineStroke() {
         return lineStroke;
     }
 
-    public void setLineStroke(BasicStroke lineStroke) {
+    public void setLineStroke(Float lineStroke) {
         this.lineStroke = lineStroke;
     }
 

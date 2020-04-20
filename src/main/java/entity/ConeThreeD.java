@@ -2,7 +2,7 @@ package entity;
 
 import java.awt.*;
 
-public class Cone3d {
+public class ConeThreeD {
     private  float r;
     private  float h;
     private Color color;

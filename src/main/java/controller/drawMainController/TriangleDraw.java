@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class TriangleDraw {
     Triangle triangle;
 
-    public TriangleDraw(MousePoint p1, MousePoint p2, Color penColor, BasicStroke lineStroke){
+    public TriangleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
         triangle=new Triangle();
 
         /**
@@ -44,7 +44,7 @@ public class TriangleDraw {
         BufferedImage drawImage = ImageUtil.imageCopy(image);
         Graphics2D g2 = (Graphics2D)drawImage.getGraphics();
         g2.setColor(triangle.getColor());
-        g2.setStroke(triangle.getStroke());
+        g2.setStroke(new BasicStroke(triangle.getStroke()));
         g2.drawLine( (triangle.getX1()+triangle.getX2())/2, 
         		triangle.getY1(),triangle.getX1(), triangle.getY2());
         g2.drawLine(triangle.getX1(), triangle.getY2(), triangle.getX2(), triangle.getY2());

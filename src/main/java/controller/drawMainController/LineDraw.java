@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class LineDraw {
     Line line;
 
-    public LineDraw(MousePoint p1, MousePoint p2, Color penColor, BasicStroke lineStroke){
+    public LineDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
         line = new Line();
 
         line.setX1(p1.getX());
@@ -28,7 +28,7 @@ public class LineDraw {
         BufferedImage drawImage = ImageUtil.imageCopy(image);
         Graphics2D g2 = (Graphics2D)drawImage.getGraphics();
         g2.setColor(line.getColor());
-        g2.setStroke(line.getStroke());
+        g2.setStroke(new BasicStroke(line.getStroke()));
         g2.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2());
 
         return drawImage;

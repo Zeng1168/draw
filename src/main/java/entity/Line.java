@@ -8,7 +8,7 @@ public class Line {
     private Integer x2; // 截止坐标
     private Integer y2;
     private Color color;    // 颜色
-    private BasicStroke stroke; // 厚度
+    private Float stroke; // 厚度
 
     public Integer getX1() {
         return x1;
@@ -50,11 +50,11 @@ public class Line {
         this.color = color;
     }
 
-    public BasicStroke getStroke() {
+    public Float getStroke() {
         return stroke;
     }
 
-    public void setStroke(BasicStroke stroke) {
+    public void setStroke(Float stroke) {
         this.stroke = stroke;
     }
 }

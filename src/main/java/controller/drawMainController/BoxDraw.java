@@ -1,18 +1,17 @@
 package controller.drawMainController;
 
 import com.sun.j3d.utils.geometry.Box;
-import entity.Box3d;
+import entity.BoxThreeD;
 
 import javax.media.j3d.BranchGroup;
-import java.awt.*;
 
 public class BoxDraw {
-   Box3d box3d;
+   BoxThreeD box3d;
 
 
 
     public BoxDraw(){
-        box3d =new Box3d();
+        box3d =new BoxThreeD();
 
 
     }

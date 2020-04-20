@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class CircleDraw {
     Circle circle;
 
-    public CircleDraw(MousePoint p1, MousePoint p2, Color penColor, BasicStroke lineStroke){
+    public CircleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
         circle = new Circle();
 
         /**
@@ -43,7 +43,7 @@ public class CircleDraw {
         BufferedImage drawImage = ImageUtil.imageCopy(image);
         Graphics2D g2 = drawImage.createGraphics();
         g2.setColor(circle.getColor());
-        g2.setStroke(circle.getStroke());
+        g2.setStroke(new BasicStroke(circle.getStroke()));
         g2.drawOval(circle.getX(), circle.getY(), circle .getWidth(), circle.getHeight());
 
         return drawImage;

@@ -45,7 +45,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         drawMain = new DrawMain();
         drawMain.setImage(image);
         drawMain.setDrawMode(DrawMode.MOUSE);
-        drawMain.setLineStroke(new BasicStroke(2));
+        drawMain.setLineStroke(2.0f);
         drawMain.setPenColor(Color.BLUE);
         drawMain.setBackgroundColor(Color.WHITE);
         drawMain.setGroundSizeX(image.getWidth());
@@ -193,7 +193,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     // 画笔粗细改变
     @Override
     public void onLineStrockChanged(Float lineStroke) {
-        drawMain.setLineStroke(new BasicStroke(lineStroke));
+        drawMain.setLineStroke(lineStroke);
     }
 
     // 画布尺寸改变
@@ -242,7 +242,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 drawMain.setImage(offscreenTest.getDrawImage());
             }break;
             case SPHERE:{
-                SphereDraw sphereDraw=new SphereDraw();
+                SphereThreeDDraw sphereDraw=new SphereThreeDDraw();
                 OffScreen3DImage offscreenTest=new OffScreen3DImage(new Color3f(drawMain.getPenColor()),sphereDraw.draw());
                 offscreenTest.setVisible(true);
                 drawMain.setImage(offscreenTest.getDrawImage());

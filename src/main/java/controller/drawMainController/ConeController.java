@@ -1,6 +1,6 @@
 package controller.drawMainController;
 
-import entity.Cone3d;
+import entity.ConeThreeD;
 import view.ConeView;
 
 public class ConeController implements ConeView.ConeController{
@@ -21,7 +21,7 @@ public class ConeController implements ConeView.ConeController{
             vcone.showMessageDialog("高度不能为空！");
             vcone.focushInput();
         }else {
-            Cone3d cone3d =new Cone3d();
+            ConeThreeD cone3d =new ConeThreeD();
             cone3d.setR(Float.parseFloat(r));
             cone3d.setH(Float.parseFloat(h));
             area= cone3d.getArea();

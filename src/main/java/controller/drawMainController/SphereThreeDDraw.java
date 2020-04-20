@@ -1,15 +1,15 @@
 package controller.drawMainController;
 
 import com.sun.j3d.utils.geometry.Sphere;
-import entity.Sphere3d;
+import entity.SphereThreeD;
 
 import javax.media.j3d.BranchGroup;
 
-public class SphereDraw {
-    Sphere3d sphere3d;
+public class SphereThreeDDraw {
+    SphereThreeD sphere3d;
 
-    public SphereDraw(){
-        sphere3d=new Sphere3d();
+    public SphereThreeDDraw(){
+        sphere3d=new SphereThreeD();
     }
 
     public BranchGroup draw() {

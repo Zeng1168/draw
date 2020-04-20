@@ -8,7 +8,7 @@ public class Triangle {
     private Integer y1,y2;  // 位置坐标y1,y2
  
     private Color color;    // 颜色
-    private BasicStroke stroke; // 厚度
+    private Float stroke; // 厚度
 
   
     public Integer getX1() {
@@ -52,12 +52,12 @@ public class Triangle {
         this.color = color;
     }
 
-    public BasicStroke getStroke() {
-        return stroke;
-    }
+	public Float getStroke() {
+		return stroke;
+	}
 
-    public void setStroke(BasicStroke stroke) {
-        this.stroke = stroke;
-    }
+	public void setStroke(Float stroke) {
+		this.stroke = stroke;
+	}
 }
 
