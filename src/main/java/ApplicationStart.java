@@ -3,6 +3,8 @@ import controller.LoginController;
 import javax.swing.*;
 
 public class ApplicationStart {
+    // 添加一行
+
     public static void main(String[] args) {
 //        new DrawMainController();
 //        new LoginController();
