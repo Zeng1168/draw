@@ -1,7 +1,6 @@
 package controller;
 
 import entity.User;
-import mapper.UserMapper;
 import view.UserModifyView;
 
 public class UserModifyController implements UserModifyView.UserModifyListener {
@@ -29,8 +28,8 @@ public class UserModifyController implements UserModifyView.UserModifyListener {
             user.setPassword(password);
             user.setPasswordOld(passwordOld);
 
-            UserMapper userMapper = new UserMapper();
-            userModifyView.showMessageDialog(userMapper.updateUser(user));
+//            UserDao userMapper = new UserDao();
+//            userModifyView.showMessageDialog(userMapper.updateUser(user));
             userModifyView.dispose();
         }
     }

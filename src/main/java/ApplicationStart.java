@@ -1,4 +1,4 @@
-import controller.LoginController2;
+import controller.LoginController;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class ApplicationStart {
 
 
             try {
-                LoginController2.launch(LoginController2.class);
+                LoginController.launch(LoginController.class);
 
             }catch (Exception e){
                 e.printStackTrace();

@@ -6,7 +6,7 @@ import entity.DrawMain;
 import entity.DrawMode;
 import entity.MousePoint;
 import entity.Image;
-import mapper.ImageMapper;
+import dao.ImageMapper;
 import sun.misc.BASE64Encoder;
 import utils.ImageUtil;
 import view.drawMainView.*;

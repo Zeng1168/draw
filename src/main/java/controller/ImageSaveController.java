@@ -2,7 +2,7 @@ package controller;
 
 import controller.drawMainController.DrawMainController;
 import entity.Image;
-import mapper.ImageMapper;
+import dao.ImageMapper;
 import sun.misc.BASE64Decoder;
 import view.ImageSaveView;
 
