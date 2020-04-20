@@ -19,7 +19,7 @@ import utils.ResultCode;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class LoginController extends Application {
+public class LoginController  {
     UserService userService;
 
     @FXML
@@ -28,15 +28,7 @@ public class LoginController extends Application {
     @FXML
     TextField password;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("style/Login.fxml"));
-        root.getStylesheets().add(getClass().getClassLoader().getResource("style/login.css").toExternalForm());
-        primaryStage.setTitle("用户登陆");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
 
-    }
 
     @FXML
     public void btnLogin(ActionEvent e){
