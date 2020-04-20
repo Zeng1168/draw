@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import service.UserService;
+import utils.AlertUtil;
 import utils.Result;
 import utils.ResultCode;
 
@@ -26,17 +27,9 @@ public class LoginController extends BaseController<UserService> {
         String strPsw = password.getText();
 
         if(strUsername.equals("")){
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("登陆状态提示");
-            alert.setHeaderText(null);
-            alert.setContentText("用户名不能为空");
-            alert.showAndWait();
+            AlertUtil.alertWarn("登陆状态提示", null,"用户名不能为空！");
         }else if(strPsw.equals("")) {
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("登陆状态提示");
-            alert.setHeaderText(null);
-            alert.setContentText("密码不能为空");
-            alert.showAndWait();
+            AlertUtil.alertWarn("登陆状态提示", null,"密码不能为空！");
         }else {
                  User user=new User();
                  user.setName(strUsername);
