@@ -1,8 +1,6 @@
 package controller;
 
 import controller.drawMainController.DrawMainController;
-import entity.Image;
-import dao.ImageMapper;
 import sun.misc.BASE64Decoder;
 import view.ImageSaveView;
 
@@ -10,7 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.List;
 
 public class ImageSaveController implements ImageSaveView.ImageSaveListener {
     private ImageSaveView imageSaveView;
@@ -23,9 +20,9 @@ public class ImageSaveController implements ImageSaveView.ImageSaveListener {
 
     @Override
     public void onQuery() {
-        ImageMapper imageMapper = new ImageMapper();
-        List<Image> images = imageMapper.queryAll();
-        imageSaveView.setData(images);
+//        ImageDao imageMapper = new ImageDao();
+//        List<Image> images = imageMapper.queryAll();
+//        imageSaveView.setData(images);
     }
 
     @Override
@@ -44,9 +41,9 @@ public class ImageSaveController implements ImageSaveView.ImageSaveListener {
 
     @Override
     public void onDelete(Integer id) {
-        ImageMapper imageMapper = new ImageMapper();
-        if(imageMapper.deteleImage(id) > 0){
-            onQuery();
-        }
+//        ImageDao imageMapper = new ImageDao();
+//        if(imageMapper.deteleImage(id) > 0){
+//            onQuery();
+//        }
     }
 }

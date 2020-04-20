@@ -5,9 +5,8 @@ import controller.SimpleOffscreenTest;
 import controller.UserModifyController;
 import entity.DrawMain;
 import entity.DrawMode;
-import entity.MousePoint;
 import entity.Image;
-import dao.ImageMapper;
+import entity.MousePoint;
 import sun.misc.BASE64Encoder;
 import utils.ImageUtil;
 import view.drawMainView.*;
@@ -111,12 +110,12 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         image.setUserId(1);
         image.setTime(new Date());
         image.setImage(imageStr);
-        ImageMapper imageMapper = new ImageMapper();
-        if(imageMapper.insertImage(image) > 0){
-            drawMainView.showMessageDialog("保存成功！");
-        }else {
-            drawMainView.showMessageDialog("保存失败！");
-        }
+//        ImageDao imageMapper = new ImageDao();
+//        if(imageMapper.insertImage(image) > 0){
+//            drawMainView.showMessageDialog("保存成功！");
+//        }else {
+//            drawMainView.showMessageDialog("保存失败！");
+//        }
     }
 
     // 保存为文件

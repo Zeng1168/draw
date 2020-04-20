@@ -1,17 +1,11 @@
 package controller;
 
-
 import controller.drawMainController.DrawMainController;
 import entity.User;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import service.UserService;
 import utils.Result;
 import utils.ResultCode;
@@ -19,16 +13,12 @@ import utils.ResultCode;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class LoginController  {
-    UserService userService;
-
+public class LoginController extends BaseController<UserService> {
     @FXML
     TextField username;
 
     @FXML
     TextField password;
-
-
 
     @FXML
     public void btnLogin(ActionEvent e){
@@ -53,29 +43,31 @@ public class LoginController  {
                  user.setPassword(strPsw);
 
 
-                 userService = new UserService();
-            System.out.println(userService.toString());
-                    Result loginResult = userService.userLogin(user);
-                    if(loginResult.getStatus() == ResultCode.SUCCESS.getCode()){    // 登录成功
-                        try {
-                            // 生成初始图片
-                            BufferedImage image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
-                            Graphics g = image.getGraphics();
-                            g.setColor(Color.WHITE);
-                            g.fillRect(0,0,image.getWidth(), image.getHeight());
+                 if(getServiceInstance()){
+                     System.out.println(service.toString());
+                     Result loginResult = service.userLogin(user);
+                     if(loginResult.getStatus() == ResultCode.SUCCESS.getCode()){    // 登录成功
+                         try {
+                             // 生成初始图片
+                             BufferedImage image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
+                             Graphics g = image.getGraphics();
+                             g.setColor(Color.WHITE);
+                             g.fillRect(0,0,image.getWidth(), image.getHeight());
 
-                            new DrawMainController(image);
+                             new DrawMainController(image);
 
-                        } catch (Exception e2) {
-                            e2.printStackTrace();
-                        }
-                    }else { // 登录失败
-                        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("登陆状态提示");
-                        alert.setHeaderText(null);
-                        alert.setContentText(loginResult.getMsg());
-                        alert.showAndWait();
-                    }
+                         } catch (Exception e2) {
+                             e2.printStackTrace();
+                         }
+                     }else { // 登录失败
+                         Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                         alert.setTitle("登陆状态提示");
+                         alert.setHeaderText(null);
+                         alert.setContentText(loginResult.getMsg());
+                         alert.showAndWait();
+                     }
+                 }
+
         }
 
     }
