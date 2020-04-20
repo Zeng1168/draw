@@ -1,18 +1,19 @@
 package controller.drawMainController;
 
 import controller.ImageSaveController;
-import controller.SimpleOffscreenTest;
+
+import controller.OffScreen3DImage;
 import controller.UserModifyController;
-import entity.DrawMain;
-import entity.DrawMode;
+import entity.*;
+import dao.ImageMapper;
 import entity.Image;
-import entity.MousePoint;
 import sun.misc.BASE64Encoder;
 import utils.ImageUtil;
 import view.drawMainView.*;
 
 import javax.imageio.ImageIO;
 import javax.media.j3d.BranchGroup;
+import javax.vecmath.Color3f;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -110,12 +111,12 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         image.setUserId(1);
         image.setTime(new Date());
         image.setImage(imageStr);
-//        ImageDao imageMapper = new ImageDao();
-//        if(imageMapper.insertImage(image) > 0){
-//            drawMainView.showMessageDialog("保存成功！");
-//        }else {
-//            drawMainView.showMessageDialog("保存失败！");
-//        }
+        ImageMapper imageMapper = new ImageMapper();
+        if(imageMapper.insertImage(image) > 0){
+            drawMainView.showMessageDialog("保存成功！");
+        }else {
+            drawMainView.showMessageDialog("保存失败！");
+        }
     }
 
     // 保存为文件
@@ -230,15 +231,23 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         switch (drawMode){
 
             case CONE: {
-                new ConeController();
+                ConeDraw coneDraw=new ConeDraw();
+                OffScreen3DImage offscreenTest=new OffScreen3DImage(new Color3f(drawMain.getPenColor()),coneDraw.draw());
+                offscreenTest.setVisible(true);
+                drawMain.setImage(offscreenTest.getDrawImage());
             } break;
             case BOX:{
-                //每点击一次按钮就会生成一个JFram
-                SimpleOffscreenTest offscreenTest=new SimpleOffscreenTest();
+                BoxDraw box=new BoxDraw();
+                OffScreen3DImage offscreenTest=new OffScreen3DImage(new Color3f(drawMain.getPenColor()),box.draw());
                 offscreenTest.setVisible(true);
-                //把image从offscreenTest中取出
-                drawMain.setImage(offscreenTest.getDrawImae());
+                drawMain.setImage(offscreenTest.getDrawImage());
             }break;
+            case SPHERE:{
+                SphereDraw sphereDraw=new SphereDraw();
+                OffScreen3DImage offscreenTest=new OffScreen3DImage(new Color3f(drawMain.getPenColor()),sphereDraw.draw());
+                offscreenTest.setVisible(true);
+                drawMain.setImage(offscreenTest.getDrawImage());
+            }
 
             default: break;
         }

@@ -20,6 +20,7 @@ public enum DrawMode {
     CIRCLE("  圆形  ", CursorTool.AIM_CURSOR),
     ROSE("  玫瑰  ", CursorTool.AIM_CURSOR),
     CONE("  圆锥  ", CursorTool.AIM_CURSOR),
+    SPHERE(" 球 ",CursorTool.AIM_CURSOR),
     BOX(" 长方体 ",CursorTool.AIM_CURSOR);
 
     // 鼠标形状
