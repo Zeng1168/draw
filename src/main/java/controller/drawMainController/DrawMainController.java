@@ -1,6 +1,7 @@
 package controller.drawMainController;
 
 import controller.ImageSaveController;
+import controller.SimpleOffscreenTest;
 import controller.UserModifyController;
 import entity.DrawMain;
 import entity.DrawMode;
@@ -232,6 +233,13 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
             case CONE: {
                 new ConeController();
             } break;
+            case BOX:{
+                //每点击一次按钮就会生成一个JFram
+                SimpleOffscreenTest offscreenTest=new SimpleOffscreenTest();
+                offscreenTest.setVisible(true);
+                //把image从offscreenTest中取出
+                drawMain.setImage(offscreenTest.getDrawImae());
+            }break;
 
             default: break;
         }
