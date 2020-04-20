@@ -1,0 +1,23 @@
+
+.root{
+    -fx-font-family: "normal";
+    -fx-font-size: 16px;
+    -fx-background-color: #F1F0EB;
+    -fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+
+}
+
+.text-field{-fx-border-style:outset;
+-fx-font-family:"UD Digi Kyokasho NP-B"
+}
+.button{-fx-background-color:#6A9D67;
+    -fx-font: white;
+}
+
+
+.button:hover{
+    -fx-background-color: #326d3b;
+}
+
+

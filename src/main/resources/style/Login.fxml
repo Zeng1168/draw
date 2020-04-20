@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mLogin" prefHeight="316.0" prefWidth="488.0" style="-fx-background-image: 12;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController2">
+   <children>
+   <FlowPane layoutX="80.0" layoutY="102.0" prefHeight="87.0" prefWidth="80.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="102.0">
+         <children>
+            <VBox alignment="center">
+               <children>
+                  <Label fx:id="title" alignment="center" layoutX="300.0" layoutY="67.0" style="-fx-font-size: 35;" text="欢迎登陆" textFill="#171717">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" fillHeight="false" prefHeight="135.0" prefWidth="413.0" spacing="6.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="69.0" spacing="22.0">
+                     <children>
+                        <Label id="username" text="用户名">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label id="password" text="密码" textFill="#1b1a1a">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="111.0" prefWidth="195.0" spacing="12.0">
+                     <children>
+                        <TextField fx:id="username" />
+                        <PasswordField fx:id="password" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+                  <HBox alignment="center" spacing="40">
+                     <children>
+                        <Button id="login" fx:id="login" onAction="#btnLogin" text="登陆" textFill="WHITE" />
+                        <Button fx:id="regist" onAction="#btnRegist" text="注册" textFill="WHITE" />
+                        <Button fx:id="cancel" onAction="#btnCancle" text="取消" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+   </FlowPane>
+
+   </children>
+</AnchorPane>
