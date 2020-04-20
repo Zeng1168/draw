@@ -3,6 +3,7 @@ package entity;
 import java.awt.*;
 
 public class Box {
+    // 添加了
     private Integer x;  // 位置坐标x
     private Integer y;  // 位置坐标y
     private Integer width;  // 宽度
