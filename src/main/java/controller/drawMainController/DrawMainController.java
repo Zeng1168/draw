@@ -1,12 +1,12 @@
 package controller.drawMainController;
 
 import controller.ImageSaveController;
-
 import controller.OffScreen3DImage;
 import controller.UserModifyController;
-import entity.*;
-import dao.ImageMapper;
+import entity.DrawMain;
+import entity.DrawMode;
 import entity.Image;
+import entity.MousePoint;
 import sun.misc.BASE64Encoder;
 import utils.ImageUtil;
 import view.drawMainView.*;
@@ -111,12 +111,12 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         image.setUserId(1);
         image.setTime(new Date());
         image.setImage(imageStr);
-        ImageMapper imageMapper = new ImageMapper();
-        if(imageMapper.insertImage(image) > 0){
-            drawMainView.showMessageDialog("保存成功！");
-        }else {
-            drawMainView.showMessageDialog("保存失败！");
-        }
+//        ImageMapper imageMapper = new ImageMapper();
+//        if(imageMapper.insertImage(image) > 0){
+//            drawMainView.showMessageDialog("保存成功！");
+//        }else {
+//            drawMainView.showMessageDialog("保存失败！");
+//        }
     }
 
     // 保存为文件
@@ -302,7 +302,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 drawMain.setImage(image);
             }break;
             case BOX:{ // 长方体
-                BoxDraw boxDraw=new BoxDraw(drawMain.getPenColor());
+                BoxDraw boxDraw=new BoxDraw();
                 setGroup(boxDraw.draw());
                 drawMainView.setDrawGroup(boxDraw.draw());
                 //BufferedImage image=boxDraw.draw(drawMain.getPressedImage());

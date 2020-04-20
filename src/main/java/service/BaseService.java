@@ -31,6 +31,7 @@ public abstract class BaseService <T> {
     // 结束数据库会话
     protected void closeSqlsession(){
         if(sqlSession != null){
+            sqlSession.commit();
             sqlSession.close();
         }
     }
