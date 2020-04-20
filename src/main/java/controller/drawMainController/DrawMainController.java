@@ -1,12 +1,11 @@
 package controller.drawMainController;
 
 import controller.ImageSaveController;
+
 import controller.OffScreen3DImage;
 import controller.UserModifyController;
-import entity.DrawMain;
-import entity.DrawMode;
+import entity.*;
 import entity.Image;
-import entity.MousePoint;
 import sun.misc.BASE64Encoder;
 import utils.ImageUtil;
 import view.drawMainView.*;
@@ -300,13 +299,6 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 RoseDraw roseController=new RoseDraw();
                 BufferedImage image=roseController.draw(drawMain.getPressedImage());
                 drawMain.setImage(image);
-            }break;
-            case BOX:{ // 长方体
-                BoxDraw boxDraw=new BoxDraw();
-                setGroup(boxDraw.draw());
-                drawMainView.setDrawGroup(boxDraw.draw());
-                //BufferedImage image=boxDraw.draw(drawMain.getPressedImage());
-
             }break;
             default : break;
         }
