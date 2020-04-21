@@ -1,6 +1,6 @@
 package controller.drawMainController;
 
-import entity.MousePoint;
+import entity.Point;
 import entity.Triangle;
 import utils.ImageUtil;
 
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class TriangleDraw {
     Triangle triangle;
 
-    public TriangleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
+    public TriangleDraw(Point p1, Point p2, Color penColor, Float lineStroke){
         triangle=new Triangle();
 
         /**

@@ -1,6 +1,6 @@
 package controller.drawMainController;
 
-import entity.MousePoint;
+import entity.Point;
 import utils.ImageUtil;
 
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class FillRectangleDraw extends RectangleDraw {
 
-    public FillRectangleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke) {
+    public FillRectangleDraw(Point p1, Point p2, Color penColor, Float lineStroke) {
         super(p1, p2, penColor, lineStroke);
     }
 

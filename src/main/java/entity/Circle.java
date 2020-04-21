@@ -1,15 +1,50 @@
 package entity;
 
 
-import java.awt.*;
-
 public class Circle {
-    private Integer x;  // 位置坐标x
-    private Integer y;  // 位置坐标y
-    private Integer width;  // 宽度
-    private Integer height; // 高度
-    private Color color;    // 颜色
-    private Float stroke; // 厚度
+    // 数据库中的id
+    private Integer id;
+    private Integer imageId;
+    private Integer drawId;
+
+    private String name;
+    private Integer x;  // 起始坐标x
+    private Integer y;  // 起始坐标y
+    private Integer radius;  // 半径
+    private Integer color;    // 颜色
+    private Integer stroke; // 厚度
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
+
+    public Integer getDrawId() {
+        return drawId;
+    }
+
+    public void setDrawId(Integer drawId) {
+        this.drawId = drawId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Integer getX() {
         return x;
@@ -27,35 +62,27 @@ public class Circle {
         this.y = y;
     }
 
-    public Integer getWidth() {
-        return width;
+    public Integer getRadius() {
+        return radius;
     }
 
-    public void setWidth(Integer width) {
-        this.width = width;
+    public void setRadius(Integer radius) {
+        this.radius = radius;
     }
 
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Color getColor() {
+    public Integer getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 
-    public Float getStroke() {
+    public Integer getStroke() {
         return stroke;
     }
 
-    public void setStroke(Float stroke) {
+    public void setStroke(Integer stroke) {
         this.stroke = stroke;
     }
 }

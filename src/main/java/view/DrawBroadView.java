@@ -1,6 +1,6 @@
 package view;
 
-import entity.MousePoint;
+import entity.Point;
 
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
@@ -74,7 +74,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseDragged(MouseEvent e) {
         if(listener != null){
-            listener.mouseDragged(new MousePoint(e.getX(), e.getY()));
+            listener.mouseDragged(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -82,7 +82,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseMoved(MouseEvent e) {
         if(listener != null){
-            listener.mouseMoved(new MousePoint(e.getX(), e.getY()));
+            listener.mouseMoved(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -90,7 +90,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseClicked(MouseEvent e) {
         if(listener != null){
-            listener.mouseClicked(new MousePoint(e.getX(), e.getY()));
+            listener.mouseClicked(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -98,7 +98,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mousePressed(MouseEvent e) {
         if(listener != null){
-            listener.mousePressed(new MousePoint(e.getX(), e.getY()));
+            listener.mousePressed(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -106,7 +106,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseReleased(MouseEvent e) {
         if(listener != null){
-            listener.mouseReleased(new MousePoint(e.getX(), e.getY()));
+            listener.mouseReleased(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -114,7 +114,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseEntered(MouseEvent e) {
         if(listener != null){
-            listener.mouseEntered(new MousePoint(e.getX(), e.getY()));
+            listener.mouseEntered(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -122,7 +122,7 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     @Override
     public void mouseExited(MouseEvent e) {
         if(listener != null){
-            listener.mouseExited(new MousePoint(e.getX(), e.getY()));
+            listener.mouseExited(new Point(e.getX(), e.getY()));
         }
     }
 
@@ -133,13 +133,13 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
 
     // 自定义监听器
     public interface DrawBroadListener{
-        void mouseDragged(MousePoint p);
-        void mouseMoved(MousePoint p);
-        void mouseClicked(MousePoint p);
-        void mousePressed(MousePoint p);
-        void mouseReleased(MousePoint p);
-        void mouseEntered(MousePoint p);
-        void mouseExited(MousePoint p);
+        void mouseDragged(Point p);
+        void mouseMoved(Point p);
+        void mouseClicked(Point p);
+        void mousePressed(Point p);
+        void mouseReleased(Point p);
+        void mouseEntered(Point p);
+        void mouseExited(Point p);
     }
 
     // 画图容器 内部类

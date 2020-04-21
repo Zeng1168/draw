@@ -1,4 +1,5 @@
-package entity;
+package utils;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,18 +11,18 @@ import java.awt.*;
  */
 public enum DrawMode {
 
-    MOUSE("  鼠标  ", CursorTool.MOUSE_CURSOR),
-    PEN("  钢笔  ", CursorTool.PEN_CURSOR),
-    RUBBER("  橡皮  ", CursorTool.RUBBER_CURSOR),
-    LINE("  直线  ", CursorTool.AIM_CURSOR),
-    TRIANGLE(" 三角形 ", CursorTool.AIM_CURSOR),
-    RECTANGEL("  矩形  ", CursorTool.AIM_CURSOR),
+    MOUSE("鼠标", CursorTool.MOUSE_CURSOR),
+    PEN("钢笔", CursorTool.PEN_CURSOR),
+    RUBBER("橡皮", CursorTool.RUBBER_CURSOR),
+    LINE("直线", CursorTool.AIM_CURSOR),
+    TRIANGLE("三角形", CursorTool.AIM_CURSOR),
+    RECTANGEL("矩形", CursorTool.AIM_CURSOR),
     FILL_RECTANGEL("实心矩形", CursorTool.AIM_CURSOR),
-    CIRCLE("  圆形  ", CursorTool.AIM_CURSOR),
-    ROSE("  玫瑰  ", CursorTool.AIM_CURSOR),
-    CONE("  圆锥  ", CursorTool.AIM_CURSOR),
-    SPHERE(" 球 ",CursorTool.AIM_CURSOR),
-    BOX(" 长方体 ",CursorTool.AIM_CURSOR);
+    CIRCLE("圆形", CursorTool.AIM_CURSOR),
+    ROSE("玫瑰", CursorTool.AIM_CURSOR),
+    CONE("圆锥", CursorTool.AIM_CURSOR),
+    SPHERE("球体",CursorTool.AIM_CURSOR),
+    BOX("长方体",CursorTool.AIM_CURSOR);
 
     // 鼠标形状
     static class CursorTool {

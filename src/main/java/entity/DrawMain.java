@@ -1,5 +1,7 @@
 package entity;
 
+import utils.DrawMode;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Stack;
@@ -15,9 +17,9 @@ public class DrawMain {
     private Integer rubberSize;     // 橡皮半径
 
     private BufferedImage image;    // 绘制的图像
-    private MousePoint previousPoint;   // 鼠标经过的上一个坐标
+    private Point previousPoint;   // 鼠标经过的上一个坐标
     private BufferedImage previousImage;    // 上一个绘制的图像
-    private MousePoint pressedPoint;    // 鼠标刚按下的坐标
+    private Point pressedPoint;    // 鼠标刚按下的坐标
     private BufferedImage pressedImage; // 鼠标刚按下的图像
     private Stack recordStack;   // image历史记录
     private Stack cancelStack;   // image撤销记录
@@ -91,11 +93,11 @@ public class DrawMain {
         this.image = image;
     }
 
-    public MousePoint getPreviousPoint() {
+    public Point getPreviousPoint() {
         return previousPoint;
     }
 
-    public void setPreviousPoint(MousePoint previousPoint) {
+    public void setPreviousPoint(Point previousPoint) {
         this.previousPoint = previousPoint;
     }
 
@@ -107,11 +109,11 @@ public class DrawMain {
         this.previousImage = previousImage;
     }
 
-    public MousePoint getPressedPoint() {
+    public Point getPressedPoint() {
         return pressedPoint;
     }
 
-    public void setPressedPoint(MousePoint pressedPoint) {
+    public void setPressedPoint(Point pressedPoint) {
         this.pressedPoint = pressedPoint;
     }
 

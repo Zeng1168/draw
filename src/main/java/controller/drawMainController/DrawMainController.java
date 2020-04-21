@@ -6,7 +6,9 @@ import controller.OffScreen3DImage;
 import controller.UserModifyController;
 import entity.*;
 import entity.Image;
+import entity.Point;
 import sun.misc.BASE64Encoder;
+import utils.DrawMode;
 import utils.ImageUtil;
 import view.drawMainView.*;
 
@@ -254,7 +256,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
 
     // 鼠标拖动
     @Override
-    public void mouseDragged(MousePoint p) {
+    public void mouseDragged(Point p) {
         switch(drawMain.getDrawMode()) {
             case PEN :{ // 钢笔绘制
                 if(drawMain.getPreviousPoint() != null) {
@@ -281,9 +283,9 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 drawMain.setImage(ImageUtil.imageCombine(drawMain.getPressedImage(), image));   // 更新绘制图像
             }break;
             case CIRCLE:{   // 绘制圆形
-                CircleDraw circleController=new CircleDraw(drawMain.getPressedPoint(), p, drawMain.getPenColor(), drawMain.getLineStroke());
-                BufferedImage image=circleController.draw(drawMain.getPressedImage());
-                drawMain.setImage(image);   // 更新绘制图像
+                CircleDraw circleController=new CircleDraw(drawMain.getPressedPoint(), p, drawMain.getPenColor().getRGB(), drawMain.getLineStroke().intValue());
+                BufferedImage image=circleController.draw(drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
+                drawMain.setImage(ImageUtil.imageCombine(drawMain.getPressedImage(), image));   // 更新绘制图像
             }break;
             case LINE :{    // 画直线
                 LineDraw lineDraw =new LineDraw(drawMain.getPressedPoint(), p, drawMain.getPenColor(), drawMain.getLineStroke());
@@ -310,15 +312,15 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
 
     // 鼠标移动
     @Override
-    public void mouseMoved(MousePoint p) { }
+    public void mouseMoved(Point p) { }
 
     // 鼠标点击
     @Override
-    public void mouseClicked(MousePoint p) { }
+    public void mouseClicked(Point p) { }
 
     // 鼠标按下
     @Override
-    public void mousePressed(MousePoint p) {
+    public void mousePressed(Point p) {
         // 记录鼠标按下时的点和图像
         drawMain.setPreviousPoint(p);
         drawMain.setPressedPoint(p);
@@ -331,7 +333,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
 
     // 鼠标松开
     @Override
-    public void mouseReleased(MousePoint p) {
+    public void mouseReleased(Point p) {
         // 清除鼠标和图像绘制记录
         drawMain.setPreviousPoint(null);
         drawMain.setPreviousImage(null);
@@ -341,9 +343,9 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
 
     // 鼠标进入绘图区
     @Override
-    public void mouseEntered(MousePoint p) { }
+    public void mouseEntered(Point p) { }
 
     // 鼠标离开绘图区
     @Override
-    public void mouseExited(MousePoint p) { }
+    public void mouseExited(Point p) { }
 }

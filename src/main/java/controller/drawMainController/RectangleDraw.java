@@ -1,6 +1,6 @@
 package controller.drawMainController;
 
-import entity.MousePoint;
+import entity.Point;
 import entity.Rectangle;
 import utils.ImageUtil;
 
@@ -10,8 +10,9 @@ import java.awt.image.BufferedImage;
 public class RectangleDraw {
     Rectangle rectangle;
 
-    public RectangleDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
+    public RectangleDraw(Point p1, Point p2, Color penColor, Float lineStroke){
         rectangle = new Rectangle();
+
 
         /**
          * 设置起始位置和宽高度

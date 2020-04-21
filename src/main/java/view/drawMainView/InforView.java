@@ -1,6 +1,6 @@
 package view.drawMainView;
 
-import entity.DrawMode;
+import utils.DrawMode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +50,7 @@ public class InforView extends JPanel implements LeftToolBar.LeftToolListener {
         boxv1.add(volumn);
         boxv2.add(volumnContent);
         boxv1.add(position);
-        boxv2.add(positionContent);
+//        boxv2.add(positionContent);
         boxh1.add(boxv1);
         boxh1.add(boxv2);
 

@@ -1,5 +1,5 @@
 package view.drawMainView;
-import entity.DrawMode;
+import utils.DrawMode;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

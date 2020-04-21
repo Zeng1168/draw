@@ -4,8 +4,8 @@ package entity;
 import java.awt.*;
 
 public class Triangle {
-    private Integer x1,x2;  // 位置坐标x1,x2
-    private Integer y1,y2;  // 位置坐标y1,y2
+    private Integer x1,x2,x3;  // 位置坐标x1,x2
+    private Integer y1,y2,y3;  // 位置坐标y1,y2
  
     private Color color;    // 颜色
     private Float stroke; // 厚度

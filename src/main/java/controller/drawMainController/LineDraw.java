@@ -1,7 +1,7 @@
 package controller.drawMainController;
 
 import entity.Line;
-import entity.MousePoint;
+import entity.Point;
 import utils.ImageUtil;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class LineDraw {
     Line line;
 
-    public LineDraw(MousePoint p1, MousePoint p2, Color penColor, Float lineStroke){
+    public LineDraw(Point p1, Point p2, Color penColor, Float lineStroke){
         line = new Line();
 
         line.setX1(p1.getX());
