@@ -1,10 +1,12 @@
 package controller;
 
 import controller.drawMainController.DrawMainController;
+import dao.ImageDao;
 import sun.misc.BASE64Decoder;
 import view.ImageSaveView;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

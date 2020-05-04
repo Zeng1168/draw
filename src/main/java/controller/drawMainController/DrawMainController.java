@@ -4,6 +4,7 @@ import controller.ImageSaveController;
 
 import controller.OffScreen3DImage;
 import controller.UserModifyController;
+import controller.DemodeController;
 import entity.*;
 import entity.Image;
 import entity.Point;
@@ -168,12 +169,16 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         }
     }
     //修改信息
-
-
     @Override
     public void onModify() {
         new UserModifyController();
     }
+
+    //切换模式
+    @Override
+    public void onchange() {new DemodeController();    }
+
+    public  void onchange2(){}
 
     /**  顶部工具栏监听  **/
     // 画笔颜色改变
@@ -236,6 +241,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 OffScreen3DImage offscreenTest=new OffScreen3DImage(new Color3f(drawMain.getPenColor()),coneDraw.draw());
                 offscreenTest.setVisible(true);
                 drawMain.setImage(offscreenTest.getDrawImage());
+                drawMainView.setConeAttribute();
             } break;
             case BOX:{
                 BoxDraw box=new BoxDraw();
@@ -286,6 +292,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 CircleDraw circleController=new CircleDraw(drawMain.getPressedPoint(), p, drawMain.getPenColor().getRGB(), drawMain.getLineStroke().intValue());
                 BufferedImage image=circleController.draw(drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
                 drawMain.setImage(ImageUtil.imageCombine(drawMain.getPressedImage(), image));   // 更新绘制图像
+
             }break;
             case LINE :{    // 画直线
                 LineDraw lineDraw =new LineDraw(drawMain.getPressedPoint(), p, drawMain.getPenColor(), drawMain.getLineStroke());

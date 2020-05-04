@@ -50,14 +50,13 @@ public class InforView extends JPanel implements LeftToolBar.LeftToolListener {
         boxv1.add(volumn);
         boxv2.add(volumnContent);
         boxv1.add(position);
-//        boxv2.add(positionContent);
         boxh1.add(boxv1);
         boxh1.add(boxv2);
 
         this.add(boxh1);
         this.setLayout(new FlowLayout());
         this.setSize(200,480);
-        this.setVisible(true);
+       this.setVisible(true);
 
 
     }

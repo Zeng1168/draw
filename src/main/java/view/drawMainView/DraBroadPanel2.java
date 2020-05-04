@@ -79,7 +79,7 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
         DirectionalLight light1
                 = new DirectionalLight(light1Color, light1Direction);
         light1.setInfluencingBounds(bounds);
-        Color backgroundColor=new Color(200,120,110);
+        Color backgroundColor=new Color(224, 188, 118, 255);
         Background bg = new Background(backgroundColor.getRed()/255f, backgroundColor.getGreen()/255f, backgroundColor.getBlue()/255f);
         bg.setApplicationBounds(bounds);
         root.addChild(bg);
@@ -235,10 +235,6 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
             this.bImage = bImage;
         }
     }
-
-
-
-
 
         @Override
         public void paint(Graphics g) {

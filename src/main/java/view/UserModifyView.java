@@ -13,7 +13,6 @@ public class UserModifyView extends JFrame implements ActionListener {
     JLabel jl1,jl2,jl3;
     JTextField jf1,jf2,jf3;
     JButton jb;
-    String old_yhm,old_psw,psw;
     public UserModifyView() {
 
         boxh1=Box.createHorizontalBox();
@@ -76,9 +75,9 @@ public class UserModifyView extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(listener != null){
             listener.onModify(jf1.getText().trim(), jf3.getText().trim(), jf2.getText().trim());
+            System.out.println(e.getActionCommand());
         }
     }
-
 
     // 设置监听
     public void setUserModifyListener(UserModifyListener listener){
@@ -87,6 +86,6 @@ public class UserModifyView extends JFrame implements ActionListener {
 
     // 自定义监听器
     public interface UserModifyListener{
-        void onModify(String name, String password, String passwordPld);
+        void onModify(String name, String password, String passwordOld);
     }
 }

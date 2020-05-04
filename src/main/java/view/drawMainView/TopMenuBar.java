@@ -1,6 +1,7 @@
 package view.drawMainView;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * 顶部菜单栏
@@ -13,6 +14,9 @@ public class TopMenuBar extends JMenuBar{
 	JMenu tOption=new JMenu("选项");
 	JMenu tHelp=new JMenu("帮助");
 	JMenu tUser=new JMenu("用户");
+	JMenu tchange=new JMenu("画板模式");
+
+
 
 	// 文件菜单
 	JMenuItem fOpen=new JMenuItem("打开本地文件");
@@ -29,13 +33,16 @@ public class TopMenuBar extends JMenuBar{
 	//用户菜单
 	JMenuItem uModify=new JMenuItem("修改信息");
 
-
+	//画板模式
+	JMenuItem change=new JMenuItem("平面绘图模式");
+	JMenuItem change2=new JMenuItem("数学绘图模式");
 	public TopMenuBar() {
 		this.add(tFile);
 		this.add(tEdit);
 		this.add(tOption);
 		this.add(tHelp);
-		this.add(tUser);
+		this.add(tUser,0);
+		this.add(tchange);
 
 		tFile.add(fOpenDB);
 		tFile.add(fOpen);
@@ -49,6 +56,10 @@ public class TopMenuBar extends JMenuBar{
 
 		tUser.add(uModify);
 
+		tchange.add(change);
+		tchange.add(change2);
+		ImageIcon icon=new ImageIcon("./user1.png");
+		tUser.setIcon(icon);
 		this.setListener();
 		this.setVisible(true);
 	}
@@ -101,6 +112,16 @@ public class TopMenuBar extends JMenuBar{
 				listener.onModify();
 			}
 		});
+		change.addActionListener(e -> {
+			if(listener!=null){
+				listener.onchange();
+			}
+		});
+		change2.addActionListener(e -> {
+			if(listener!=null){
+				listener.onchange2();
+			}
+		});
 	}
 
 	// 设置自定义监听器
@@ -118,7 +139,7 @@ public class TopMenuBar extends JMenuBar{
 		void onRedoEdit();
 		void onClearEdit();
 		void onModify();
+		void onchange();
+		void onchange2();
 	}
-
-
 }

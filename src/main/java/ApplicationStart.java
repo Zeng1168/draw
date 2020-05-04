@@ -17,5 +17,6 @@ public class ApplicationStart extends Application {
         primaryStage.show();
         JFrame.setDefaultLookAndFeelDecorated(true);
         UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+
     }
 }

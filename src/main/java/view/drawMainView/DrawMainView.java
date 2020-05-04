@@ -2,9 +2,11 @@ package view.drawMainView;
 
 
 import entity.DrawMain;
+import entity.Image;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
+import view.ConeView;
 
 import javax.media.j3d.BranchGroup;
 import javax.swing.*;
@@ -62,6 +64,8 @@ public class DrawMainView extends JFrame {
         this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
+        ImageIcon icon=new ImageIcon("./iconfont.png");
+        this.setIconImage(icon.getImage());
 
         // 设置
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -69,7 +73,10 @@ public class DrawMainView extends JFrame {
         this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
         this.setVisible(true);	// 设置窗体可见性
     }
-
+    public void setConeAttribute(){
+        this.add(new ConeView(),BorderLayout.SOUTH);
+        this.validate();
+    }
     public BranchGroup getDrawGroup() {
         return drawGroup;
     }
@@ -97,4 +104,5 @@ public class DrawMainView extends JFrame {
         leftTool.setLeftToolListener(leftToolListener);
         drawBroad.setDrawBroadListener(drawBroadListener);
     }
+
 }

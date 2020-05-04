@@ -47,22 +47,6 @@ public class DrawBroadView extends JScrollPane implements MouseMotionListener, M
     private static final int offScreenHeight = 480;
 
 
-
-    public DrawBroadView(BufferedImage image){
-        this.image = image;
-
-        // 画板初始化
-        this.setBounds(0, 0, image.getWidth(), image.getHeight());
-        this.setLayout(new BorderLayout());
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        this.setViewportView(new DrawPanel());
-        this.addMouseMotionListener(this);  // 设置鼠标监听
-        this.addMouseListener(this);
-        this.setVisible(true);  // 设置可见性
-    }
-
-
     // 重新绘制图像
     public void paintImage(BufferedImage image){
         this.image = image;

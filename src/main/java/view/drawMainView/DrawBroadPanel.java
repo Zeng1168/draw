@@ -65,7 +65,6 @@ public class DrawBroadPanel extends JPanel implements MouseMotionListener, Mouse
 
         locale.addBranchGraph(sceneBranchGroup);
         addViewBranchGroup(locale, viewBranchGroup);
-
         createView(vp);
     }
     /**

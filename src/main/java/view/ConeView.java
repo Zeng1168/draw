@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConeView extends JFrame implements ActionListener {
+public class ConeView extends JPanel implements ActionListener {
    ConeController listener;
     Box boxh1,boxh2,boxh3;
     Box boxv1,boxv2,boxv3,boxv4;
@@ -53,24 +53,24 @@ public class ConeView extends JFrame implements ActionListener {
         jPanel1.add(boxh2);
         jPanel1.add(boxh3);
 
-        this.setLayout(new BorderLayout());
+       // this.setLayout(new BorderLayout());
         this.add(jPanel1,BorderLayout.NORTH);
 
         jb.addActionListener(this);
 
-        setSize(800,600);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = this.getSize();
-        if (frameSize.height > screenSize.height) {
-            frameSize.height = screenSize.height;
-        }
-        if (frameSize.width > screenSize.width) {
-            frameSize.width = screenSize.width;
-        }
-        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-        setTitle("圆锥");
+        //setSize(800,600);
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        Dimension frameSize = this.getSize();
+//        if (frameSize.height > screenSize.height) {
+//            frameSize.height = screenSize.height;
+//        }
+//        if (frameSize.width > screenSize.width) {
+//            frameSize.width = screenSize.width;
+//        }
+//        setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
+//
         setVisible(true);
-        this.repaint();
+       // this.repaint();
     }
 
 
