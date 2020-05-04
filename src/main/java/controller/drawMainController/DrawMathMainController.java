@@ -158,7 +158,7 @@ public class DrawMathMainController implements TopMathMenuBar.TopMathMenuListene
     @Override
     public void onModeChanged(DrawMode drawMode) {
         drawMain.setDrawMode(drawMode);
-        drawMainView.setDrawBroadCursor(drawMode.getCursor());   // 改变鼠标形状
+
 
         switch (drawMode) {
 
