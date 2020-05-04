@@ -2,6 +2,7 @@ package controller;
 
 import controller.drawMainController.DrawMainController;
 import entity.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -41,6 +42,7 @@ public class LoginController extends BaseController<UserService> {
                              //通过stage方式操作窗口，因为一个新的窗口就是一个新的stage
                              Stage stage = (Stage)username.getScene().getWindow();
                              stage.close();
+                             Platform.exit();
                          } catch (Exception e2) {
                              e2.printStackTrace();
                          }

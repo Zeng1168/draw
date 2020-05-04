@@ -1,6 +1,7 @@
-package view.drawMainView;
+package view.drawMathView;
 
 import utils.DrawMode;
+import view.drawMainView.LeftToolBar;
 
 import javax.swing.*;
 import java.awt.*;
