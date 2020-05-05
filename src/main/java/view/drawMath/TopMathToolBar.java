@@ -1,13 +1,11 @@
-package view.drawMathView;
+package view.drawMath;
 
 import utils.DrawMathMode;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Year;
 
 /**
  * 顶部工具栏
@@ -49,12 +47,12 @@ public class TopMathToolBar extends JPanel implements ActionListener,LeftMathToo
 
     JButton test=new JButton("模式更改");
 
-    public TopMathToolBar(Color penColor) {
+    public TopMathToolBar() {
 
 
         // 设置
         this.setLayout(new BorderLayout());
-        this.init(penColor);
+        this.init(Color.BLACK);
         this.setListener(); // 为需要交互的组件设置监听
         this.setVisible(true);
         test.addActionListener(this);

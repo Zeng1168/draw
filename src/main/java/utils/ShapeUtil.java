@@ -1,12 +1,15 @@
 package utils;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import entity.Point;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShapeMathUtil {
+public class ShapeUtil {
 
     // 计算两点距离
     public static Integer distance(Point p1, Point p2){
@@ -52,5 +55,24 @@ public class ShapeMathUtil {
         mid.y = (p1.y + p2.y)/2;
 
         return mid;
+    }
+
+    /**
+     * 判断一个类是否存在某个属性（字段）
+     *
+     * @param field 字段
+     * @param obj   类对象
+     * @return true:存在，false:不存在, null:参数不合法
+     */
+    public static Boolean isExistField(String field, Object obj) {
+        if (obj == null || StringUtils.isEmpty(field)) {
+            return null;
+        }
+        Object o = JSON.toJSON(obj);
+        JSONObject jsonObj = new JSONObject();
+        if (o instanceof JSONObject) {
+            jsonObj = (JSONObject) o;
+        }
+        return jsonObj.containsKey(field);
     }
 }

@@ -1,6 +1,5 @@
-package view.drawMathView;
+package view.drawMath;
 import utils.DrawMathMode;
-import utils.DrawMode;
 
 import javax.swing.*;
 import java.awt.*;

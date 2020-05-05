@@ -1,4 +1,4 @@
-package controller.drawMainController;
+package controller.drawMain;
 
 import com.sun.j3d.utils.geometry.Cone;
 import entity.ConeThreeD;

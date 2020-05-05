@@ -1,4 +1,4 @@
-package controller.drawMainController;
+package controller.drawMain;
 
 import controller.ImageSaveController;
 
@@ -14,7 +14,6 @@ import utils.ImageUtil;
 import view.drawMainView.*;
 
 import javax.imageio.ImageIO;
-import javax.media.j3d.BranchGroup;
 import javax.vecmath.Color3f;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,11 +23,9 @@ import java.io.IOException;
 import java.util.Date;
 
 public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBar.TopToolListener, LeftToolBar.LeftToolListener, DrawBroadPanel.DrawBroadListener {
-    DrawMainView drawMainView;//JFram
+    DrawMainView drawMainView;  // JFram
 
     DrawMain drawMain;//参数
-
-    BranchGroup group;
 
     public DrawMainController() {
         // 生成初始图片
@@ -58,18 +55,9 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
         // 绑定view层
         drawMainView = new DrawMainView(drawMain);
         drawMainView.setListener(this, this, this, this);
-
-        group=new BranchGroup();
-
+        drawMainView.paintImage(image);
     }
 
-    public BranchGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(BranchGroup group) {
-        this.group = group;
-    }
 
     // 绘制到界面上
     private void paint(){
@@ -77,108 +65,6 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     }
 
 
-    /**  顶部菜单栏监听   **/
-    @Override
-    public void onOpenDB() {
-        new ImageSaveController();
-    }
-
-    @Override
-    public void onCreateNew() {
-        // 生成初始图片
-        BufferedImage image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
-        Graphics g = image.getGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0,0,image.getWidth(), image.getHeight());
-
-        new controller.drawMainController.DrawMainController(image);
-    }
-
-    // 保存到数据库
-    @Override
-    public void onSaveDB() {
-        BASE64Encoder encoder = new BASE64Encoder();
-        String imageStr;
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(drawMain.getImage(), "jpeg", baos);
-            byte[] bytes = baos.toByteArray();
-            imageStr = encoder.encodeBuffer(bytes).trim();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Image image = new Image();
-        image.setUserId(1);
-        image.setTime(new Date());
-        image.setImage(imageStr);
-//        ImageMapper imageMapper = new ImageMapper();
-//        if(imageMapper.insertImage(image) > 0){
-//            drawMainView.showMessageDialog("保存成功！");
-//        }else {
-//            drawMainView.showMessageDialog("保存失败！");
-//        }
-    }
-
-    // 保存为文件
-    @Override
-    public void onSaveFile() {
-
-    }
-
-    // 撤销
-    @Override
-    public void onCancleEdit() {
-        Object image = drawMain.popRecordStack(); // 从历史记录栈取出
-        if( image != null){
-            drawMain.pushCancelStack(drawMain.getImage());    // 把当前图片放入撤销记录栈
-            drawMain.setImage((BufferedImage)image);
-            paint();
-        }
-    }
-
-    // 重做
-    @Override
-    public void onRedoEdit() {
-        Object image = drawMain.popCancelStack();
-        if( image != null){
-            drawMain.pushRecordStack(drawMain.getImage());
-            drawMain.setImage((BufferedImage)image);
-            paint();
-        }
-    }
-
-    //清空
-    @Override
-    public void onClearEdit() {
-        drawMain.setBackgroundColor(Color.WHITE);
-        Graphics g = drawMain.getImage().getGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
-        paint();
-    }
-
-    // 存为文件
-    private void saveToFile(String fileName,String fileSrc) {
-        try {
-            ImageIO.write(drawMain.getImage(), "jpeg", new File(fileSrc+fileName+".jpeg"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    //修改信息
-    @Override
-    public void onModify() {
-        new PasswordModifyController();
-    }
-
-    //切换模式
-    @Override
-    public void onchange() {new DemodeController();    }
-
-   public  void onchange2(){}
 
     /**  顶部工具栏监听  **/
     // 画笔颜色改变
@@ -355,4 +241,90 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     // 鼠标离开绘图区
     @Override
     public void mouseExited(Point p) { }
+
+    // 顶部菜单栏被点击
+    @Override
+    public void onMenuItemClick(String command) {
+        switch (command){
+            case "用户-修改密码" : {
+                new PasswordModifyController();
+            }break;
+            case "文件-打开数据库文件" : {
+                new ImageSaveController();
+            }break;
+            case "文件-新建" : {
+                new DrawMainController();
+            }break;
+            case "文件-保存到数据库" : {
+                saveToDB();
+            }break;
+            case "文件-保存到文件" : {
+
+            }break;
+            case "编辑-撤销" : {
+                Object image = drawMain.popRecordStack(); // 从历史记录栈取出
+                if( image != null){
+                    drawMain.pushCancelStack(drawMain.getImage());    // 把当前图片放入撤销记录栈
+                    drawMain.setImage((BufferedImage)image);
+                    paint();
+                }
+            }break;
+            case "编辑-重做" : {
+                Object image = drawMain.popCancelStack();
+                if( image != null){
+                    drawMain.pushRecordStack(drawMain.getImage());
+                    drawMain.setImage((BufferedImage)image);
+                    paint();
+                }
+            }break;
+            case "编辑-清空" : {
+                drawMain.setBackgroundColor(Color.WHITE);
+                Graphics g = drawMain.getImage().getGraphics();
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
+                paint();
+            }break;
+            case "画板模式-数学绘图模式" : {
+                new DemodeController();
+            }break;
+            default:break;
+        }
+    }
+
+    // 保存到数据库
+    public void saveToDB() {
+        BASE64Encoder encoder = new BASE64Encoder();
+        String imageStr;
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(drawMain.getImage(), "jpeg", baos);
+            byte[] bytes = baos.toByteArray();
+            imageStr = encoder.encodeBuffer(bytes).trim();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        Image image = new Image();
+        image.setUserId(1);
+        image.setTime(new Date());
+        image.setImage(imageStr);
+//        ImageMapper imageMapper = new ImageMapper();
+//        if(imageMapper.insertImage(image) > 0){
+//            drawMainView.showMessageDialog("保存成功！");
+//        }else {
+//            drawMainView.showMessageDialog("保存失败！");
+//        }
+    }
+
+
+    // 存为文件
+    private void saveToFile(String fileName,String fileSrc) {
+        try {
+            ImageIO.write(drawMain.getImage(), "jpeg", new File(fileSrc+fileName+".jpeg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

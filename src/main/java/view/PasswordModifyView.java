@@ -12,30 +12,40 @@ public class PasswordModifyView extends JFrame {
     private JTextField passwordOldEdit,passwordEdit;
     private JButton sureBtn;
     public PasswordModifyView() {
+        Box mainBox = Box.createVerticalBox();
         // 上下两个水平盒子
         Box inputBox = Box.createHorizontalBox();
         Box btnBox = Box.createHorizontalBox();
+
 
         // 上边盒子
         // 垂直标签盒子
         Box labelBox = Box.createVerticalBox();
         labelBox.add(new JLabel("请输入原始密码："));
+        labelBox.add(Box.createVerticalStrut(10));
         labelBox.add(new JLabel("请输入新密码："));
-        inputBox.add(labelBox);
         // 垂直输入框盒子
         Box EditBox = Box.createVerticalBox();
         passwordOldEdit=new JTextField(10);
         passwordEdit=new JTextField(10);
         EditBox.add(passwordOldEdit);
+        EditBox.add(Box.createVerticalStrut(10));
         EditBox.add(passwordEdit);
+
+        inputBox.add(labelBox);
         inputBox.add(EditBox);
 
         // 下边盒子
         sureBtn = new JButton("确定");
         btnBox.add(sureBtn);
+
+
+        mainBox.add(Box.createVerticalStrut(30));
+        mainBox.add(inputBox);
+        mainBox.add(Box.createVerticalStrut(20));
+        mainBox.add(btnBox);
         this.setLayout(new FlowLayout());
-        this.add(inputBox);
-        this.add(btnBox);
+        this.add(mainBox);
 
         // 设置监听
         sureBtn.addActionListener(e -> {

@@ -1,4 +1,4 @@
-package controller.drawMainController;
+package controller.drawMain;
 
 import com.sun.j3d.utils.geometry.Sphere;
 import entity.SphereThreeD;

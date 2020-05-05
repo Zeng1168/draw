@@ -1,4 +1,4 @@
-package controller.drawMainController;
+package controller.drawMain;
 
 import entity.ConeThreeD;
 import view.ConeView;

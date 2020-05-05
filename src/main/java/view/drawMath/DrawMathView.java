@@ -1,52 +1,42 @@
-package view.drawMathView;
+package view.drawMath;
 
 
-import entity.DrawMain;
-import entity.DrawMathMain;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.stage.Stage;
-import view.drawMainView.*;
+import view.drawMainView.TopMenuBar;
 
-import javax.media.j3d.BranchGroup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * 主函数
  *
  * 创建窗体，把个模块布置到窗体中
  */
-public class DrawMathMainView extends JFrame {
-    private TopMathMenuBar topMenu;    // 顶部菜单
+public class DrawMathView extends JFrame {
+    private TopMenuBar topMenu;    // 顶部菜单
     private TopMathToolBar topTool;  // 顶部工具条
     private LeftMathToolBar leftTool;    // 左侧工具条
-    private DrawMathBroad drawMathBroad;    // 中部画板
-    private InforView inforView;//右侧信息栏
+    private MathDrawBroad mathDrawBroad;    // 中部画板
+    private InfoView infoView;//右侧信息栏
 
-    BranchGroup drawGroup = null;
 
-    public DrawMathMainView(DrawMathMain drawMathMain){
+    public DrawMathView(){
         // 初始化各模块
-        topMenu = new TopMathMenuBar();
-        topTool = new TopMathToolBar(drawMathMain.getPenColor());
+        topMenu = new TopMenuBar();
+        topTool = new TopMathToolBar();
         leftTool = new LeftMathToolBar();
-        drawMathBroad=new DrawMathBroad();
-        inforView=new InforView();
-
-       // drawBroad.setDrawGroup(this.getDrawGroup());
+        mathDrawBroad =new MathDrawBroad();
+        infoView =new InfoView();
 
         // 向主界面添加组件
         this.setJMenuBar(topMenu);	// 设置菜单栏
 
-        this.add(inforView,BorderLayout.EAST);
-    //    this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
+        this.add(infoView,BorderLayout.EAST);
+        this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
-        this.add(drawMathBroad,BorderLayout.CENTER);	//添加绘图区容器
+        this.add(mathDrawBroad,BorderLayout.CENTER);	//添加绘图区容器
 
-        this.validate();
-        this.repaint();
         // 设置
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -55,11 +45,20 @@ public class DrawMathMainView extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    public void refrashInfo(Map<String, String> map){
+        infoView.refrashInfo(map);
+    }
 
-    public void setListener(TopMathMenuBar.TopMathMenuListener topMenuListener,
+    // 绘制图像到画板
+    public void paintImage(BufferedImage image){
+        mathDrawBroad.paintImage(image);
+    }
+
+
+    public void setListener(TopMenuBar.TopMenuListener topMenuListener,
                             TopMathToolBar.TopMathToolListener topToolListener,
                             LeftMathToolBar.LeftMathToolListener leftToolListener){
-        topMenu.setTopMathMenuListener(topMenuListener);
+        topMenu.setTopMenuListener(topMenuListener);
         topTool.setTopMathToolListener(topToolListener);
         leftTool.setLeftToolListener(leftToolListener);
 

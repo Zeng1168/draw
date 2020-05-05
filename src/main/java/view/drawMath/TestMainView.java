@@ -1,4 +1,4 @@
-package view.drawMathView;
+package view.drawMath;
 
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
@@ -7,10 +7,6 @@ import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import controller.drawMainController.RectangleDraw;
-import entity.Point;
-import entity.Rectangle;
-import entity.Triangle;
 
 import javax.media.j3d.*;
 import javax.swing.*;
@@ -21,6 +17,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+
 
 public class TestMainView extends JFrame implements ActionListener {
 

@@ -1,4 +1,4 @@
-package controller.drawMainController;
+package controller.drawMain;
 
 import entity.Point;
 import utils.ImageUtil;

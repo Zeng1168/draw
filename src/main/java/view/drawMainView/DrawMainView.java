@@ -1,15 +1,7 @@
 package view.drawMainView;
 
-
 import entity.DrawMain;
-import entity.Image;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.stage.Stage;
 import view.ConeView;
-import view.drawMathView.InforView;
-
-import javax.media.j3d.BranchGroup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,17 +15,14 @@ public class DrawMainView extends JFrame {
     private TopMenuBar topMenu;    // 顶部菜单
     private TopToolBar topTool;  // 顶部工具条
     private LeftToolBar leftTool;    // 左侧工具条
-    // 中部画板
-    private DraBroadPanel2 drawBroad;
+    private DrawBroadPanel drawBroad;    // 中部画板
 
     public DrawMainView(DrawMain drawMain){
         // 初始化各模块
         topMenu = new TopMenuBar();
         topTool = new TopToolBar(drawMain.getPenColor(), drawMain.getBackgroundColor(), drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
         leftTool = new LeftToolBar();
-        drawBroad=new DraBroadPanel2(drawMain.getImage());
-
-
+        drawBroad=new DrawBroadPanel(drawMain.getImage());
 
 
         // 向主界面添加组件
@@ -41,10 +30,10 @@ public class DrawMainView extends JFrame {
         this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
+
+        // 设置窗口
         ImageIcon icon=new ImageIcon("src/main/resources/img_source/iconfont.png");
         this.setIconImage(icon.getImage());
-
-        // 设置
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
@@ -54,7 +43,6 @@ public class DrawMainView extends JFrame {
         this.add(new ConeView(),BorderLayout.SOUTH);
         this.validate();
     }
-
 
     // 绘制图像到画板
     public void paintImage(BufferedImage image){

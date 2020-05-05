@@ -1,6 +1,6 @@
 package controller;
 
-import controller.drawMainController.DrawMainController;
+import controller.drawMain.DrawMainController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

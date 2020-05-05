@@ -1,6 +1,6 @@
 package controller;
 
-import controller.drawMainController.DrawMainController;
+import controller.drawMain.DrawMainController;
 import view.DemodeView;
 
 public class DemodeController implements DemodeView.drawmodelListener{
