@@ -1,4 +1,4 @@
-package drawTest;
+package view.drawMathView;
 
 
 import javax.swing.*;
