@@ -65,7 +65,6 @@ public class DrawMathMainView extends JFrame {
         this.drawGroup = drawGroup;
     }
 
-    public void
 
     public void setListener(TopMathMenuBar.TopMathMenuListener topMenuListener,
                             TopMathToolBar.TopMathToolListener topToolListener,

@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 import view.ConeView;
+import view.drawMathView.InforView;
 
 import javax.media.j3d.BranchGroup;
 import javax.swing.*;

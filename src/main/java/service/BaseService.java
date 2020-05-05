@@ -1,7 +1,5 @@
 package service;
 
-import org.apache.ibatis.session.SqlSession;
-import utils.SqlSessionFactoryUtil;
 import java.lang.reflect.ParameterizedType;
 
 /**
@@ -10,30 +8,20 @@ import java.lang.reflect.ParameterizedType;
  *          Dao层类名
  */
 public abstract class BaseService <T> {
-    protected SqlSession sqlSession;    // 数据库会话
-    protected T dao;    // dao层实例
+    protected T api;    // api层实例
 
-    // 获取数据库会话
-    protected boolean openSqlSession(){
-        try {
-            sqlSession = SqlSessionFactoryUtil.openSession();
-            // 反射机制获取泛型类
-            Class<T> tClass = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            dao = sqlSession.getMapper(tClass);
-
-        } catch (Exception e) {
-            System.out.println(e);
-            sqlSession.rollback();
+    protected boolean getApiInstance(){
+        if(api == null){
+            ParameterizedType tClass = (ParameterizedType) getClass().getGenericSuperclass();
+            Class<T> type = (Class<T>) tClass.getActualTypeArguments()[0];
+            try{
+                api = type.newInstance();
+            }catch (Exception e){
+                // Oops, no default constructor
+                throw new RuntimeException(e);
+            }
         }
-        return sqlSession != null && dao != null;
-    }
-
-    // 结束数据库会话
-    protected void closeSqlsession(){
-        if(sqlSession != null){
-            sqlSession.commit();
-            sqlSession.close();
-        }
+        return api != null;
     }
 
 }

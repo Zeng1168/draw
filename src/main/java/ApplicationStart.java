@@ -1,3 +1,4 @@
+import api.UserApi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ public class ApplicationStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/Login.fxml"));
         root.getStylesheets().add(getClass().getClassLoader().getResource("style/login.css").toExternalForm());
         primaryStage.setTitle("用户登陆");
@@ -18,5 +21,8 @@ public class ApplicationStart extends Application {
         JFrame.setDefaultLookAndFeelDecorated(true);
         UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
 
+//
+//        // 启动后先获取一遍cookie
+//        new UserApi().userLogin(null);
     }
 }

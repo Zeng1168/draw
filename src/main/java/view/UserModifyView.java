@@ -19,15 +19,11 @@ public class UserModifyView extends JFrame implements ActionListener {
         boxh2=Box.createHorizontalBox();
         boxv1=Box.createVerticalBox();
         boxv2=Box.createVerticalBox();
-        jl1=new JLabel("请输入原始用户名：");
         jl2=new JLabel("请输入原始密码：");
         jl3=new JLabel("请输入新密码：");
-        jf1=new JTextField(10);
         jf2=new JTextField(10);
         jf3=new JTextField(10);
         jb=new JButton("确定");
-        boxv1.add(jl1);
-        boxv2.add(jf1);
         boxv1.add(jl2);
         boxv2.add(jf2);
         boxv1.add(jl3);
@@ -59,10 +55,6 @@ public class UserModifyView extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, msg);
     }
 
-    public void focusUserInput(){
-        jf1.requestFocusInWindow();
-    }
-
     public void focusPasswordInput(){
         jf3.requestFocusInWindow();
     }
@@ -74,7 +66,7 @@ public class UserModifyView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(listener != null){
-            listener.onModify(jf1.getText().trim(), jf3.getText().trim(), jf2.getText().trim());
+            listener.onModify(jf3.getText().trim(), jf2.getText().trim());
             System.out.println(e.getActionCommand());
         }
     }
@@ -86,6 +78,6 @@ public class UserModifyView extends JFrame implements ActionListener {
 
     // 自定义监听器
     public interface UserModifyListener{
-        void onModify(String name, String password, String passwordOld);
+        void onModify(String password, String passwordOld);
     }
 }
