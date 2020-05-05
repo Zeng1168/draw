@@ -3,7 +3,7 @@ package controller.drawMainController;
 import controller.ImageSaveController;
 
 import controller.OffScreen3DImage;
-import controller.UserModifyController;
+import controller.PasswordModifyController;
 import controller.DemodeController;
 import entity.*;
 import entity.Image;
@@ -171,7 +171,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     //修改信息
     @Override
     public void onModify() {
-        new UserModifyController();
+        new PasswordModifyController();
     }
 
     //切换模式

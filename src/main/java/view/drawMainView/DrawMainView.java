@@ -21,7 +21,6 @@ import java.awt.image.BufferedImage;
  */
 public class DrawMainView extends JFrame {
     private TopMenuBar topMenu;    // 顶部菜单
-    private MenuController topMenu2;
     private TopToolBar topTool;  // 顶部工具条
     private LeftToolBar leftTool;    // 左侧工具条
     //private DrawBroadPanel2 drawBroad;    // 中部画板
@@ -33,7 +32,6 @@ public class DrawMainView extends JFrame {
     public DrawMainView(DrawMain drawMain){
         // 初始化各模块
         topMenu = new TopMenuBar();
-        topMenu2=new MenuController();
         topTool = new TopToolBar(drawMain.getPenColor(), drawMain.getBackgroundColor(), drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
         leftTool = new LeftToolBar();
        // drawBroad = new DrawBroadPanel2(drawMain.getImage());
@@ -43,18 +41,6 @@ public class DrawMainView extends JFrame {
 
       //  drawBroad.setDrawGroup(this.getDrawGroup());
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    topMenu2.start(new Stage());
-
-                    jfxPanel.setScene(topMenu2.getScene());
-                }catch (Exception e){
-
-                }
-            }
-        });
 
         // 向主界面添加组件
         this.setJMenuBar(topMenu);	// 设置菜单栏

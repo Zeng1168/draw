@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class UserService extends BaseService<UserApi> {
 
+    // 用户登录
     public MyResponse userLogin(String username, String password){
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -17,6 +18,7 @@ public class UserService extends BaseService<UserApi> {
         }else return MyResponse.failureResponse("网络请求失败！");
     }
 
+    // 注册
     public MyResponse userSign(String username, String password){
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
@@ -26,6 +28,7 @@ public class UserService extends BaseService<UserApi> {
         }else return MyResponse.failureResponse("网络请求失败！");
     }
 
+    // 修改密码
     public MyResponse changePassword(String oldPassword, String password){
         Map<String, String> params = new HashMap<>();
         params.put("oldPassword", oldPassword);
