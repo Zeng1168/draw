@@ -12,6 +12,7 @@ import sun.misc.BASE64Encoder;
 import utils.DrawMode;
 import utils.ImageUtil;
 import view.drawMainView.*;
+import view.drawMathView.TestMainView;
 
 import javax.imageio.ImageIO;
 import javax.media.j3d.BranchGroup;
@@ -178,7 +179,8 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     @Override
     public void onchange() {new DemodeController();    }
 
-   public  void onchange2(){}
+   public  void onchange2(){new TestMainView();
+   }
 
     /**  顶部工具栏监听  **/
     // 画笔颜色改变

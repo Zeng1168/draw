@@ -204,6 +204,7 @@ public class TestMainView extends JFrame implements ActionListener {
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
         this.setVisible(true);	// 设置窗体可见性
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 
@@ -249,7 +250,7 @@ public class TestMainView extends JFrame implements ActionListener {
                     g2d.drawLine(X1,Y1,X2,Y2);
                     panelDrawBroad.repaint();
                     PosInfo.setText("("+X1+","+Y1+")");
-                    ZcInfo.setText(""+(X2-X1));
+                    ZcInfo.setText(""+((X2-X1)+Math.pow((Math.pow((Y2-Y1),2)+Math.pow(0.5*(X2-X1),2)),0.5)));
 
                 }
             });
