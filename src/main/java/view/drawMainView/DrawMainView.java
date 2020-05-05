@@ -41,7 +41,7 @@ public class DrawMainView extends JFrame {
         inforView=new InforView();
         jfxPanel=new JFXPanel();
 
-        drawBroad.setDrawGroup(this.getDrawGroup());
+      //  drawBroad.setDrawGroup(this.getDrawGroup());
 
         Platform.runLater(new Runnable() {
             @Override

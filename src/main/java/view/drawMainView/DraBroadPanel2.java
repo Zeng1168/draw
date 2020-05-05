@@ -27,13 +27,7 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
 
     private DrawBroadPanel.DrawBroadListener listener;
     private BufferedImage image;
-    private BranchGroup sceneBranchGroup = null;
-    BranchGroup drawGroup=null;
-    private Canvas3D canvas3D = null;
-    private SimpleUniverse simpleUniverse;
-    private ImageComponent2D imageComponent = null;
-    private static final int offScreenWidth = 640;
-    private static final int offScreenHeight = 480;
+
 
     public DraBroadPanel2(BufferedImage image){
         this.image = image;
@@ -43,13 +37,7 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
 //        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 //        this.setViewportView(new DrawPanel());
-          GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
-            Canvas3D canvas = new Canvas3D(config);
-            this.add(canvas,BorderLayout.CENTER);
-            SimpleUniverse u = new SimpleUniverse(canvas);
-            u.getViewingPlatform().setNominalViewingTransform();
-            BranchGroup scene = createContentBranch();
-            u.addBranchGraph(scene);
+
             setSize(400, 400);
             setVisible(true);
 
@@ -58,43 +46,7 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
         this.setVisible(true);  // 设置可见性
 
     }
-    public BranchGroup createContentBranch ()
 
-    {
-        BranchGroup root = new BranchGroup();
-//创建一个tansformGroup
-        TransformGroup tansformGroup = new TransformGroup();
-        tansformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        root.addChild(tansformGroup);
-        MouseRotate rotate = new MouseRotate();
-        rotate.setTransformGroup(tansformGroup);
-        rotate.setSchedulingBounds(new BoundingSphere(new Point3d(), 1000));
-        tansformGroup.addChild(rotate);
-//设置立方体颜色
-        //ColorCube colorCube = new ColorCube(0.3);
-        Color3f light1Color = new Color3f(Color.yellow);
-        BoundingSphere bounds =
-                new BoundingSphere(new Point3d(0.0,0.0,0.0), 1000.0);
-        Vector3f light1Direction  = new Vector3f(0, 0, -1);
-        DirectionalLight light1
-                = new DirectionalLight(light1Color, light1Direction);
-        light1.setInfluencingBounds(bounds);
-        Color backgroundColor=new Color(224, 188, 118, 255);
-        Background bg = new Background(backgroundColor.getRed()/255f, backgroundColor.getGreen()/255f, backgroundColor.getBlue()/255f);
-        bg.setApplicationBounds(bounds);
-        root.addChild(bg);
-        root.addChild(light1);
-        //创建3D图形
-        Sphere sphere=new Sphere(0.3f);
-        Cone cone=new Cone(0.3f,0.4f);
-        ColorCube cube=new ColorCube();
-        com.sun.j3d.utils.geometry.Box box=new Box(0.1f,0.2f,0.3f,null);
-        Cylinder cylinder=new Cylinder(0.3f,0.4f);
-        tansformGroup.addChild(box);
-        root.compile();
-        return root;
-
-    }
 
 
 
@@ -103,13 +55,6 @@ public class DraBroadPanel2 extends JPanel implements MouseMotionListener, Mouse
         this.repaint();
     }
 
-    public BranchGroup getDrawGroup() {
-        return drawGroup;
-    }
-
-    public void setDrawGroup(BranchGroup drawGroup) {
-        this.drawGroup = drawGroup;
-    }
 
     /** 鼠标事件监听  */
     // 监听鼠标拖动

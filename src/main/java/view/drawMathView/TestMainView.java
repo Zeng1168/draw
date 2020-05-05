@@ -86,15 +86,7 @@ public class TestMainView extends JFrame implements ActionListener {
     //布局
 
     Box boxhPos1, boxhPos2, boxhLenWid, boxhHei, boxhR;
-    Box boxLine=Box.createVerticalBox(),
-            boxCircle=Box.createVerticalBox(),
-            boxRectangle=Box.createVerticalBox(),
-            boxTriangle=Box.createVerticalBox();
-    Box boxCone=Box.createVerticalBox(),
-            boxBox=Box.createVerticalBox(),
-            boxSphere=Box.createVerticalBox();
 
-    Box boxvTest=Box.createVerticalBox();
 
     BufferedImage image;
     Graphics2D g2d;
@@ -202,30 +194,6 @@ public class TestMainView extends JFrame implements ActionListener {
 
         this.add(panelDrawBroad,BorderLayout.CENTER);
 
-        boxvTest.add(boxhLenWid);
-        boxvTest.add(boxhPos1);
-        boxvTest.add(boxhHei);
-        boxvTest.add(boxhPos2);
-        boxvTest.add(boxhR);
-
-        boxLine.add(boxhPos1);
-        boxLine.add(boxhPos2);
-
-        boxRectangle.add(boxhPos1);
-        boxRectangle.add(boxhLenWid);
-
-        boxTriangle.add(boxhPos1);
-        boxTriangle.add(boxhPos2);
-
-        boxCircle.add(boxhR);
-
-        boxCone.add(boxhR);
-        boxCone.add(boxhHei);
-
-        boxBox.add(boxhLenWid);
-        boxBox.add(boxhHei);
-
-        boxSphere.add(boxhR);
         panelParams.setLayout(new BorderLayout());
         panelParams.setVisible(true);
 
@@ -244,6 +212,7 @@ public class TestMainView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object object=e.getSource();
+        panelDrawBroad.repaint();
         if(object==line){
             panelParams.removeAll();
             panelParams.repaint();
@@ -461,7 +430,6 @@ public class TestMainView extends JFrame implements ActionListener {
 //创建一个 Canvas3D 对象并将其加到frame中去
 
         Canvas3D canvas = new Canvas3D(config);
-
         this.add(canvas,BorderLayout.CENTER);
 
 
