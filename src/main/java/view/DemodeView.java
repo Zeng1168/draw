@@ -43,8 +43,7 @@ public class DemodeView extends JFrame implements ActionListener {
             switch (e.getActionCommand()) {
                 case "当前窗口": {
                     System.out.println(e.getActionCommand());
-                    this.setVisible(false);//关闭当前窗口
-                    //System.exit(0);
+                   this.setVisible(false);
                 }
                 break;
                 case "新窗口": {

@@ -58,7 +58,7 @@ public class TopMenuBar extends JMenuBar{
 
 		tchange.add(change);
 		tchange.add(change2);
-		ImageIcon icon=new ImageIcon("./user1.png");
+		ImageIcon icon=new ImageIcon("src/main/resources/img_source/user1.png");
 		tUser.setIcon(icon);
 		this.setListener();
 		this.setVisible(true);
