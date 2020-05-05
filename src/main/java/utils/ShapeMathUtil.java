@@ -21,7 +21,7 @@ public class ShapeMathUtil {
     public static List<Point> revisePoint(Point p1, Point p2){
         Point start = new Point();
         Point end = new Point();
-        List<Point> points = new ArrayList<>();
+        List<Point> points = new ArrayList<Point>();
 
         if(p1.x < p2.x ){
             start.x = p1.x;

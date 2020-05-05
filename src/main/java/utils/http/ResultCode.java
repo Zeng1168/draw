@@ -1,4 +1,4 @@
-package utils;
+package utils.http;
 
 /**
  * 规定:
@@ -16,6 +16,14 @@ public enum ResultCode {
     /* 默认失败 */
     ERROR(1, "失败"),
 
+    /* 请求失败 */
+    FAILURE(3, "失败"),
+
+    /* 网络异常 400～500*/
+    NET_OVER_TIME(401, "网络连接超时！"),
+    NET_NOT_FOUND(404, "网络请求地址无效！"),
+    NET_EXCEPTION(400, "网络异常,请检查网络连接！"),
+
     /* 参数错误：1000～1999 */
     PARAM_NOT_VALID(101, "参数无效"),
     PARAM_IS_BLANK(102, "参数为空"),
@@ -24,7 +32,14 @@ public enum ResultCode {
 
     /* 用户错误 */
     USER_NOT_LOGIN(201, "用户未登录！"),
-    USER_ACCOUNT_EXPIRED(202, "登录过期！"),
+    USER_ACCOUNT_EXPIRED(202, "账号已过期！"),
+    USER_CREDENTIALS_ERROR(203, "密码错误！"),
+    USER_CREDENTIALS_EXPIRED(204, "密码过期！"),
+    USER_ACCOUNT_DISABLE(205, "账号不可用！"),
+    USER_ACCOUNT_LOCKED(206, "账号被锁定！"),
+    USER_ACCOUNT_NOT_EXIST(207, "账号不存在！"),
+    USER_ACCOUNT_ALREADY_EXIST(208, "账号已存在！"),
+    USER_ACCOUNT_USE_BY_OTHERS(209, "账号下线！"),
 
     /* 业务错误 */
     NO_PERMISSION(301, "没有权限！");

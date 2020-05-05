@@ -1,7 +1,6 @@
 package controller;
 
 import controller.drawMainController.DrawMainController;
-import dao.ImageDao;
 import sun.misc.BASE64Decoder;
 import view.ImageSaveView;
 
