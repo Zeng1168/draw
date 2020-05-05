@@ -244,6 +244,7 @@ public class TestMainView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object object=e.getSource();
+        panelDrawBroad.repaint();
         if(object==line){
             panelParams.removeAll();
             panelParams.repaint();
@@ -461,7 +462,6 @@ public class TestMainView extends JFrame implements ActionListener {
 //创建一个 Canvas3D 对象并将其加到frame中去
 
         Canvas3D canvas = new Canvas3D(config);
-
         this.add(canvas,BorderLayout.CENTER);
 
 
