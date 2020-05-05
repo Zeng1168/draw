@@ -1,11 +1,22 @@
 package view.drawMathView;
 
 
+import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
+import com.sun.j3d.utils.geometry.ColorCube;
+import com.sun.j3d.utils.geometry.Cone;
+import com.sun.j3d.utils.geometry.Cylinder;
+import com.sun.j3d.utils.geometry.Sphere;
+import com.sun.j3d.utils.universe.SimpleUniverse;
 import controller.drawMainController.RectangleDraw;
 import entity.Point;
 import entity.Rectangle;
+import entity.Triangle;
 
+import javax.media.j3d.*;
 import javax.swing.*;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3f;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,6 +105,7 @@ public class TestMainView extends JFrame implements ActionListener {
         g2d=image.createGraphics();
         g2d.setColor(Color.white);
         g2d.fillRect(0,0,image.getWidth(),image.getHeight());
+        repaint();
 
         panelDrawBroad.setBounds(0,0,680,460);
         panelDrawBroad.setVisible(true);
@@ -235,8 +247,8 @@ public class TestMainView extends JFrame implements ActionListener {
         if(object==line){
             panelParams.removeAll();
             panelParams.repaint();
-            panelParams.add(boxhPos1,BorderLayout.SOUTH);
-            panelParams.add(boxhPos2,BorderLayout.NORTH);
+            panelParams.add(boxhPos1,BorderLayout.NORTH);
+            panelParams.add(boxhPos2,BorderLayout.SOUTH);
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
@@ -314,6 +326,124 @@ public class TestMainView extends JFrame implements ActionListener {
             });
 
 
+        }else if(object==triangle){
+            panelParams.removeAll();
+            panelParams.repaint();
+            panelParams.add(boxhPos1,BorderLayout.NORTH);
+            panelParams.add(boxhPos2,BorderLayout.SOUTH);
+            panelParams.add(confirm,BorderLayout.EAST);
+            panelParams.revalidate();
+            this.add(panelParams,BorderLayout.NORTH);
+            infoPanle.removeAll();
+            infoPanle.repaint();
+            infoPanle.add(labelPos);
+            infoPanle.add(PosInfo);
+            infoPanle.add(labelZc);
+            infoPanle.add(ZcInfo);
+            infoPanle.add(labelArea);
+            infoPanle.add(AreaInfo);
+            this.add(infoPanle,BorderLayout.EAST);
+            image=new BufferedImage(680,460,BufferedImage.TYPE_3BYTE_BGR);
+            g2d=image.createGraphics();
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0,0,680,460);
+            g2d.setColor(Color.BLACK);
+
+
+            confirm.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int X1=Integer.parseInt(fieldX1.getText());
+                    int Y1=Integer.parseInt(fieldY1.getText());
+                    int X2=Integer.parseInt(fieldX2.getText());
+                    int Y2=Integer.parseInt(fieldY2.getText());
+
+                    g2d.drawLine( (X1+X2)/2, Y1,X1, Y2);
+                    g2d.drawLine(X1, Y2, X2, Y2);
+                    g2d.drawLine((X1+X2)/2, Y1,
+                           X2, Y2);
+                    panelDrawBroad.repaint();
+                    PosInfo.setText("("+X1+","+Y1+")");
+                    ZcInfo.setText(""+((X2-X1)+Math.pow((Math.pow((Y2-Y1),2)+Math.pow(0.5*(X2-X1),2)),0.5)));
+                    AreaInfo.setText(""+0.5*(X2-X1)*(Y2-Y1));
+                }
+            });
+
+
+        }else if(object==circle){
+            panelParams.removeAll();
+            panelParams.repaint();
+            panelParams.add(boxhPos1,BorderLayout.SOUTH);
+            panelParams.add(boxhR,BorderLayout.NORTH);
+            panelParams.add(confirm,BorderLayout.EAST);
+            panelParams.revalidate();
+            this.add(panelParams,BorderLayout.NORTH);
+            infoPanle.removeAll();
+            infoPanle.repaint();
+            infoPanle.add(labelPos);
+            infoPanle.add(PosInfo);
+            infoPanle.add(labelZc);
+            infoPanle.add(ZcInfo);
+            infoPanle.add(labelArea);
+            infoPanle.add(AreaInfo);
+            this.add(infoPanle,BorderLayout.EAST);
+            image=new BufferedImage(680,460,BufferedImage.TYPE_3BYTE_BGR);
+            g2d=image.createGraphics();
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0,0,680,460);
+            g2d.setColor(Color.BLACK);
+
+
+            confirm.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int X1=Integer.parseInt(fieldX1.getText());
+                    int Y1=Integer.parseInt(fieldY1.getText());
+                    int radius=Integer.parseInt(fieldRadius.getText());
+
+                    g2d.drawOval(X1,Y1,radius,radius);
+                    panelDrawBroad.repaint();
+                    PosInfo.setText("("+X1+","+Y1+")");
+                    ZcInfo.setText(""+3.14*2*radius);
+                    AreaInfo.setText(""+3.14*radius*radius);
+                }
+            });
+
+
+        }else if(object==cone){
+            panelParams.removeAll();
+            panelParams.repaint();
+            panelParams.add(boxhR,BorderLayout.NORTH);
+            panelParams.add(boxhHei,BorderLayout.SOUTH);
+            panelParams.add(confirm,BorderLayout.EAST);
+            panelParams.revalidate();
+            this.add(panelParams,BorderLayout.NORTH);
+            infoPanle.removeAll();
+            infoPanle.repaint();
+            infoPanle.add(labelPos);
+            infoPanle.add(PosInfo);
+            infoPanle.add(labelVolumn);
+            infoPanle.add(VolumnInfo);
+            this.add(infoPanle,BorderLayout.EAST);
+
+            confirm.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Float radius=Float.parseFloat(fieldRadius.getText());
+                    Float hight=Float.parseFloat(fieldHei.getText());
+                    BranchGroup group=new BranchGroup();
+                    Cone cone=new Cone(radius,hight);
+                    group.addChild(cone);
+                    create3d(group);
+
+                }
+            });
+
+        }else if(object==box){
+
+        }else if(object==sphere){
+
         }
 
 
@@ -321,6 +451,96 @@ public class TestMainView extends JFrame implements ActionListener {
 
 
         }
+
+
+    public void create3d(BranchGroup drawGroup){
+
+        GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
+
+
+//创建一个 Canvas3D 对象并将其加到frame中去
+
+        Canvas3D canvas = new Canvas3D(config);
+
+        this.add(canvas,BorderLayout.CENTER);
+
+
+//创建一个SimpleUniverse对象,用来管理”view” 分支
+
+        SimpleUniverse u = new SimpleUniverse(canvas);
+
+        u.getViewingPlatform().setNominalViewingTransform();
+
+
+//将 “content” 分支加入到SimpleUniverse中去
+
+        BranchGroup scene = createContentBranch(drawGroup);
+
+        u.addBranchGraph(scene);
+
+
+    }
+    public BranchGroup createContentBranch (BranchGroup drawGroup)
+
+    {
+
+        BranchGroup root = new BranchGroup();
+
+
+
+//创建一个tansformGroup
+
+        TransformGroup tansformGroup = new TransformGroup();
+
+        tansformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
+        root.addChild(tansformGroup);
+
+
+//创建鼠标旋转行为
+
+        MouseRotate rotate = new MouseRotate();
+
+
+        rotate.setTransformGroup(tansformGroup);
+
+        rotate.setSchedulingBounds(new BoundingSphere(new Point3d(), 1000));
+
+        tansformGroup.addChild(rotate);
+
+
+//设置立方体颜色
+
+        //ColorCube colorCube = new ColorCube(0.3);
+        Color3f light1Color = new Color3f(Color.yellow);
+        BoundingSphere bounds =
+                new BoundingSphere(new Point3d(0.0,0.0,0.0), 1000.0);
+        Vector3f light1Direction  = new Vector3f(0, 0, -1);
+        DirectionalLight light1
+                = new DirectionalLight(light1Color, light1Direction);
+        light1.setInfluencingBounds(bounds);
+        Color backgroundColor=new Color(200,120,110);
+        Background bg = new Background(backgroundColor.getRed()/255f, backgroundColor.getGreen()/255f, backgroundColor.getBlue()/255f);
+        bg.setApplicationBounds(bounds);
+        root.addChild(bg);
+        root.addChild(light1);
+        //创建3D图形
+        Sphere sphere=new Sphere(0.3f);
+        Cone cone=new Cone(0.3f,0.4f);
+        ColorCube cube=new ColorCube();
+        com.sun.j3d.utils.geometry.Box box=new com.sun.j3d.utils.geometry.Box(0.1f,0.2f,0.3f,null);
+        Cylinder cylinder=new Cylinder(0.3f,0.4f);
+
+        tansformGroup.addChild(drawGroup);
+
+
+        root.compile();
+
+        return root;
+
+    }
+
+
 
 
     private class PanelBroad extends JPanel{
