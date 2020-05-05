@@ -86,15 +86,7 @@ public class TestMainView extends JFrame implements ActionListener {
     //布局
 
     Box boxhPos1, boxhPos2, boxhLenWid, boxhHei, boxhR;
-    Box boxLine=Box.createVerticalBox(),
-            boxCircle=Box.createVerticalBox(),
-            boxRectangle=Box.createVerticalBox(),
-            boxTriangle=Box.createVerticalBox();
-    Box boxCone=Box.createVerticalBox(),
-            boxBox=Box.createVerticalBox(),
-            boxSphere=Box.createVerticalBox();
 
-    Box boxvTest=Box.createVerticalBox();
 
     BufferedImage image;
     Graphics2D g2d;
@@ -202,30 +194,6 @@ public class TestMainView extends JFrame implements ActionListener {
 
         this.add(panelDrawBroad,BorderLayout.CENTER);
 
-        boxvTest.add(boxhLenWid);
-        boxvTest.add(boxhPos1);
-        boxvTest.add(boxhHei);
-        boxvTest.add(boxhPos2);
-        boxvTest.add(boxhR);
-
-        boxLine.add(boxhPos1);
-        boxLine.add(boxhPos2);
-
-        boxRectangle.add(boxhPos1);
-        boxRectangle.add(boxhLenWid);
-
-        boxTriangle.add(boxhPos1);
-        boxTriangle.add(boxhPos2);
-
-        boxCircle.add(boxhR);
-
-        boxCone.add(boxhR);
-        boxCone.add(boxhHei);
-
-        boxBox.add(boxhLenWid);
-        boxBox.add(boxhHei);
-
-        boxSphere.add(boxhR);
         panelParams.setLayout(new BorderLayout());
         panelParams.setVisible(true);
 
