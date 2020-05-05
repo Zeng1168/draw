@@ -49,12 +49,7 @@ public class TopMathToolBar extends JPanel implements ActionListener,LeftMathToo
 
     JButton test=new JButton("模式更改");
 
-
-
-
     public TopMathToolBar(Color penColor) {
-
-
 
 
         // 设置

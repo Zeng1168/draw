@@ -1,12 +1,13 @@
 package view.drawMathView;
 
+import utils.DrawMathMode;
 import utils.DrawMode;
 import view.drawMainView.LeftToolBar;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class InforView extends JPanel implements LeftToolBar.LeftToolListener {
+public class InforView extends JPanel implements LeftMathToolBar.LeftMathToolListener {
 
     InfoViewListener listener;
     JLabel object;
@@ -57,25 +58,23 @@ public class InforView extends JPanel implements LeftToolBar.LeftToolListener {
         this.add(boxh1);
         this.setLayout(new FlowLayout());
         this.setSize(200,480);
-       this.setVisible(true);
-
+        this.setVisible(true);
 
     }
 
     @Override
-    public void onModeChanged(DrawMode drawMode) {
-        String mode=drawMode.getMode();
+    public void onModeChanged(DrawMathMode drawMathMode) {
+        String mode=drawMathMode.getMode();
         objectContent.setText(mode.toLowerCase());
         if(mode.equals("RECTANGLE")||mode.equals("CIRCLE")||mode.equals("TRIANGLE")||mode.equals("FILL_RECTANGEL")){
+            this.add(area);
+            this.revalidate();
 
 
         }else if(mode.equals("SPHERE")||mode.equals("BOX")||mode.equals("CONE")){
 
         }
-
     }
-
-
 
     interface InfoViewListener{
          void infoTrans();

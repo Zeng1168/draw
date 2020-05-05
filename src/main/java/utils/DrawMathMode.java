@@ -18,7 +18,6 @@ public enum DrawMathMode{
 
 
     private String mode;
-    private Cursor cursor;
 
     DrawMathMode(String mode) {
         this.mode = mode;

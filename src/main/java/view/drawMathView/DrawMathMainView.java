@@ -37,10 +37,6 @@ public class DrawMathMainView extends JFrame {
 
        // drawBroad.setDrawGroup(this.getDrawGroup());
 
-
-
-
-
         // 向主界面添加组件
         this.setJMenuBar(topMenu);	// 设置菜单栏
 
@@ -49,27 +45,20 @@ public class DrawMathMainView extends JFrame {
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
         this.add(drawMathBroad,BorderLayout.CENTER);	//添加绘图区容器
 
+        this.validate();
+        this.repaint();
         // 设置
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
         this.setVisible(true);	// 设置窗体可见性
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
-
-    public BranchGroup getDrawGroup() {
-        return drawGroup;
-    }
-
-    public void setDrawGroup(BranchGroup drawGroup) {
-        this.drawGroup = drawGroup;
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 
     public void setListener(TopMathMenuBar.TopMathMenuListener topMenuListener,
                             TopMathToolBar.TopMathToolListener topToolListener,
-                            LeftMathToolBar.LeftMathToolListener leftToolListener,
-                            DrawBroadPanel.DrawBroadListener drawBroadListener){
+                            LeftMathToolBar.LeftMathToolListener leftToolListener){
         topMenu.setTopMathMenuListener(topMenuListener);
         topTool.setTopMathToolListener(topToolListener);
         leftTool.setLeftToolListener(leftToolListener);

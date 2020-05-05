@@ -43,8 +43,6 @@ public class DrawMainView extends JFrame {
 
         drawBroad.setDrawGroup(this.getDrawGroup());
 
-
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -65,7 +63,7 @@ public class DrawMainView extends JFrame {
         this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
-        ImageIcon icon=new ImageIcon("./iconfont.png");
+        ImageIcon icon=new ImageIcon("src/main/resources/img_source/iconfont.png");
         this.setIconImage(icon.getImage());
 
         // 设置

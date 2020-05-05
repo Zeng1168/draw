@@ -178,7 +178,7 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
     @Override
     public void onchange() {new DemodeController();    }
 
-    public  void onchange2(){}
+   public  void onchange2(){}
 
     /**  顶部工具栏监听  **/
     // 画笔颜色改变
