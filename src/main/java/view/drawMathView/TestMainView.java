@@ -124,7 +124,7 @@ public class TestMainView extends JFrame implements ActionListener {
         fieldHei = new TextField(20);
         labelRadius = new JLabel("半径");
         fieldRadius = new TextField(20);
-        confirm = new JButton("确认");
+
 
 
         boxhPos1 = Box.createHorizontalBox();
@@ -213,11 +213,14 @@ public class TestMainView extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object object=e.getSource();
         panelDrawBroad.repaint();
+
         if(object==line){
+
             panelParams.removeAll();
             panelParams.repaint();
             panelParams.add(boxhPos1,BorderLayout.NORTH);
             panelParams.add(boxhPos2,BorderLayout.SOUTH);
+            confirm = new JButton("确认");
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
@@ -247,15 +250,22 @@ public class TestMainView extends JFrame implements ActionListener {
                     panelDrawBroad.repaint();
                     PosInfo.setText("("+X1+","+Y1+")");
                     ZcInfo.setText(""+(X2-X1));
+
                 }
             });
+            PosInfo.setText("");
+            ZcInfo.setText("");
+            AreaInfo.setText("");
+            VolumnInfo.setText("");
 
 
         }else if(object==rectangle){
+
             panelParams.removeAll();
             panelParams.repaint();
             panelParams.add(boxhPos1,BorderLayout.NORTH);
             panelParams.add(boxhLenWid,BorderLayout.SOUTH);
+            confirm = new JButton("确认");
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
@@ -291,15 +301,22 @@ public class TestMainView extends JFrame implements ActionListener {
                     AreaInfo.setText(""+(width*length));
 
 
+
                 }
             });
+            PosInfo.setText("");
+            ZcInfo.setText("");
+            AreaInfo.setText("");
+            VolumnInfo.setText("");
 
 
         }else if(object==triangle){
+
             panelParams.removeAll();
             panelParams.repaint();
             panelParams.add(boxhPos1,BorderLayout.NORTH);
             panelParams.add(boxhPos2,BorderLayout.SOUTH);
+            confirm = new JButton("确认");
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
@@ -335,15 +352,22 @@ public class TestMainView extends JFrame implements ActionListener {
                     PosInfo.setText("("+X1+","+Y1+")");
                     ZcInfo.setText(""+((X2-X1)+Math.pow((Math.pow((Y2-Y1),2)+Math.pow(0.5*(X2-X1),2)),0.5)));
                     AreaInfo.setText(""+0.5*(X2-X1)*(Y2-Y1));
+
                 }
             });
+            PosInfo.setText("");
+            ZcInfo.setText("");
+            AreaInfo.setText("");
+            VolumnInfo.setText("");
 
 
         }else if(object==circle){
+
             panelParams.removeAll();
             panelParams.repaint();
             panelParams.add(boxhPos1,BorderLayout.SOUTH);
             panelParams.add(boxhR,BorderLayout.NORTH);
+            confirm = new JButton("确认");
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
@@ -375,15 +399,22 @@ public class TestMainView extends JFrame implements ActionListener {
                     PosInfo.setText("("+X1+","+Y1+")");
                     ZcInfo.setText(""+3.14*2*radius);
                     AreaInfo.setText(""+3.14*radius*radius);
+
                 }
             });
+            PosInfo.setText("");
+            ZcInfo.setText("");
+            AreaInfo.setText("");
+            VolumnInfo.setText("");
 
 
         }else if(object==cone){
+
             panelParams.removeAll();
             panelParams.repaint();
             panelParams.add(boxhR,BorderLayout.NORTH);
             panelParams.add(boxhHei,BorderLayout.SOUTH);
+            confirm = new JButton("确认");
             panelParams.add(confirm,BorderLayout.EAST);
             panelParams.revalidate();
             this.add(panelParams,BorderLayout.NORTH);
