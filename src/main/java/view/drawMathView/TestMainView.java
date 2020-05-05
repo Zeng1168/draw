@@ -1,6 +1,10 @@
 package view.drawMathView;
 
 
+import controller.drawMainController.RectangleDraw;
+import entity.Point;
+import entity.Rectangle;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -243,8 +247,8 @@ public class TestMainView extends JFrame implements ActionListener {
             infoPanle.add(labelZc);
             infoPanle.add(ZcInfo);
             this.add(infoPanle,BorderLayout.EAST);
-            BufferedImage image2=new BufferedImage(680,460,BufferedImage.TYPE_3BYTE_BGR);
-            g2d=image2.createGraphics();
+            image=new BufferedImage(680,460,BufferedImage.TYPE_3BYTE_BGR);
+            g2d=image.createGraphics();
             g2d.setColor(Color.WHITE);
             g2d.fillRect(0,0,680,460);
             g2d.setColor(Color.BLACK);
@@ -259,13 +263,12 @@ public class TestMainView extends JFrame implements ActionListener {
                     int Y2=Integer.parseInt(fieldY2.getText());
 
                     g2d.drawLine(X1,Y1,X2,Y2);
-                    image=image2;
+                    panelDrawBroad.repaint();
                     PosInfo.setText("("+X1+","+Y1+")");
                     ZcInfo.setText(""+(X2-X1));
                 }
             });
-           this.repaint();
-            panelDrawBroad.repaint();
+
 
         }else if(object==rectangle){
             panelParams.removeAll();
@@ -297,19 +300,18 @@ public class TestMainView extends JFrame implements ActionListener {
                     int Y1=Integer.parseInt(fieldY1.getText());
                     int length=Integer.parseInt(fieldLen.getText());
                     int width=Integer.parseInt(fieldWid.getText());
+                    //RectangleDraw rectangleDraw=new RectangleDraw(new Point(X1,Y1),new Point(width-X1,length-Y1),Color.BLUE,2.0f);
+                    //image=rectangleDraw.draw(image.getWidth(),image.getHeight());
                     g2d.drawRect(X1,Y1,width,length);
+                    panelDrawBroad.repaint();
 
                     PosInfo.setText("("+X1+","+Y1+")");
                     ZcInfo.setText(""+(2*width+2*length));
                     AreaInfo.setText(""+(width*length));
-                    panelDrawBroad.removeAll();
+
 
                 }
             });
-            this.repaint();
-            panelDrawBroad.repaint();
-            panelDrawBroad.revalidate();
-            this.revalidate();
 
 
         }
