@@ -19,7 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 
-public class HttpTools {
+public class HttpTool {
     // 设置配置请求参数
 //    private static String baseUrl = "http://127.0.0.1:8086/";
     private static String baseUrl = "http://api.zeml.top:8086/";
