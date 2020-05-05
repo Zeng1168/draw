@@ -23,29 +23,21 @@ public class DrawMainView extends JFrame {
     private TopMenuBar topMenu;    // 顶部菜单
     private TopToolBar topTool;  // 顶部工具条
     private LeftToolBar leftTool;    // 左侧工具条
-    //private DrawBroadPanel2 drawBroad;    // 中部画板
+    // 中部画板
     private DraBroadPanel2 drawBroad;
-    private InforView inforView;//右侧信息栏
-    JFXPanel jfxPanel;
-    BranchGroup drawGroup = null;
 
     public DrawMainView(DrawMain drawMain){
         // 初始化各模块
         topMenu = new TopMenuBar();
         topTool = new TopToolBar(drawMain.getPenColor(), drawMain.getBackgroundColor(), drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
         leftTool = new LeftToolBar();
-       // drawBroad = new DrawBroadPanel2(drawMain.getImage());
         drawBroad=new DraBroadPanel2(drawMain.getImage());
-        inforView=new InforView();
-        jfxPanel=new JFXPanel();
 
-      //  drawBroad.setDrawGroup(this.getDrawGroup());
+
 
 
         // 向主界面添加组件
         this.setJMenuBar(topMenu);	// 设置菜单栏
-        //this.add(jfxPanel,BorderLayout.EAST);
-        this.add(inforView,BorderLayout.EAST);
         this.add(topTool,BorderLayout.NORTH);	// 添加顶部工具栏
         this.add(leftTool,BorderLayout.WEST);    // 添加侧边工具栏
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
@@ -62,13 +54,7 @@ public class DrawMainView extends JFrame {
         this.add(new ConeView(),BorderLayout.SOUTH);
         this.validate();
     }
-    public BranchGroup getDrawGroup() {
-        return drawGroup;
-    }
 
-    public void setDrawGroup(BranchGroup drawGroup) {
-        this.drawGroup = drawGroup;
-    }
 
     // 绘制图像到画板
     public void paintImage(BufferedImage image){
