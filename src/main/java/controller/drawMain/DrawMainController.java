@@ -5,6 +5,7 @@ import controller.ImageSaveController;
 import controller.OffScreen3DImage;
 import controller.PasswordModifyController;
 import controller.DemodeController;
+import controller.drawMath.DrawMathController;
 import entity.*;
 import entity.Image;
 import entity.Point;
@@ -284,8 +285,11 @@ public class DrawMainController implements TopMenuBar.TopMenuListener, TopToolBa
                 g.fillRect(0, 0, drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
                 paint();
             }break;
-            case "画板模式-数学绘图模式" : {
+            case "画板模式-平面绘图模式" : {
                 new DemodeController();
+            }break;
+            case "画板模式-数学绘图模式" : {
+                new DrawMathController();
             }break;
             default:break;
         }

@@ -61,7 +61,7 @@ public class TopMenuBar extends JMenuBar implements ActionListener {
 		menuItemEntityList = new ArrayList<>();
 		menuItemEntityList.add(new MenuItemEntity("平面绘图模式"));
 		menuItemEntityList.add(new MenuItemEntity("数学绘图模式"));
-		menuEntity = new MenuEntity("",  menuItemEntityList);
+		menuEntity = new MenuEntity("画板模式",  menuItemEntityList);
 		menuList.add(menuEntity);
 
 		return menuList;
