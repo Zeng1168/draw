@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType;
  * @param <T>
  *          Dao层类名
  */
-public abstract class BaseService <T> {
+public abstract class BaseService<T> {
     protected T api;    // api层实例
 
     protected boolean getApiInstance(){

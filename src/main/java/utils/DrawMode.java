@@ -21,15 +21,15 @@ public enum DrawMode {
     CIRCLE("圆形", CursorTool.AIM_CURSOR),
     ROSE("玫瑰", CursorTool.AIM_CURSOR),
     CONE("圆锥", CursorTool.AIM_CURSOR),
-    SPHERE("球体",CursorTool.AIM_CURSOR),
-    BOX("长方体",CursorTool.AIM_CURSOR);
+    SPHERE("球体", CursorTool.AIM_CURSOR),
+    BOX("长方体", CursorTool.AIM_CURSOR);
 
     // 鼠标形状
     static class CursorTool {
         public static Cursor MOUSE_CURSOR = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-        public static Cursor PEN_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/img_source/pen2.png").getImage(), new Point(0, 30), "norm");
-        public static Cursor RUBBER_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/img_source/rubber.png").getImage(), new Point(0, 30), "norm");
-        public static Cursor AIM_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/img_source/aim.png").getImage(), new Point(17, 17), "norm");
+        public static Cursor PEN_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/image/pen2.png").getImage(), new Point(0, 30), "norm");
+        public static Cursor RUBBER_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/image/rubber.png").getImage(), new Point(0, 30), "norm");
+        public static Cursor AIM_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/image/aim.png").getImage(), new Point(17, 17), "norm");
     }
 
     private String mode;

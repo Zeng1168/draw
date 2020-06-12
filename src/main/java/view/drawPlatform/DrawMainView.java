@@ -1,7 +1,7 @@
-package view.drawMainView;
+package view.drawPlatform;
 
-import entity.DrawMain;
-import view.ConeView;
+import entity.module.DrawParams;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,12 +17,12 @@ public class DrawMainView extends JFrame {
     private LeftToolBar leftTool;    // 左侧工具条
     private DrawBroadPanel drawBroad;    // 中部画板
 
-    public DrawMainView(DrawMain drawMain){
+    public DrawMainView(DrawParams drawParams){
         // 初始化各模块
         topMenu = new TopMenuBar();
-        topTool = new TopToolBar(drawMain.getPenColor(), drawMain.getBackgroundColor(), drawMain.getGroundSizeX(), drawMain.getGroundSizeY());
+        topTool = new TopToolBar(drawParams.getPenColor(), drawParams.getBackgroundColor(), drawParams.getGroundSizeX(), drawParams.getGroundSizeY());
         leftTool = new LeftToolBar();
-        drawBroad=new DrawBroadPanel(drawMain.getImage());
+        drawBroad=new DrawBroadPanel(drawParams.getImage());
 
 
         // 向主界面添加组件
@@ -38,10 +38,6 @@ public class DrawMainView extends JFrame {
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setBounds((screenWidth-800)/2,(screenHeight-600)/2,800,600);	// 设置窗体位置和大小
         this.setVisible(true);	// 设置窗体可见性
-    }
-    public void setConeAttribute(){
-        this.add(new ConeView(),BorderLayout.SOUTH);
-        this.validate();
     }
 
     // 绘制图像到画板

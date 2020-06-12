@@ -1,4 +1,4 @@
-package view.drawMainView;
+package view.drawPlatform;
 import utils.DrawMode;
 
 import javax.swing.*;

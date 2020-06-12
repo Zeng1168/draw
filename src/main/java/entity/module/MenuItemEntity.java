@@ -1,4 +1,4 @@
-package entity;
+package entity.module;
 
 public class MenuItemEntity{
     private String name;

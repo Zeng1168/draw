@@ -1,4 +1,4 @@
-package view.drawMainView;
+package view.drawPlatform;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

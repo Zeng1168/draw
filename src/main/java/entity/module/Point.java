@@ -1,4 +1,4 @@
-package entity;
+package entity.module;
 
 /**
  * 鼠标坐标

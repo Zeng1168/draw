@@ -275,7 +275,7 @@ public class TopMathToolBar extends JPanel implements ActionListener,LeftMathToo
         public interface TopMathToolListener {
             void onPenColorChanged(Color color);
             void onLineStrockChanged(Float lineStroke);
-            void onParamsChanged(Integer X1,Integer Y1,Float length,Float width,Float height,Float radius,Integer X2,Integer Y2);
+            void onParamsChanged(Integer X1, Integer Y1, Float length, Float width, Float height, Float radius, Integer X2, Integer Y2);
 
         }
 

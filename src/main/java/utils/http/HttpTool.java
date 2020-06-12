@@ -6,7 +6,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -113,12 +116,12 @@ public class HttpTool {
 
 
     /**  Get请求 无参数  **/
-    public static  MyResponse doGet(String url){
+    public static MyResponse doGet(String url){
         return doGet(url, null);
     }
 
     /**  Get请求  **/
-    public static  MyResponse doGet(String url, Map<String, String> paramMap) {
+    public static MyResponse doGet(String url, Map<String, String> paramMap) {
         MyResponse response = null;
 
         // 把数据加到url中

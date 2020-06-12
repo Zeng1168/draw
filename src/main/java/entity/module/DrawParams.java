@@ -1,4 +1,4 @@
-package entity;
+package entity.module;
 
 import utils.DrawMode;
 
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Stack;
 
-public class DrawMain {
+public class DrawParams {
     // 绘图参数
     private DrawMode drawMode;  // 绘图模式
     private Float lineStroke;   // 线条粗细
@@ -24,7 +24,7 @@ public class DrawMain {
     private Stack recordStack;   // image历史记录
     private Stack cancelStack;   // image撤销记录
 
-    public DrawMain() {
+    public DrawParams() {
         recordStack = new Stack();
         cancelStack = new Stack();
     }

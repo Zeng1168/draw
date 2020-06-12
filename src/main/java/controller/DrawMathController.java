@@ -1,32 +1,18 @@
-package controller.drawMath;
+package controller;
 
-import controller.DemodeController;
-import controller.ImageSaveController;
-import controller.OffScreen3DImage;
-import controller.PasswordModifyController;
-import controller.drawMain.*;
-import entity.DrawMain;
-import entity.Image;
-import entity.Point;
-import entity.Shape;
 import sun.misc.BASE64Encoder;
 import utils.DrawMathMode;
-import utils.DrawMode;
-import utils.ImageUtil;
-import view.drawMainView.*;
 import view.drawMath.DrawMathView;
 import view.drawMath.LeftMathToolBar;
 import view.drawMath.TopMathToolBar;
+import view.drawMath.TopMenuBar;
 
 import javax.imageio.ImageIO;
-import javax.media.j3d.BranchGroup;
-import javax.vecmath.Color3f;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathToolBar.TopMathToolListener, LeftMathToolBar.LeftMathToolListener  {
     DrawMathView drawMathView;  // JFram
@@ -35,9 +21,6 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
     DrawMathMode mathMode;
     BufferedImage image;
 
-    public static void main(String[] args) {
-        new DrawMathController();
-    }
 
     public DrawMathController() {
         // 生成初始图片
@@ -64,10 +47,10 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
     public void onMenuItemClick(String command) {
         switch (command){
             case "用户-修改密码" : {
-                new PasswordModifyController();
+//                new PasswordModifyController();
             }break;
             case "文件-打开数据库文件" : {
-                new ImageSaveController();
+//                new ImageSaveController();
             }break;
             case "文件-新建" : {
                 new DrawMathController();
@@ -78,9 +61,8 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
             case "文件-保存到文件" : {
 
             }break;
-
             case "画板模式-平面绘图模式" : {
-                new DemodeController();
+                new DrawPlatformController();
             }break;
             default:break;
         }
@@ -100,10 +82,10 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
             return;
         }
 
-        Image image = new Image();
-        image.setUserId(1);
-        image.setTime(new Date());
-        image.setImage(imageStr);
+//        Image image = new Image();
+//        image.setUserId(1);
+//        image.setTime(new Date());
+//        image.setImage(imageStr);
 //        ImageMapper imageMapper = new ImageMapper();
 //        if(imageMapper.insertImage(image) > 0){
 //            drawMainView.showMessageDialog("保存成功！");

@@ -1,7 +1,8 @@
-package view.drawMainView;
+package view.drawPlatform;
 
-import entity.MenuEntity;
-import entity.MenuItemEntity;
+import entity.module.MenuEntity;
+import entity.module.MenuItemEntity;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

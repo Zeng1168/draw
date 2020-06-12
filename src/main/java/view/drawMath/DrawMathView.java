@@ -1,8 +1,6 @@
 package view.drawMath;
 
 
-import view.drawMainView.TopMenuBar;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;

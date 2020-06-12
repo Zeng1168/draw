@@ -1,6 +1,6 @@
-package view.drawMainView;
+package view.drawPlatform;
 
-import entity.Point;
+import entity.module.Point;
 
 import javax.swing.*;
 import java.awt.*;
