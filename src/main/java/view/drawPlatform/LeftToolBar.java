@@ -16,7 +16,8 @@ public class LeftToolBar extends JToolBar implements ActionListener {
     public LeftToolBar() {
         // 创建选择画笔工具,直接从枚举类中遍历
         for (DrawMode dm : DrawMode.values()) {
-            JButton button = new JButton(dm.getMode());
+            JButton button = new JButton();
+            button.setIcon(new ImageIcon(dm.getIcon()));
             this.add(button);
             button.setActionCommand(dm.getMode());
             button.addActionListener(this);

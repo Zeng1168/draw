@@ -11,18 +11,14 @@ import java.awt.*;
  */
 public enum DrawMode {
 
-    MOUSE("鼠标", CursorTool.MOUSE_CURSOR),
-    PEN("钢笔", CursorTool.PEN_CURSOR),
-    RUBBER("橡皮", CursorTool.RUBBER_CURSOR),
-    LINE("直线", CursorTool.AIM_CURSOR),
-    TRIANGLE("三角形", CursorTool.AIM_CURSOR),
-    RECTANGEL("矩形", CursorTool.AIM_CURSOR),
-    FILL_RECTANGEL("实心矩形", CursorTool.AIM_CURSOR),
-    CIRCLE("圆形", CursorTool.AIM_CURSOR),
-    ROSE("玫瑰", CursorTool.AIM_CURSOR),
-    CONE("圆锥", CursorTool.AIM_CURSOR),
-    SPHERE("球体", CursorTool.AIM_CURSOR),
-    BOX("长方体", CursorTool.AIM_CURSOR);
+    MOUSE("鼠标", CursorTool.MOUSE_CURSOR, IconTool.point),
+    RUBBER("橡皮", CursorTool.RUBBER_CURSOR, IconTool.rubber),
+    PEN("钢笔", CursorTool.PEN_CURSOR, IconTool.line),
+    LINE("直线", CursorTool.AIM_CURSOR, IconTool.straightLine),
+    TRIANGLE("三角形", CursorTool.AIM_CURSOR, IconTool.trangle),
+    RECTANGEL("矩形", CursorTool.AIM_CURSOR, IconTool.retangle),
+    FILL_RECTANGEL("实心矩形", CursorTool.AIM_CURSOR, IconTool.fullTrangle),
+    CIRCLE("圆形", CursorTool.AIM_CURSOR, IconTool.circle);
 
     // 鼠标形状
     static class CursorTool {
@@ -32,12 +28,25 @@ public enum DrawMode {
         public static Cursor AIM_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon("src/main/resources/image/aim.png").getImage(), new Point(17, 17), "norm");
     }
 
+    static class IconTool {
+        public static String point = "src/main/resources/image/mode_point_32.png";
+        public static String rubber = "src/main/resources/image/mode_rubber_32.png";
+        public static String line = "src/main/resources/image/mode_line_32.png";
+        public static String straightLine = "src/main/resources/image/mode_straight_line_32.png";
+        public static String trangle = "src/main/resources/image/mode_trangle_32.png";
+        public static String retangle = "src/main/resources/image/mode_retangle_32.png";
+        public static String fullTrangle = "src/main/resources/image/mode_full_trangle_32.png";
+        public static String circle = "src/main/resources/image/mode_circle_32.png";
+    }
+
     private String mode;
     private Cursor cursor;
+    private String icon;
 
-    DrawMode(String mode, Cursor cursor) {
+    DrawMode(String mode, Cursor cursor, String icon) {
         this.mode = mode;
         this.cursor = cursor;
+        this.icon = icon;
     }
 
     public String getMode() {
@@ -54,6 +63,14 @@ public enum DrawMode {
 
     public void setCursor(Cursor cursor) {
         this.cursor = cursor;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     // 根据字符串获取对应enum

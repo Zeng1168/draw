@@ -163,7 +163,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
                     g2.drawRect(x1, y1, width, height);
                 }break;
                 case CIRCLE:{   // 绘制圆形
-                    g2.drawOval(x1, x2, width, height);
+                    g2.drawOval(x1, y1, width, height);
                 }break;
                 case LINE :{    // 画直线
                     g2.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
@@ -178,11 +178,6 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
                     g2.drawLine( p1.getX(), p2.getY(), p2.getX(), p2.getY());   // AB线
                     g2.drawLine(p2.getX(), p2.getY(), (p1.getX()+p2.getX())/2, p1.getY());    // BC线
                     g2.drawLine((p1.getX()+p2.getX())/2, p1.getY(), p1.getX(), p2.getY());    // CA线
-                }break;
-                case ROSE:{ // 画玫瑰
-//                RoseDraw roseController=new RoseDraw();
-//                BufferedImage image=roseController.draw(drawParams.getPressedImage());
-//                drawParams.setImage(image);
                 }break;
                 default : break;
             }
