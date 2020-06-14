@@ -43,7 +43,7 @@ public class RegistController extends BaseController<UserService> {
             else{
             if(getServiceInstance()){
                 // 请求网络
-                MyResponse signResult = service.userSign(strUsername, strPsw);
+                MyResponse signResult = service.userSign(strUsername, strPsw,strPhone);
                 if(signResult.getStatus() == ResultCode.SUCCESS.getCode()){
                     AlertUtil.alertInfo("注册状态提示", null,"注册成功！");
                 }else {

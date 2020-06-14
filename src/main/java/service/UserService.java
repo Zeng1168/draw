@@ -19,10 +19,11 @@ public class UserService extends BaseService<UserApi> {
     }
 
     // 注册
-    public MyResponse userSign(String username, String password){
+    public MyResponse userSign(String username, String password,String phone){
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
+        params.put("phone",phone);
         if(getApiInstance()){
             return api.userSign(params);
         }else return MyResponse.failureResponse("网络请求失败！");
