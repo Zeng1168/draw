@@ -3,7 +3,11 @@ package controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import service.UserService;
 import utils.AlertUtil;
@@ -64,25 +68,19 @@ public class LoginController extends BaseController<UserService> {
      */
     @FXML
     public void btnRegist(ActionEvent e) {
-        String strUsername = username.getText();
-        String strPsw = password.getText();
 
-        if(strUsername.equals("")){
-            AlertUtil.alertWarn("注册状态提示", null,"用户名不能为空");
-        }else if(strPsw.equals("")) {
-            AlertUtil.alertWarn("注册状态提示", null,"密码不能为空");
-        }else{
-            if(getServiceInstance()){
-                // 请求网络
-                MyResponse signResult = service.userSign(strUsername, strPsw);
-                if(signResult.getStatus() == ResultCode.SUCCESS.getCode()){
-                    AlertUtil.alertInfo("注册状态提示", null,"注册成功！");
-                }else {
-                    AlertUtil.alertWarn("注册状态提示", null,signResult.getMsg());
-                }
-            }
+        try {
+            AnchorPane page = FXMLLoader.load(getClass().getClassLoader().getResource("layout/Regist.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("注册界面");
+            stage.setScene(new Scene(page,600,400));
+            stage.show();
+        }catch (Exception e1){
+            e1.printStackTrace();
         }
     }
+
+
 
     @FXML
     public void btnCancle(ActionEvent e){
