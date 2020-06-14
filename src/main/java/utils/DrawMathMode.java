@@ -1,27 +1,22 @@
 package utils;
 
-import javax.swing.*;
-import java.awt.*;
-
 public enum DrawMathMode{
-
-
-    LINE("直线"),
-    TRIANGLE("三角形"),
-    RECTANGEL("矩形"),
-    FILL_RECTANGEL("实心矩形"),
-    CIRCLE("圆形"),
-    ROSE("玫瑰"),
-    CONE("圆锥"),
-    SPHERE("球体"),
-    BOX("长方体");
-
+    LINE("直线", true),
+    TRIANGLE("三角形", true),
+    RECTANGEL("矩形", true),
+    FILL_RECTANGEL("实心矩形", true),
+    CIRCLE("圆形", true),
+    ROSE("玫瑰", false),
+    CONE("圆锥", false),
+    SPHERE("球体", false),
+    BOX("长方体", false);
 
     private String mode;
+    private Boolean isPlanform; // 是否为平面图
 
-    DrawMathMode(String mode) {
+    DrawMathMode(String mode, Boolean isPlanform) {
         this.mode = mode;
-
+        this.isPlanform = isPlanform;
     }
 
     public String getMode() {
@@ -33,7 +28,6 @@ public enum DrawMathMode{
     }
 
 
-
     // 根据字符串获取对应enum
     public static DrawMathMode getModeByStr(String str) {
         for (DrawMathMode dm : values()) {
@@ -43,11 +37,6 @@ public enum DrawMathMode{
         }
         return null;
     }
-
-
-
-
-
 
 
 }

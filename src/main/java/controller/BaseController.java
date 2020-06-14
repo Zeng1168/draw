@@ -2,7 +2,7 @@ package controller;
 
 import java.lang.reflect.ParameterizedType;
 
-public class BaseController <T> {
+public abstract class BaseController<T> {
     protected T service;
 
     protected boolean getServiceInstance(){

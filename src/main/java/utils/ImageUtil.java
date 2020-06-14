@@ -54,6 +54,9 @@ public class ImageUtil {
      */
     public static BufferedImage createBlankImage(int width, int height){
         BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);    // 创建空白图像
+        Graphics g = buffImg.getGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0,0,buffImg.getWidth(), buffImg.getHeight());
         return buffImg;
     }
 
