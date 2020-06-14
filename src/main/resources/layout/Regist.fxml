@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="mLogin" prefHeight="316.0" prefWidth="488.0" style="-fx-background-image: 12;" stylesheets="@../style/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+
+<AnchorPane fx:id="mLogin" prefHeight="316.0" prefWidth="488.0" style="-fx-background-image: 12;" stylesheets="@../style/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistController">
     <children>
         <FlowPane layoutX="80.0" layoutY="102.0" prefHeight="87.0" prefWidth="80.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="102.0">
             <children>
                 <VBox alignment="center">
                     <children>
-                        <Label fx:id="title" alignment="center" layoutX="300.0" layoutY="10.0" style="-fx-font-size: 35;" text="用户注册" textFill="#171717">
-                            <font>
-                                <Font size="35.0" />
-                            </font>
-                        </Label>
                         <HBox alignment="CENTER" fillHeight="false" prefHeight="135.0" prefWidth="413.0" spacing="6.0">
                             <children>
                                 <VBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="93.0" spacing="22.0">
@@ -27,7 +23,10 @@
                                                 <Font size="22.0" />
                                             </font>
                                         </Label>
-                              <Label text="电话号码" />
+                              <Label text="电话号码">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font></Label>
                                         <Label id="password" text="密码" textFill="#1b1a1a">
                                             <font>
                                                 <Font size="22.0" />
@@ -38,7 +37,7 @@
                                 <VBox alignment="CENTER" prefHeight="111.0" prefWidth="195.0" spacing="12.0">
                                     <children>
                                         <TextField fx:id="username" />
-                              <TextField />
+                                         <TextField fx:id="phone" />
                                         <PasswordField fx:id="password" />
                                     </children>
                                 </VBox>
@@ -49,8 +48,13 @@
                 </VBox>
             </children>
         </FlowPane>
-              <Button fx:id="regist" layoutX="189.0" layoutY="309.0" onAction="#btnRegist" text="注册" textFill="WHITE" />
-              <Button fx:id="cancel" layoutX="372.0" layoutY="309.0" onAction="#btnCancle" text="取消" textFill="WHITE" />
+              <Button fx:id="regist" layoutX="299.0" layoutY="245.0" onAction="#btnRegist" text="注册" textFill="WHITE" />
+              <Button fx:id="cancel" layoutX="386.0" layoutY="245.0" onAction="#btnCancle" text="取消" textFill="WHITE" />
+            <Label fx:id="title" alignment="center" layoutX="217.0" layoutY="32.0" style="-fx-font-size: 35;" text="用户注册" textFill="#171717">
+                <font>
+                    <Font size="35.0" />
+                </font>
+            </Label>
 
     </children>
 </AnchorPane>
