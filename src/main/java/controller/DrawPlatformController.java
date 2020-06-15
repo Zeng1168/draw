@@ -19,15 +19,11 @@ import java.io.IOException;
  */
 
 public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopToolBar.TopToolListener, LeftToolBar.LeftToolListener, DrawBroadPanel.DrawBroadListener {
-    DrawMainView drawMainView;  // JFram
+    DrawPlatformView drawPlatFormView;  // JFram
+    DrawParams drawParams;  // 参数
 
-    DrawParams drawParams;//参数
-
-    public DrawPlatformController() {
-        this.init(null);
-    }
-
-    public DrawPlatformController(BufferedImage image) {
+    public DrawPlatformController(DrawPlatformView drawPlatFormView, BufferedImage image) {
+        this.drawPlatFormView = drawPlatFormView;
         this.init(image);
     }
 
@@ -39,6 +35,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
         drawParams.setPenColor(Color.BLUE);
         drawParams.setBackgroundColor(Color.WHITE);
         drawParams.setRubberSize(20);
+
         if(image == null){
             image = ImageUtil.createBlankImage(640, 480);
         }
@@ -46,15 +43,15 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
         drawParams.setGroundSizeX(image.getWidth());
         drawParams.setGroundSizeY(image.getHeight());
 
-        // 绑定view层
-        drawMainView = new DrawMainView(drawParams);
-        drawMainView.setListener(this, this, this, this);
-        drawMainView.paintImage(image);
+
+        // 更新初始状态到view层
+        drawPlatFormView.paintImage(image);
+        drawPlatFormView.initTopToolParams(drawParams.getPenColor(), drawParams.getBackgroundColor(), drawParams.getGroundSizeX(), drawParams.getGroundSizeY());
     }
 
     // 绘制到界面上
     private void paint(){
-        drawMainView.paintImage(drawParams.getImage());
+        drawPlatFormView.paintImage(drawParams.getImage());
     }
 
     /**  顶部工具栏监听  **/
@@ -103,13 +100,35 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
         paint();
     }
 
+    /**   撤销  */
+    @Override
+    public void onOperateBack() {
+        Object image = drawParams.popRecordStack(); // 从历史记录栈取出
+        if( image != null){
+            drawParams.pushCancelStack(drawParams.getImage());    // 把当前图片放入撤销记录栈
+            drawParams.setImage((BufferedImage)image);
+            paint();
+        }
+    }
+
+    /**   重做  */
+    @Override
+    public void onOperateRedo() {
+        Object image = drawParams.popCancelStack();
+        if( image != null){
+            drawParams.pushRecordStack(drawParams.getImage());
+            drawParams.setImage((BufferedImage)image);
+            paint();
+        }
+    }
+
 
     /**  侧边工具栏监听  **/
     // 鼠绘图模式改变
     @Override
     public void onModeChanged(DrawMode drawMode) {
         drawParams.setDrawMode(drawMode);
-        drawMainView.setDrawBroadCursor(drawMode.getCursor());   // 改变鼠标形状
+        drawPlatFormView.setDrawBroadCursor(drawMode.getCursor());   // 改变鼠标形状
     }
 
     // 鼠标拖动
@@ -241,7 +260,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 //                new ImageSaveController();
             }break;
             case "文件-新建" : {
-                new DrawPlatformController();
+                new DrawPlatformView();
             }break;
             case "文件-保存到数据库" : {
                 saveToDB();
@@ -250,20 +269,10 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 
             }break;
             case "编辑-撤销" : {
-                Object image = drawParams.popRecordStack(); // 从历史记录栈取出
-                if( image != null){
-                    drawParams.pushCancelStack(drawParams.getImage());    // 把当前图片放入撤销记录栈
-                    drawParams.setImage((BufferedImage)image);
-                    paint();
-                }
+                onOperateBack();
             }break;
             case "编辑-重做" : {
-                Object image = drawParams.popCancelStack();
-                if( image != null){
-                    drawParams.pushRecordStack(drawParams.getImage());
-                    drawParams.setImage((BufferedImage)image);
-                    paint();
-                }
+                onOperateRedo();
             }break;
             case "编辑-清空" : {
                 drawParams.setBackgroundColor(Color.WHITE);

@@ -18,6 +18,7 @@ public class LeftToolBar extends JToolBar implements ActionListener {
         for (DrawMode dm : DrawMode.values()) {
             JButton button = new JButton();
             button.setIcon(new ImageIcon(dm.getIcon()));
+            button.setToolTipText(dm.getMode());
             this.add(button);
             button.setActionCommand(dm.getMode());
             button.addActionListener(this);
@@ -25,6 +26,7 @@ public class LeftToolBar extends JToolBar implements ActionListener {
 
         // 设置
         this.setOrientation(SwingConstants.VERTICAL);
+        this.setBorderPainted(false);
         this.setVisible(true);
     }
 

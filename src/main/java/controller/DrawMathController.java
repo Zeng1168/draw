@@ -6,6 +6,7 @@ import view.drawMath.DrawMathView;
 import view.drawMath.LeftMathToolBar;
 import view.drawMath.TopMathToolBar;
 import view.drawMath.TopMenuBar;
+import view.drawPlatform.DrawPlatformView;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -62,7 +63,7 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
 
             }break;
             case "画板模式-平面绘图模式" : {
-                new DrawPlatformController();
+                new DrawPlatformView();
             }break;
             default:break;
         }
@@ -88,9 +89,9 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, TopMathTo
 //        image.setImage(imageStr);
 //        ImageMapper imageMapper = new ImageMapper();
 //        if(imageMapper.insertImage(image) > 0){
-//            drawMainView.showMessageDialog("保存成功！");
+//            drawPlatFormView.showMessageDialog("保存成功！");
 //        }else {
-//            drawMainView.showMessageDialog("保存失败！");
+//            drawPlatFormView.showMessageDialog("保存失败！");
 //        }
     }
 

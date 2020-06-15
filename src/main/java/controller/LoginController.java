@@ -1,5 +1,6 @@
 package controller;
 
+import api.UserApi;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,12 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import service.UserService;
 import utils.AlertUtil;
 import utils.http.MyResponse;
 import utils.http.ResultCode;
+import view.drawPlatform.DrawPlatformView;
 
-public class LoginController extends BaseController<UserService> {
+import java.util.HashMap;
+import java.util.Map;
+
+public class LoginController {
 
     @FXML
     TextField username;
@@ -36,27 +40,30 @@ public class LoginController extends BaseController<UserService> {
         }else if(strPsw.equals("")) {
             AlertUtil.alertWarn("登陆状态提示", null,"密码不能为空！");
         }else {
-            if(getServiceInstance()){
+            Map<String, String> params = new HashMap<>();
+            params.put("username", strUsername);
+            params.put("password", strPsw);
 
-                // 请求网络数据
-                MyResponse response = service.userLogin(strUsername, strPsw);
-                if(response.getStatus() == ResultCode.SUCCESS.getCode()){    // 登录成功
-                    try {
-                        // 打开绘图主界面
-                        new DrawPlatformController();
-                        System.out.println("登录成功！");
+            // 请求网络数据
+            UserApi userApi = new UserApi();
 
-                        // 关闭登录界面
-                        // 通过stage方式操作窗口，因为一个新的窗口就是一个新的stage
-                        Stage stage = (Stage)username.getScene().getWindow();
-                        stage.close();
-                        Platform.exit();
-                    } catch (Exception e2) {
-                        e2.printStackTrace();
-                    }
-                }else { // 登录失败
-                    AlertUtil.alertWarn("登陆状态提示", null,response.getMsg());
+            MyResponse response = userApi.userLogin(params);
+            if(response.getStatus() == ResultCode.SUCCESS.getCode()){    // 登录成功
+                try {
+                    // 打开绘图主界面
+                    new DrawPlatformView();
+                    System.out.println("登录成功！");
+
+                    // 关闭登录界面
+                    // 通过stage方式操作窗口，因为一个新的窗口就是一个新的stage
+                    Stage stage = (Stage)username.getScene().getWindow();
+                    stage.close();
+                    Platform.exit();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
                 }
+            }else { // 登录失败
+                AlertUtil.alertWarn("登陆状态提示", null,response.getMsg());
             }
         }
 

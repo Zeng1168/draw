@@ -3,6 +3,8 @@ package view.drawPlatform;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * 顶部工具栏
@@ -11,6 +13,9 @@ import java.awt.*;
  */
 public class TopToolBar extends JToolBar{
 	TopToolListener listener;  // 自定义监听
+
+    JButton backBtn;    // 撤销按钮
+    JButton redoBtn;    // 重做按钮
 
     JButton penColorBtn; // 画笔颜色选择按钮
     JTextField penColorDisp;    // 画笔颜色预览
@@ -23,10 +28,23 @@ public class TopToolBar extends JToolBar{
     JTextField groundSizeYEdit; // 画布高度
 
 
-    public TopToolBar(Color penColor, Color backColor, int width, int height){
+    public TopToolBar(){
         // 创建图形组件
+        JPanel operatePanel = new JPanel(); // 便捷操作
         JPanel penPanel = new JPanel();	// 画笔属性
         JPanel canvaPanel = new JPanel();	// 画布属性
+
+        /** 便捷操作 */
+        backBtn = new JButton();
+        redoBtn = new JButton();
+        backBtn.setToolTipText("撤销");
+        redoBtn.setToolTipText("重做");
+        backBtn.setBorderPainted(false);
+        redoBtn.setBorderPainted(false);
+        backBtn.setIcon(new ImageIcon("src/main/resources/image/operate_back.png"));
+        redoBtn.setIcon(new ImageIcon("src/main/resources/image/operate_redo.png"));
+        operatePanel.add(backBtn);
+        operatePanel.add(redoBtn);
 
         /** 画笔设置  */
         // 添加画笔标题边框
@@ -34,7 +52,6 @@ public class TopToolBar extends JToolBar{
         // 添加画笔颜色选择按钮、画笔颜色预览块
         penColorBtn = new JButton("颜色");	// 颜色标签
         penColorDisp = new JTextField(3);
-        penColorDisp.setBackground(penColor);
         penPanel.add(penColorBtn);
         penPanel.add(penColorDisp);
         // 添加画笔粗细标签、画笔粗细输入框
@@ -48,12 +65,11 @@ public class TopToolBar extends JToolBar{
         // 添加背景颜色选择按钮、背景颜色预览块
         backColorBtn = new JButton("颜色");
         backColorDisp = new JTextField(3);
-        backColorDisp.setBackground(backColor);
         canvaPanel.add(backColorBtn);
         canvaPanel.add(backColorDisp);
         // 添加尺寸设置组件
-        groundSizeXEdit = new JTextField(String.valueOf(width),2);
-        groundSizeYEdit = new JTextField(String.valueOf(height),2);
+        groundSizeXEdit = new JTextField("",2);
+        groundSizeYEdit = new JTextField("",2);
         changeSizeBtn = new JButton("改变尺寸");
         canvaPanel.add(new JLabel("尺寸"));   // 尺寸（标签）
         canvaPanel.add(groundSizeXEdit);    // 长（输入框）
@@ -63,13 +79,22 @@ public class TopToolBar extends JToolBar{
         canvaPanel.add(changeSizeBtn);
 
         this.setListener(); // 为需要交互的组件设置监听
+        this.add(operatePanel);
         this.add(penPanel);	// 添加画笔设置组件
         this.add(canvaPanel);	// 添加画布设置组件
 
         // 设置
         this.setMargin(new Insets(2,2,2,2));
         this.setOrientation(SwingConstants.HORIZONTAL);
+        this.setBorderPainted(false);
         this.setVisible(true);
+    }
+
+    public void initParams(Color penColor, Color backColor, int width, int height){
+        penColorDisp.setBackground(penColor);
+        backColorDisp.setBackground(backColor);
+        groundSizeXEdit.setText(String.valueOf(width));
+        groundSizeYEdit.setText(String.valueOf(height));
     }
 
     // 设置功能组件监听
@@ -111,6 +136,18 @@ public class TopToolBar extends JToolBar{
             }catch (Exception ex){}
 
         });
+
+        backBtn.addActionListener(e -> {
+            if(listener != null){
+                listener.onOperateBack();
+            }
+        });
+
+        redoBtn.addActionListener(e -> {
+            if(listener != null){
+                listener.onOperateRedo();
+            }
+        });
     }
 
 	// 设置自定义监听器
@@ -124,5 +161,7 @@ public class TopToolBar extends JToolBar{
 		void onBackColorChanged(Color color);
 		void onLineStrockChanged(Float lineStroke);
 		void onSizeChanged(Integer x, Integer y);
+		void onOperateBack();
+		void onOperateRedo();
 	}
 }

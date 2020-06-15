@@ -1,31 +1,24 @@
 package view.drawPlatform;
 
 import entity.module.Point;
+import utils.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 
 public class DrawBroadPanel extends JScrollPane implements MouseMotionListener, MouseListener {
-
     private DrawBroadListener listener;
     private BufferedImage image;
 
 
-    public DrawBroadPanel(BufferedImage image){
-        this.image = image;
+    public DrawBroadPanel(){
+//        this.image = ImageUtil.createBlankImage(0,0);
 
         // 画板初始化
-        this.setBounds(0, 0, image.getWidth(), image.getHeight());
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 //        this.setViewportView(new DrawPanel());
@@ -123,6 +116,7 @@ public class DrawBroadPanel extends JScrollPane implements MouseMotionListener, 
 
         @Override
         public void paint(Graphics g) {
+            this.setSize(image.getWidth(), image.getHeight());
             g.drawImage(image, 0, 0,image.getWidth(),image.getHeight(),null);
         }
 
