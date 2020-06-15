@@ -12,37 +12,78 @@ public class DrawRetangle extends JPanel {
 
     String title = "三角形绘制";
 
-    JTextField xA,yA,xB,yB,xC,yC;
-    JButton startDrawBtn;
+    JTextField x1,y1,x2,y2,x3,y3;   // 三点
+    JTextField lengthAB, lengthBC, lengthCA;    // 三条线段长度
+    JButton startDrawBtn1, startDrawBtn2;
     ImagePanel imagePanel;
     BufferedImage image;
 
     public DrawRetangle() {
-        Box mainBox = Box.createVerticalBox();
         Box topBox = Box.createVerticalBox();
 
 
         // 标题
         JLabel label = new JLabel(title);
+        topBox.add(Box.createVerticalStrut(10));
         topBox.add(label);
+        topBox.add(Box.createVerticalStrut(10));
 
-        //  参数输入框、绘制按钮
-        Box paramBtnBox = Box.createHorizontalBox();
-        Box paramBox = Box.createHorizontalBox();
-        Box btnBox = Box.createVerticalBox();
+        x1 = new JTextField("5");
+        x2 = new JTextField("10");
+        x3 = new JTextField("60");
+        y1 = new JTextField("20");
+        y2 = new JTextField("20");
+        y3 = new JTextField("70");
+        lengthAB = new JTextField();
+        lengthBC = new JTextField();
+        lengthCA = new JTextField();
+        startDrawBtn1 = new JButton("绘制");
+        startDrawBtn2 = new JButton("绘制");
 
-        // 一堆输入框
+        //  输入三点绘制
+        Box paramBox1 = Box.createHorizontalBox();
+        paramBox1.add(Box.createHorizontalStrut(20));
 
-        // 绘制按钮
-        startDrawBtn = new JButton("绘制");
-        btnBox.add(startDrawBtn);
+        Box box1A=Box.createHorizontalBox();
+        box1A.add(new JLabel("A点 X:"));
+        box1A.add(x1);
+        box1A.add(new JLabel("Y:"));
+        box1A.add(y1);
+        box1A.add(Box.createHorizontalStrut(10));
+        paramBox1.add(box1A);
+
+        Box box2A=Box.createHorizontalBox();
+        box2A.add(new JLabel("B点 X:"));
+        box2A.add(x2);
+        box2A.add(new JLabel("Y:"));
+        box2A.add(y2);
+        box2A.add(Box.createHorizontalStrut(10));
+        paramBox1.add(box2A);
+
+        Box box3A=Box.createHorizontalBox();
+        box3A.add(new JLabel("C点 X:"));
+        box3A.add(x3);
+        box3A.add(new JLabel("Y:"));
+        box3A.add(y3);
+        box3A.add(Box.createHorizontalStrut(10));
+        paramBox1.add(box3A);
+
+        paramBox1.add(startDrawBtn1);
+
+
+
+        // 输入三条线段长度绘制
+
+
+        topBox.add(paramBox1);
+
+
+        topBox.add(Box.createVerticalStrut(10));
+
 
         imagePanel = new ImagePanel();
         // 坐标系绘制
         drawShape(5,10,60,20,20,70);
-
-        mainBox.add(topBox);
-        mainBox.add(imagePanel);
 
         this.setLayout(new BorderLayout());
         this.add(topBox, BorderLayout.NORTH);
