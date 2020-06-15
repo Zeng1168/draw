@@ -16,7 +16,6 @@ public class DrawBroadPanel extends JScrollPane implements MouseMotionListener, 
 
 
     public DrawBroadPanel(){
-//        this.image = ImageUtil.createBlankImage(0,0);
 
         // 画板初始化
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -114,11 +113,11 @@ public class DrawBroadPanel extends JScrollPane implements MouseMotionListener, 
     }
 
 
-        @Override
-        public void paint(Graphics g) {
-            this.setSize(image.getWidth(), image.getHeight());
-            g.drawImage(image, 0, 0,image.getWidth(),image.getHeight(),null);
-        }
+    @Override
+    public void paint(Graphics g) {
+        this.setSize(image.getWidth(), image.getHeight());
+        g.drawImage(image, 0, 0,image.getWidth(),image.getHeight(),null);
+    }
 
 
 }

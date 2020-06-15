@@ -13,6 +13,7 @@ public class MathDrawBroad extends JScrollPane {
    public MathDrawBroad(){
        image = ImageUtil.createBlankImage(680, 460);
 
+
        this.setBounds(0, 0,680,460);
        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * 各模式中文名称、模式下鼠标指针形状
  */
-public enum DrawMode {
+public enum DrawPlatformMode {
 
     MOUSE("鼠标", CursorTool.MOUSE_CURSOR, IconTool.point),
     RUBBER("橡皮", CursorTool.RUBBER_CURSOR, IconTool.rubber),
@@ -43,7 +43,7 @@ public enum DrawMode {
     private Cursor cursor;
     private String icon;
 
-    DrawMode(String mode, Cursor cursor, String icon) {
+    DrawPlatformMode(String mode, Cursor cursor, String icon) {
         this.mode = mode;
         this.cursor = cursor;
         this.icon = icon;
@@ -74,8 +74,8 @@ public enum DrawMode {
     }
 
     // 根据字符串获取对应enum
-    public static DrawMode getModeByStr(String str) {
-        for (DrawMode dm : values()) {
+    public static DrawPlatformMode getModeByStr(String str) {
+        for (DrawPlatformMode dm : values()) {
             if (dm.getMode().equals(str)) {
                 return dm;
             }

@@ -1,5 +1,5 @@
 package view.drawPlatform;
-import utils.DrawMode;
+import utils.DrawPlatformMode;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ public class LeftToolBar extends JToolBar implements ActionListener {
 
     public LeftToolBar() {
         // 创建选择画笔工具,直接从枚举类中遍历
-        for (DrawMode dm : DrawMode.values()) {
+        for (DrawPlatformMode dm : DrawPlatformMode.values()) {
             JButton button = new JButton();
             button.setIcon(new ImageIcon(dm.getIcon()));
             button.setToolTipText(dm.getMode());
@@ -32,7 +32,7 @@ public class LeftToolBar extends JToolBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DrawMode mode = DrawMode.getModeByStr(e.getActionCommand());
+        DrawPlatformMode mode = DrawPlatformMode.getModeByStr(e.getActionCommand());
         if(mode != null && listener != null){
             listener.onModeChanged(mode);
         }
@@ -45,6 +45,6 @@ public class LeftToolBar extends JToolBar implements ActionListener {
 
     // 自定义监听器
     public interface LeftToolListener{
-        void onModeChanged(DrawMode drawMode);
+        void onModeChanged(DrawPlatformMode drawPlatformMode);
     }
 }

@@ -1,8 +1,8 @@
 package view.drawMath;
+
 import utils.DrawMathMode;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,21 +11,23 @@ import java.awt.event.ActionListener;
  *
  * 各种绘图形状
  */
-public class LeftMathToolBar extends JToolBar implements ActionListener {
+public class LeftToolBar extends JToolBar implements ActionListener {
     LeftMathToolListener listener;  // 自定义监听器
-    Font font=new Font("",Font.BOLD,22);
 
-    public LeftMathToolBar() {
+    public LeftToolBar() {
          for (DrawMathMode dm : DrawMathMode.values()) {
-            JButton button = new JButton(dm.getMode());
-            this.add(button);
-            button.setActionCommand(dm.getMode());
-            button.addActionListener(this);
-        }
+             JButton button = new JButton();
+             button.setIcon(new ImageIcon(dm.getIcon()));
+             button.setToolTipText(dm.getMode());
+             this.add(button);
+             button.setActionCommand(dm.getMode());
+             button.addActionListener(this);
+         }
 
-        // 设置
-        this.setOrientation(SwingConstants.VERTICAL);
-        this.setVisible(true);
+         // 设置
+         this.setOrientation(SwingConstants.VERTICAL);
+         this.setBorderPainted(false);
+         this.setVisible(true);
     }
 
     @Override

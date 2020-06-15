@@ -1,6 +1,6 @@
 package entity.module;
 
-import utils.DrawMode;
+import utils.DrawPlatformMode;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class DrawParams {
     // 绘图参数
-    private DrawMode drawMode;  // 绘图模式
+    private DrawPlatformMode drawPlatformMode;  // 绘图模式
     private Float lineStroke;   // 线条粗细
     private Color penColor; // 画笔颜色
     private Color backgroundColor;  // 背景颜色
@@ -29,12 +29,12 @@ public class DrawParams {
         cancelStack = new Stack();
     }
 
-    public DrawMode getDrawMode() {
-        return drawMode;
+    public DrawPlatformMode getDrawPlatformMode() {
+        return drawPlatformMode;
     }
 
-    public void setDrawMode(DrawMode drawMode) {
-        this.drawMode = drawMode;
+    public void setDrawPlatformMode(DrawPlatformMode drawPlatformMode) {
+        this.drawPlatformMode = drawPlatformMode;
     }
 
     public Float getLineStroke() {

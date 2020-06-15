@@ -1,10 +1,12 @@
 package controller;
 
+import controller.drawMath.DrawMathController;
 import entity.module.DrawParams;
 import entity.module.Point;
 import sun.misc.BASE64Encoder;
-import utils.DrawMode;
+import utils.DrawPlatformMode;
 import utils.ImageUtil;
+import view.drawMath.DrawMathView;
 import view.drawPlatform.*;
 
 import javax.imageio.ImageIO;
@@ -30,7 +32,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
     public void init(BufferedImage image){
         // 设置初始参数
         drawParams = new DrawParams();
-        drawParams.setDrawMode(DrawMode.MOUSE);
+        drawParams.setDrawPlatformMode(DrawPlatformMode.MOUSE);
         drawParams.setLineStroke(2.0f);
         drawParams.setPenColor(Color.BLUE);
         drawParams.setBackgroundColor(Color.WHITE);
@@ -126,9 +128,9 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
     /**  侧边工具栏监听  **/
     // 鼠绘图模式改变
     @Override
-    public void onModeChanged(DrawMode drawMode) {
-        drawParams.setDrawMode(drawMode);
-        drawPlatFormView.setDrawBroadCursor(drawMode.getCursor());   // 改变鼠标形状
+    public void onModeChanged(DrawPlatformMode drawPlatformMode) {
+        drawParams.setDrawPlatformMode(drawPlatformMode);
+        drawPlatFormView.setDrawBroadCursor(drawPlatformMode.getCursor());   // 改变鼠标形状
     }
 
     // 鼠标拖动
@@ -136,13 +138,13 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
     public void mouseDragged(Point p2) {
         Point p1 = drawParams.getPressedPoint();
 
-        if(drawParams.getDrawMode().equals(DrawMode.PEN)){ // 钢笔绘制
+        if(drawParams.getDrawPlatformMode().equals(DrawPlatformMode.PEN)){ // 钢笔绘制
             if (drawParams.getPreviousPoint() != null) {
                 Graphics g = drawParams.getImage().getGraphics();
                 g.setColor(drawParams.getPenColor());
                 g.drawLine(drawParams.getPreviousPoint().getX(), drawParams.getPreviousPoint().getY(), p2.getX(), p2.getY());
             }
-        }else if(drawParams.getDrawMode().equals(DrawMode.RUBBER)){  // 橡皮擦
+        }else if(drawParams.getDrawPlatformMode().equals(DrawPlatformMode.RUBBER)){  // 橡皮擦
             Graphics g = drawParams.getImage().getGraphics();
             g.setColor(drawParams.getBackgroundColor());
             Integer radius = drawParams.getRubberSize();  // 橡皮擦半径
@@ -174,7 +176,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
             g2.setColor(drawParams.getPenColor() );
             g2.setStroke(new BasicStroke(drawParams.getLineStroke()));
 
-            switch(drawParams.getDrawMode()) {
+            switch(drawParams.getDrawPlatformMode()) {
                 case FILL_RECTANGEL: {  // 绘制实心矩形
                     g2.fill3DRect(x1, y1, width, height, false);
                 }break;
@@ -226,7 +228,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
         drawParams.setPressedPoint(p);
         drawParams.setPressedImage(drawParams.getImage());
         // 按下就一定会产生图像绘制，此时先保存记录用以撤销
-        if(drawParams.getDrawMode() != DrawMode.MOUSE){
+        if(drawParams.getDrawPlatformMode() != DrawPlatformMode.MOUSE){
             drawParams.pushRecordStack(ImageUtil.imageCopy(drawParams.getImage()));
         }
     }
@@ -285,7 +287,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 //                new DemodeController();
             }break;
             case "画板模式-数学绘图模式" : {
-                new DrawMathController();
+                new DrawMathView();
             }break;
             default:break;
         }

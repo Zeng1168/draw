@@ -1,9 +1,7 @@
 package view.drawPlatform;
 
 import controller.DrawPlatformController;
-import entity.module.DrawParams;
-import utils.ImageUtil;
-import utils.WindowUtills;
+import utils.SwingUtills;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +31,6 @@ public class DrawPlatformView extends JFrame {
 
     public void init(BufferedImage image){
 
-
         // 初始化各模块
         topMenu = new TopMenuBar();
         topTool = new TopToolBar();
@@ -48,8 +45,9 @@ public class DrawPlatformView extends JFrame {
         this.add(drawBroad,BorderLayout.CENTER);	//添加绘图区容器
 
         // 设置窗口
+        this.setTitle("ODS画板-平面绘图模式");
         this.setIconImage((new ImageIcon("src/main/resources/image/iconfont.png").getImage()));
-        WindowUtills.setMiddleBounds(this, 800, 600);   // 设置窗口大小
+        SwingUtills.setMiddleBounds(this, 800, 600);   // 设置窗口大小
         this.setVisible(true);	// 设置窗体可见性
 
 

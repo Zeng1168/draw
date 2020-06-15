@@ -1,12 +1,7 @@
-import controller.DrawMathController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import view.drawMath.DrawMathView;
 import view.drawPlatform.DrawPlatformView;
-
-import javax.swing.*;
 
 
 public class ApplicationStart extends Application {
@@ -14,9 +9,9 @@ public class ApplicationStart extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        new DrawPlatformView();
+//        new DrawPlatformView();
 
-//        new DrawMathController();
+        new DrawMathView();
 
 //        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/Login.fxml"));
 //        root.getStylesheets().add(getClass().getClassLoader().getResource("style/login.css").toExternalForm());
