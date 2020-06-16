@@ -3,12 +3,9 @@ package view.drawMath;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
-import com.sun.j3d.utils.geometry.ColorCube;
-import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import controller.drawMath.BoxController;
-import controller.drawMath.ConeController;
-import entity.ShapeCone;
+import entity.ShapeBox;
 import utils.AlertUtil;
 import utils.DataCheck;
 
@@ -35,11 +32,11 @@ public class DrawBox extends JPanel implements IDraw {
 
     // 信息显示区
     private JLabel nameInfo;    // 图形名称
-    private JLabel lInfo;    // 底面圆半径r
-    private JLabel wInfo;    // 高度h
-    private JLabel hInfo;    // 高度h
-    private JLabel areaInfo;   // 底面圆面积
-    private JLabel volumeInfo;   // 体积
+    private JLabel lInfo;    // 长方体的长
+    private JLabel wInfo;    // 长方体的宽
+    private JLabel hInfo;    // 长方体的高
+    private JLabel areaInfo;   // 长方体的面积
+    private JLabel volumeInfo;   // 长方体的体积
 
 
     public DrawBox() {
@@ -49,7 +46,7 @@ public class DrawBox extends JPanel implements IDraw {
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new ConeController(this);
+        controller = new BoxController(this);
 
         this.setVisible(true);
 
@@ -106,10 +103,11 @@ public class DrawBox extends JPanel implements IDraw {
         /* 3333333333   以下为右侧信息区组件   33333333333333 */
         // 创建各对象
         nameInfo = new JLabel();    // 图形名称
-        rInfo= new JLabel();    // 底面圆半径r
-        hInfo = new JLabel();    // 高度h
-        perimeterCircleInfo = new JLabel();    // 底面圆周长
-        areaCircleInfo = new JLabel();   // 底面圆面积
+        lInfo= new JLabel();    // 长方体的长
+        wInfo = new JLabel();    // 长方体的宽
+        hInfo = new JLabel();    // 长方体的高
+
+        areaInfo = new JLabel();   // 底面圆面积
         volumeInfo = new JLabel();   // 体积
 
         Box rightInfoBox = Box.createHorizontalBox();
@@ -118,13 +116,13 @@ public class DrawBox extends JPanel implements IDraw {
         int marginInfo = 10;
         infoBox.add(nameInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(rInfo);
+        infoBox.add(lInfo);
+        infoBox.add(Box.createVerticalStrut(marginInfo));
+        infoBox.add(wInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
         infoBox.add(hInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(perimeterCircleInfo);
-        infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(areaCircleInfo);
+        infoBox.add(areaInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
         infoBox.add(volumeInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
@@ -145,21 +143,23 @@ public class DrawBox extends JPanel implements IDraw {
     public void setListener(){
         startDrawBtn.addActionListener(e -> {
             //  获取输入参数
-            String r = rInput.getText();
+            String l = lInput.getText();
+            String w = wInput.getText();
             String h = hInput.getText();
 
             // 参数合法性校验
-            if(!DataCheck.isNumber(r)) AlertUtil.warningDialog("请正确输入底面圆半径r！");
-            else if(!DataCheck.isNumber(h)) AlertUtil.warningDialog("请正确输入高度h！");
+            if(!DataCheck.isNumber(l)) AlertUtil.warningDialog("请正确输入矩形的长！");
+            else if(!DataCheck.isNumber(w)) AlertUtil.warningDialog("请正确输入矩形的宽！");
+            else if(!DataCheck.isNumber(h)) AlertUtil.warningDialog("请正确输入矩形的高！");
             else {
-                controller.onDraw(Integer.valueOf(r), Integer.valueOf(h));
+                controller.onDraw(Integer.valueOf(l), Integer.valueOf(w),Integer.valueOf(h));
             }
         });
     }
 
-    /** 画图锥 */
-    public void drawShape(ShapeCone shapeCone){
-        Canvas3D canvas = draw(shapeCone.getR(), shapeCone.getH());
+    /** 画图矩形 */
+    public void drawShape(ShapeBox shapeBox){
+        Canvas3D canvas = draw(shapeBox.getL(),shapeBox.getW(),shapeBox.getH());
 
         drawArea.removeAll();  // 清除绘图区组件
         drawArea.repaint();
@@ -168,7 +168,7 @@ public class DrawBox extends JPanel implements IDraw {
         System.out.println("绘制");
     }
 
-    public  Canvas3D draw(float r,float h) {
+    public  Canvas3D draw(int l,int w ,int h) {
 
         //canvas to draw on, ask SimpleUniverse what config to use
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
@@ -242,10 +242,8 @@ public class DrawBox extends JPanel implements IDraw {
         Color3f black = new Color3f(0.0f, 0.0f, 0.0f);
         app.setMaterial(new Material(objColor, black, objColor, black, 80.0f));
 
-        ColorCube cube = new ColorCube(0.5f);
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(0.5f, 0.5f, 0.5f, app);
-        Cone cone = new Cone(r/10, h/10, 3, app);//圆锥半径为0.3，高为0.7，片元记1
-        transformGroup.addChild(cone);//圆锥
+        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(l/2.0f, w/2.0f, h/2.0f, app);
+        transformGroup.addChild(box);//圆锥
         scene.addChild(transformGroup);
         u.addBranchGraph(scene);
         return  canvas;
@@ -253,18 +251,19 @@ public class DrawBox extends JPanel implements IDraw {
 
 
     /**  更新信息区  */
-    public void updateInfoArea(ShapeCone shapeCone){
-        nameInfo.setText("名称：" + shapeCone.getName());
-        rInfo.setText("底面圆半径r：" + shapeCone.getR());
-        hInfo.setText("高度h：" + shapeCone.getH());
-        perimeterCircleInfo.setText("底面圆周长：" + String.format("%.2f", shapeCone.getPerimeterCircle()));
-        areaCircleInfo.setText("底面圆面积：" + String.format("%.2f", shapeCone.getAreaCircle()));
-        volumeInfo.setText("体积：" + String.format("%.2f", shapeCone.getVolume()));
+    public void updateInfoArea(ShapeBox shapeBox){
+        nameInfo.setText("名称：" + shapeBox.getName());
+        lInfo.setText("长方体的长l：" + shapeBox.getL());
+        wInfo.setText("长方体的宽w：" + shapeBox.getW());
+        hInfo.setText("长方体高度h：" + shapeBox.getH());
+        areaInfo.setText("底面圆面积：" + String.format("%.2f", shapeBox.getArea()));
+        volumeInfo.setText("体积：" + String.format("%.2f", shapeBox.getVolume()));
     }
 
     @Override
     public void clean() {
-        rInput.setText("");
+        lInput.setText("");
+        wInput.setText("");
         hInput.setText("");
     }
 
@@ -281,6 +280,6 @@ public class DrawBox extends JPanel implements IDraw {
 
     // 自定义监听器
     public interface Listener{
-        void onDraw(int r, int h);
+        void onDraw(int l, int w,int h );
     }
 }

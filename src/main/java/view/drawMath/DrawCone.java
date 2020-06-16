@@ -243,7 +243,6 @@ public class DrawCone extends JPanel implements IDraw  {
         app.setMaterial(new Material(objColor, black, objColor, black, 80.0f));
 
         ColorCube cube = new ColorCube(0.5f);
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(0.5f, 0.5f, 0.5f, app);
         Cone cone = new Cone(r/10, h/10, 3, app);//圆锥半径为0.3，高为0.7，片元记1
         transformGroup.addChild(cone);//圆锥
         scene.addChild(transformGroup);

@@ -85,6 +85,11 @@ public class DrawMathView extends JFrame {
                 drawComponent=drawSphere;
                 drawPanel.add(drawSphere,BorderLayout.CENTER);
             }break;
+            case CUBOID:{
+                DrawBox drawBox=new DrawBox();
+                drawComponent=drawBox;
+                drawPanel.add(drawBox,BorderLayout.CENTER);
+            }
         }
 
         drawPanel.revalidate();
