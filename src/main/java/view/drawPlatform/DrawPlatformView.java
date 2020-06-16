@@ -47,7 +47,7 @@ public class DrawPlatformView extends JFrame {
         // 设置窗口
         this.setTitle("ODS画板-平面绘图模式");
         this.setIconImage((new ImageIcon("src/main/resources/image/iconfont.png").getImage()));
-        SwingUtills.setMiddleBounds(this, 800, 600);   // 设置窗口大小
+        SwingUtills.setMiddleBounds(this, 800, 660);   // 设置窗口大小
         this.setVisible(true);	// 设置窗体可见性
 
 

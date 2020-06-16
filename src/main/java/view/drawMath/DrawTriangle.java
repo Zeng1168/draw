@@ -276,12 +276,12 @@ public class DrawTriangle extends JPanel implements IDraw {
 
     /** 画辅助线  */
     private void drawAuxiliaryLine(Graphics2D g2, Color color, String str,int x, int y, int px, int py){
-        g2.setColor(color);
-        g2.drawString(str, px-10, py-10);
-        g2.drawLine(px, py, px, sizeY-margin );
-        g2.drawString(String.valueOf(x), px-3, sizeY-margin+15);
-        g2.drawLine(px, py, margin, py );
-        g2.drawString(String.valueOf(y), margin-15, py+3);
+        g2.setColor(color); // 设置画笔颜色
+        g2.drawString(str, px-10, py-10);   // 在点（px, py）旁边做标记，如‘A’点
+        g2.drawLine(px, py, px, sizeY-margin ); // 画从点（px, py）到X轴的辅助线
+        g2.drawString(String.valueOf(x), px-3, sizeY-margin+15);    // 标明X轴的刻度
+        g2.drawLine(px, py, margin, py );   // 画从点（px, py）到Y轴的辅助线
+        g2.drawString(String.valueOf(y), margin-15, py+3);  // 标明Y轴的刻度
     }
 
     /** 画图形 */
