@@ -64,6 +64,11 @@ public class DrawMathView extends JFrame {
                 DrawTriangle drawTriangle = new DrawTriangle();
                 drawComponent = drawTriangle;
                 drawPanel.add(drawTriangle, BorderLayout.CENTER);
+            } break;
+            case CONE:{
+                DrawCone drawCone = new DrawCone();
+                drawComponent = drawCone;
+                drawPanel.add(drawCone, BorderLayout.CENTER);
             }
         }
 

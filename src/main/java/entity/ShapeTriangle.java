@@ -21,7 +21,7 @@ public class ShapeTriangle {
     private Integer lengthBC;
     private Integer lengthCA;
     private Integer perimeter;
-    private Double Area;
+    private Double area;
 
     @Override
     public String toString() {
@@ -54,8 +54,8 @@ public class ShapeTriangle {
                 .append(lengthCA);
         sb.append(",\"perimeter\":")
                 .append(perimeter);
-        sb.append(",\"Area\":")
-                .append(Area);
+        sb.append(",\"area\":")
+                .append(area);
         sb.append('}');
         return sb.toString();
     }
@@ -173,10 +173,10 @@ public class ShapeTriangle {
     }
 
     public Double getArea() {
-        return Area;
+        return area;
     }
 
     public void setArea(Double area) {
-        Area = area;
+        this.area = area;
     }
 }

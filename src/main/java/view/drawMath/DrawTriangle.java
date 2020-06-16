@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * 绘制三角形
+ */
 public class DrawTriangle extends JPanel implements IDraw {
     private TriangleController controller;  // 持有控制器
 
@@ -252,7 +255,7 @@ public class DrawTriangle extends JPanel implements IDraw {
 
 
     /** 坐标轴  */
-    public void coordinateDraw(Graphics2D g2){
+    private void coordinateDraw(Graphics2D g2){
         // X坐标轴
         g2.drawLine(margin, sizeY-margin, sizeX-margin, sizeY-margin);  // X轴线
         g2.drawLine(sizeX-margin, sizeY-margin, sizeX-margin-8, sizeY-margin-6);
