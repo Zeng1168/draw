@@ -69,17 +69,22 @@ public class DrawMathView extends JFrame {
                 DrawCone drawCone = new DrawCone();
                 drawComponent = drawCone;
                 drawPanel.add(drawCone, BorderLayout.CENTER);
-            }
+            }break;
             case CIRCLE:{
                 DrawCircle drawCircle=new DrawCircle();
                 drawComponent=drawCircle;
                 drawPanel.add(drawCircle,BorderLayout.CENTER);
-            }
+            }break;
             case RETANGLE:{
                 DrawRectangle drawRectangle=new DrawRectangle();
                 drawComponent = drawRectangle;
                 drawPanel.add(drawRectangle,BorderLayout.CENTER);
-            }
+            }break;
+            case SPHERE:{
+                DrawSphere drawSphere=new DrawSphere();
+                drawComponent=drawSphere;
+                drawPanel.add(drawSphere,BorderLayout.CENTER);
+            }break;
         }
 
         drawPanel.revalidate();

@@ -13,6 +13,7 @@ public class RectangleController implements  DrawRectangle.Listener{
     @Override
     public void onDraw1(int x, int y, int length, int width) {
       shapeRectangle=new ShapeRectangle();
+      shapeRectangle.setName("未命名矩形");
       shapeRectangle.setX(x);
       shapeRectangle.setY(y);
       shapeRectangle.setWidth(width);

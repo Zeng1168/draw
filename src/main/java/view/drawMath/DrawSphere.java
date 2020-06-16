@@ -8,7 +8,9 @@ import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import controller.drawMath.ConeController;
+import controller.drawMath.SphereController;
 import entity.ShapeCone;
+import entity.ShapeSphere;
 import utils.AlertUtil;
 import utils.DataCheck;
 
@@ -19,40 +21,33 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
 import java.awt.*;
 
-/**
- * 绘制圆锥
- */
-public class DrawCone extends JPanel implements IDraw  {
-    private ConeController controller;  // 持有控制器
+public class DrawSphere extends JPanel implements  IDraw{
+    private SphereController controller;  // 持有控制器
 
     private JPanel drawArea;  // 绘图区容器
 
     // 标题
-    private String title = "圆锥绘制";
+    private String title = "球绘制";
 
     // 参数输入区
     private JTextField rInput;
-    private JTextField hInput;
     private JButton startDrawBtn;
 
     // 信息显示区
     private JLabel nameInfo;    // 图形名称
-    private JLabel rInfo;    // 底面圆半径r
-    private JLabel hInfo;    // 高度h
-    private JLabel perimeterCircleInfo;    // 底面圆周长
-    private JLabel areaCircleInfo;   // 底面圆面积
+    private JLabel rInfo;    // 半径r
+    private JLabel areaInfo;   // 底面圆面积
     private JLabel volumeInfo;   // 体积
 
 
-    public DrawCone() {
+    public DrawSphere() {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new ConeController(this);
-
+        controller = new SphereController(this);
         this.setVisible(true);
 
 
@@ -62,7 +57,6 @@ public class DrawCone extends JPanel implements IDraw  {
         /* 111111111111111   以下为顶部标题、输入框组件   111111111111111 */
         // 创建各对象
         rInput = new JTextField();
-        hInput = new JTextField();
         startDrawBtn = new JButton("绘制");
 
         /**  第一行输入参数组   r、h  */
@@ -76,12 +70,7 @@ public class DrawCone extends JPanel implements IDraw  {
         box1A.add(Box.createHorizontalStrut(30));
         paramBox1.add(box1A);
 
-        // 输入B点
-        Box box1B=Box.createHorizontalBox();
-        box1B.add(new JLabel("高度h:"));
-        box1B.add(hInput);
-        box1B.add(Box.createHorizontalStrut(20));
-        paramBox1.add(box1B);
+
 
         // 开始绘制按钮
         paramBox1.add(startDrawBtn);
@@ -107,9 +96,7 @@ public class DrawCone extends JPanel implements IDraw  {
         // 创建各对象
         nameInfo = new JLabel();    // 图形名称
         rInfo= new JLabel();    // 底面圆半径r
-        hInfo = new JLabel();    // 高度h
-        perimeterCircleInfo = new JLabel();    // 底面圆周长
-        areaCircleInfo = new JLabel();   // 底面圆面积
+        areaInfo = new JLabel();   // 表面积
         volumeInfo = new JLabel();   // 体积
 
         Box rightInfoBox = Box.createHorizontalBox();
@@ -120,11 +107,7 @@ public class DrawCone extends JPanel implements IDraw  {
         infoBox.add(Box.createVerticalStrut(marginInfo));
         infoBox.add(rInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(hInfo);
-        infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(perimeterCircleInfo);
-        infoBox.add(Box.createVerticalStrut(marginInfo));
-        infoBox.add(areaCircleInfo);
+        infoBox.add(areaInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
         infoBox.add(volumeInfo);
         infoBox.add(Box.createVerticalStrut(marginInfo));
@@ -146,29 +129,28 @@ public class DrawCone extends JPanel implements IDraw  {
         startDrawBtn.addActionListener(e -> {
             //  获取输入参数
             String r = rInput.getText();
-            String h = hInput.getText();
+
 
             // 参数合法性校验
             if(!DataCheck.isNumber(r)) AlertUtil.warningDialog("请正确输入底面圆半径r！");
-            else if(!DataCheck.isNumber(h)) AlertUtil.warningDialog("请正确输入高度h！");
             else {
-                controller.onDraw(Integer.valueOf(r), Integer.valueOf(h));
+                controller.onDraw(Float.parseFloat(r));
             }
         });
     }
 
-    /** 画图锥 */
-    public void drawShape(ShapeCone shapeCone){
-        Canvas3D canvas = draw(shapeCone.getR(), shapeCone.getH());
+    /** 画球*/
+    public void drawShape(ShapeSphere shapeSphere){
+        Canvas3D canvas = draw(shapeSphere.getR());
 
         drawArea.removeAll();  // 清除绘图区组件
         drawArea.repaint();
         drawArea.add(canvas, BorderLayout.CENTER);
         drawArea.revalidate();
-        System.out.println("绘制");
+        System.out.println("绘制球");
     }
 
-    public  Canvas3D draw(float r,float h) {
+    public  Canvas3D draw(float r) {
 
         //canvas to draw on, ask SimpleUniverse what config to use
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
@@ -237,15 +219,15 @@ public class DrawCone extends JPanel implements IDraw  {
         behavior3.setSchedulingBounds(bounds);
 
         Appearance app = new Appearance();
-
+        // Material material = new Material();
+        // material.setEmissiveColor(new Color3f(0.2f, 0.6f, 1.0f));
         Color3f objColor = new Color3f(1.0f, 0.7f, 0.8f);
         Color3f black = new Color3f(0.0f, 0.0f, 0.0f);
         app.setMaterial(new Material(objColor, black, objColor, black, 80.0f));
 
-        ColorCube cube = new ColorCube(0.5f);
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(0.5f, 0.5f, 0.5f, app);
-        Cone cone = new Cone(r/10, h/10, 3, app);//圆锥半径为0.3，高为0.7，片元记1
-        transformGroup.addChild(cone);//圆锥
+        Sphere sphere = new Sphere(r/10, app);
+
+        transformGroup.addChild(sphere);//球
         scene.addChild(transformGroup);
         u.addBranchGraph(scene);
         return  canvas;
@@ -253,19 +235,17 @@ public class DrawCone extends JPanel implements IDraw  {
 
 
     /**  更新信息区  */
-    public void updateInfoArea(ShapeCone shapeCone){
-        nameInfo.setText("名称：" + shapeCone.getName());
-        rInfo.setText("底面圆半径r：" + shapeCone.getR());
-        hInfo.setText("高度h：" + shapeCone.getH());
-        perimeterCircleInfo.setText("底面圆周长：" + String.format("%.2f", shapeCone.getPerimeterCircle()));
-        areaCircleInfo.setText("底面圆面积：" + String.format("%.2f", shapeCone.getAreaCircle()));
-        volumeInfo.setText("体积：" + String.format("%.2f", shapeCone.getVolume()));
+    public void updateInfoArea(ShapeSphere shapeSphere){
+        nameInfo.setText("名称：" + shapeSphere.getName());
+        rInfo.setText("底面圆半径r：" + shapeSphere.getR());
+        areaInfo.setText("表面积：" + String.format("%.2f", shapeSphere.getArea()));
+        volumeInfo.setText("体积：" + String.format("%.2f", shapeSphere.getVolume()));
     }
 
     @Override
     public void clean() {
         rInput.setText("");
-        hInput.setText("");
+
     }
 
     @Override
@@ -281,6 +261,6 @@ public class DrawCone extends JPanel implements IDraw  {
 
     // 自定义监听器
     public interface Listener{
-        void onDraw(int r, int h);
+        void onDraw(float r);
     }
 }

@@ -19,7 +19,7 @@ public class DrawRectangle extends JPanel implements IDraw{
     private int sizeX = 560, sizeY = 480;   // 坐标系的大小
     private int margin = 20;    // 边距
     // 标题
-    private String title = "三角形绘制";
+    private String title = "矩形绘制";
 
     // 参数输入区
     private JTextField x, y; // 左上角顶点A的坐标
@@ -79,7 +79,7 @@ public class DrawRectangle extends JPanel implements IDraw{
 
         // 矩形的宽度
         Box boxw = Box.createHorizontalBox();
-        boxw.add(new JLabel("BC长度："));
+        boxw.add(new JLabel("矩形宽度："));
         boxw.add(width);
         boxw.add(Box.createHorizontalStrut(20));
         paramBox.add(boxw);
@@ -147,10 +147,10 @@ public class DrawRectangle extends JPanel implements IDraw{
             String widthText = width.getText();
             String lengthText = length.getText();
 
-            if (strX == null || !DataCheck.isNumber(strX)) AlertUtil.warningDialog("请正确输入A点X坐标！");
-            else if (strY == null || !DataCheck.isNumber(strY)) AlertUtil.warningDialog("请正确输入A点Y坐标！");
-            else if (widthText == null || !DataCheck.isNumber(widthText)) AlertUtil.warningDialog("请正确输入矩形的长！");
-            else if (lengthText == null || !DataCheck.isNumber(lengthText)) AlertUtil.warningDialog("请正确输入矩形的宽！");
+            if ( !DataCheck.isNumber(strX)) AlertUtil.warningDialog("请正确输入A点X坐标！");
+            else if (!DataCheck.isNumber(strY)) AlertUtil.warningDialog("请正确输入A点Y坐标！");
+            else if (  !DataCheck.isNumber(widthText)) AlertUtil.warningDialog("请正确输入矩形的长！");
+            else if ( !DataCheck.isNumber(lengthText)) AlertUtil.warningDialog("请正确输入矩形的宽！");
             else {
                 rectangleController.onDraw1(Integer.valueOf(strX), Integer.valueOf(strY), Integer.valueOf(lengthText), Integer.valueOf(widthText));
             }
@@ -177,13 +177,13 @@ public class DrawRectangle extends JPanel implements IDraw{
         imagePanel.repaint();
     }
     /** 画辅助线  */
-    private void drawAuxiliaryLine(Graphics2D g2, Color color, String str, int x, int y, int mS){
-        g2.setColor(color);
-        g2.drawString(str, x*mS+margin-10, sizeY-y*mS+margin-10);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin,x*mS+margin, sizeY-margin );
-        g2.drawString(String.valueOf(x), x*mS+margin-3, sizeY-margin+15);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin,margin, sizeY-y*mS+margin );
-        g2.drawString(String.valueOf(y), margin-15, sizeY-y*mS+margin+3);
+    private void drawAuxiliaryLine(Graphics2D g2, Color color, String str,int x, int y, int px, int py){
+        g2.setColor(color); // 设置画笔颜色
+        g2.drawString(str, px-10, py-10);   // 在点（px, py）旁边做标记，如‘A’点
+        g2.drawLine(px, py, px, sizeY-margin ); // 画从点（px, py）到X轴的辅助线
+        g2.drawString(String.valueOf(x), px-3, sizeY-margin+15);    // 标明X轴的刻度
+        g2.drawLine(px, py, margin, py );   // 画从点（px, py）到Y轴的辅助线
+        g2.drawString(String.valueOf(y), margin-15, py+3);  // 标明Y轴的刻度
     }
 
     /** 画图形 */
@@ -211,17 +211,18 @@ public class DrawRectangle extends JPanel implements IDraw{
         maxScale = maxScale>w?maxScale:w;
         maxScale = maxScale>l?maxScale:l;
         mS = (sizeY-margin*3)/(maxScale);
-
+        // 将三点坐标转换成实际像素坐标点
+        int px1 = x*mS + margin;
+        int py1 = sizeY - margin - y*mS;
+        int width=w*mS;
+        int height=l*mS;
         // 画坐标轴
         coordinateDraw(g2);
 
         // 画四条边
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin, x*mS+margin, sizeY-y*mS+margin-w);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin, x*mS+margin+l, sizeY-y*mS+margin);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin-w, x*mS+margin+l, sizeY-y*mS+margin-w);
-        g2.drawLine(x*mS+margin+l, sizeY-y*mS+margin, x*mS+margin+l, sizeY-y*mS+margin-w);
+       g2.drawRect(px1,py1,width,height);
         // 画A点辅助线
-        drawAuxiliaryLine(g2, Color.GREEN, "A", x, y, mS);
+        drawAuxiliaryLine(g2, Color.GREEN, "A", x, y, px1,py1);
 
         imagePanel.repaint();
     }
@@ -232,12 +233,16 @@ public class DrawRectangle extends JPanel implements IDraw{
         len.setText("矩形的长：" +shapeRectangle.getLength());
         wid.setText("矩形的宽：" + shapeRectangle.getWidth());
         perimeter.setText("周长：" + shapeRectangle.getPerimeter());
-        area.setText("面积：" + String.format("%.2f", shapeRectangle.getArea()));   // 保留两位小数输出面积
+        area.setText("面积：" + shapeRectangle.getArea());   // 保留两位小数输出面积
     }
 
     @Override
     public void clean() {
 
+        x.setText("");
+        y.setText("");
+        length.setText("");
+        width.setText("");
     }
 
     @Override
@@ -260,7 +265,7 @@ public class DrawRectangle extends JPanel implements IDraw{
 
     // 自定义监听器
     public interface Listener{
-        void onDraw1(int x, int y, int w, int l);
+        void onDraw1(int x, int y, int l, int w);
     }
 
 }
