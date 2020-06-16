@@ -79,4 +79,15 @@ public class ImageUtil {
 
         return buffImg;
     }
+
+    /**
+     * 消除绘图锯齿
+     */
+    public static void cleanTooth(Graphics2D g2){
+
+        //消除文字锯齿
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        //消除画图锯齿
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    }
 }

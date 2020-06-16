@@ -140,9 +140,11 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 
         if(drawParams.getDrawPlatformMode().equals(DrawPlatformMode.PEN)){ // 钢笔绘制
             if (drawParams.getPreviousPoint() != null) {
-                Graphics g = drawParams.getImage().getGraphics();
-                g.setColor(drawParams.getPenColor());
-                g.drawLine(drawParams.getPreviousPoint().getX(), drawParams.getPreviousPoint().getY(), p2.getX(), p2.getY());
+                Graphics2D g2 = drawParams.getImage().createGraphics();
+                g2.setColor(drawParams.getPenColor());
+                g2.setStroke(new BasicStroke(drawParams.getLineStroke()));
+                ImageUtil.cleanTooth(g2);
+                g2.drawLine(drawParams.getPreviousPoint().getX(), drawParams.getPreviousPoint().getY(), p2.getX(), p2.getY());
             }
         }else if(drawParams.getDrawPlatformMode().equals(DrawPlatformMode.RUBBER)){  // 橡皮擦
             Graphics g = drawParams.getImage().getGraphics();
@@ -175,6 +177,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
             Graphics2D g2 = (Graphics2D)drawImage.getGraphics();
             g2.setColor(drawParams.getPenColor() );
             g2.setStroke(new BasicStroke(drawParams.getLineStroke()));
+            ImageUtil.cleanTooth(g2);
 
             switch(drawParams.getDrawPlatformMode()) {
                 case FILL_RECTANGEL: {  // 绘制实心矩形
