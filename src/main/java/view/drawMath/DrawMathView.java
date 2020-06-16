@@ -26,7 +26,7 @@ public class DrawMathView extends JFrame {
         drawPanel = new JPanel();
 
         drawPanel.setLayout(new BorderLayout());
-        drawPanel.add(new DrawRetangle(),BorderLayout.CENTER);
+        drawPanel.add(new DrawTriangle(),BorderLayout.CENTER);
 
 
         // 向主界面添加组件
@@ -37,7 +37,7 @@ public class DrawMathView extends JFrame {
 
         // 设置
         this.setTitle("ODS画板-数学绘图模式");
-        SwingUtills.setMiddleBounds(this, 800, 600);
+        SwingUtills.setMiddleBounds(this, 800, 660);
         this.setVisible(true);	// 设置窗体可见性
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 

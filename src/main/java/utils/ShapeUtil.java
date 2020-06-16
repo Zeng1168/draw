@@ -20,6 +20,15 @@ public class ShapeUtil {
         return  (int) Math.sqrt(a+b);
     }
 
+    // 计算两点距离
+    public static Integer distance(int x1, int y1, int x2, int y2 ){
+        int a = x1 - x2;
+        int b = y1 - y2;
+        a = a*a;
+        b = b*b;
+        return  (int) Math.sqrt(a+b);
+    }
+
     //  重设起始点和截止点
     public static List<Point> revisePoint(Point p1, Point p2){
         Point start = new Point();

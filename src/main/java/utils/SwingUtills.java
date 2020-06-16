@@ -9,4 +9,6 @@ public class SwingUtills {
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         frame.setBounds((screenWidth-width)/2,(screenHeight-height)/2,width,height);	// 设置窗体位置和大小
     }
+
+
 }
