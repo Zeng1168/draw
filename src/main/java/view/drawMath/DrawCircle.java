@@ -220,7 +220,9 @@ public class DrawCircle extends JPanel implements IDraw{
         int maxScale, mS;
         // 找出x轴、y轴最大坐标
         maxScale = x1;
-        maxScale = maxScale>2*radius?maxScale:2*radius;
+        maxScale = maxScale>y1?maxScale:y1;
+        maxScale = maxScale>x1+radius?maxScale:x1+radius;
+        maxScale = maxScale>y1+radius?maxScale:y1+radius;
 
 
         // 如果数字太大，则提示错误
@@ -229,7 +231,7 @@ public class DrawCircle extends JPanel implements IDraw{
             return;
         }
 
-        mS = (sizeY-margin*4)/(maxScale);
+        mS = (sizeY-margin*3)/(maxScale);
 
         // 将三点坐标转换成实际像素坐标点
         int px1 = x1*mS + margin;
@@ -240,24 +242,18 @@ public class DrawCircle extends JPanel implements IDraw{
         int py3 = sizeY - margin - y3*mS;
         int px0= x0*mS + margin;
         int py0 = sizeY - margin - y0*mS;
+        int rl=radius*mS;
 
-        int rl=radius*mS+margin;
-        double rW=radius/(px1-px0);
-        double rH=radius/(py0-py1);
-        System.out.println("半径"+radius+"横"+rW+"纵"+rH);
-        int r1=px0-px1;
-        int r2=py1-py0;
-        System.out.println("横"+r1+"纵"+r2);
 
 
         /**
          * 按照先画辅助线，再画坐标轴、图形的顺序，可以避免辅助线覆盖图形和坐标轴
          */
         // 画三点辅助线
-        drawAuxiliaryLine(g2, Color.ORANGE, "Q", x0, y0, px0, py0);
+       // drawAuxiliaryLine(g2, Color.ORANGE, "Q", x0, y0, px0, py0);
         drawAuxiliaryLine(g2, Color.GREEN, "O", x1, y1, px1, py1);
-       // drawAuxiliaryLine(g2, Color.BLUE, "A", x2, y2, px2, py2);
-       // drawAuxiliaryLine(g2, Color.RED, "B", x3, y3, px3, py3);
+        drawAuxiliaryLine(g2, Color.BLUE, "A", x2, y2, px2, py2);
+        drawAuxiliaryLine(g2, Color.RED, "B", x3, y3, px3, py3);
         g2.setColor(Color.BLACK);   // 恢复黑色
 
         // 画坐标轴
@@ -277,7 +273,7 @@ public class DrawCircle extends JPanel implements IDraw{
         dotO.setText("圆心(" + shapeCircle.getX1() + "," + shapeCircle.getY1() + ")");
 
         labelRadius.setText("半径：" + shapeCircle.getRadius());
-        perimeter.setText("周长：" + String.format("0.2f",shapeCircle.getPerimeter()));
+        perimeter.setText("周长：" + String.format("%.2f",shapeCircle.getPerimeter()));
         area.setText("面积：" + String.format("%.2f", shapeCircle.getArea()));   // 保留两位小数输出面积
     }
 
