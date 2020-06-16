@@ -273,7 +273,7 @@ public class DrawCircle extends JPanel implements IDraw{
         dotO.setText("圆心(" + shapeCircle.getX1() + "," + shapeCircle.getY1() + ")");
 
         labelRadius.setText("半径：" + shapeCircle.getRadius());
-        perimeter.setText("周长：" + String.format("0.2f",shapeCircle.getPerimeter()));
+        perimeter.setText("周长：" + String.format("%.2f",shapeCircle.getPerimeter()));
         area.setText("面积：" + String.format("%.2f", shapeCircle.getArea()));   // 保留两位小数输出面积
     }
 
