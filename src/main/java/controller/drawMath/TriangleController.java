@@ -14,6 +14,7 @@ public class TriangleController implements DrawTriangle.Listener {
         this.drawTriangle = drawTriangle;
     }
 
+    /** 根据ABC三点绘图  */
     @Override
     public void onDraw1(int x1, int y1, int x2, int y2, int x3, int y3) {
         shapeTriangle = new ShapeTriangle();
@@ -29,9 +30,19 @@ public class TriangleController implements DrawTriangle.Listener {
 
         System.out.println(shapeTriangle.toString());
 
-        drawTriangle.drawShape(shapeTriangle);
-        drawTriangle.updateLengthABC(shapeTriangle);
-        drawTriangle.updateInfoArea(shapeTriangle);
+        drawTriangle.updateABC(shapeTriangle);  // 更新到输入框
+        drawTriangle.drawShape(shapeTriangle);  // 绘制
+        drawTriangle.updateInfoArea(shapeTriangle); // 更新侧边栏信息
+    }
+
+    /**  根据三边绘图  */
+    @Override
+    public void onDraw2(int ab, int bc, int ca) {
+        // A点为坐标原点，B点在X轴上
+        double Xc = (ca*(ca*ca + ab*ab - bc*bc))/(2*ab*ca);
+        double Yc = Math.sqrt(ca*ca - Xc*Xc);
+
+        onDraw1(0,0, ab, 0, new Double(Xc).intValue(), new Double(Yc).intValue());
     }
 
     /**  根据三点算三边长度 */
