@@ -242,7 +242,7 @@ public class DrawBox extends JPanel implements IDraw {
         Color3f black = new Color3f(0.0f, 0.0f, 0.0f);
         app.setMaterial(new Material(objColor, black, objColor, black, 80.0f));
 
-        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(l/2.0f, w/2.0f, h/2.0f, app);
+        com.sun.j3d.utils.geometry.Box box = new com.sun.j3d.utils.geometry.Box(l/10.0f, w/10.0f, h/10.0f, app);
         transformGroup.addChild(box);//圆锥
         scene.addChild(transformGroup);
         u.addBranchGraph(scene);
