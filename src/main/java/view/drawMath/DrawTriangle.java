@@ -8,11 +8,9 @@ import utils.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class DrawTriangle extends JPanel {
+public class DrawTriangle extends JPanel implements IDraw {
     private TriangleController controller;  // 持有控制器
 
     private ImagePanel imagePanel;  // 绘图区容器
@@ -57,12 +55,12 @@ public class DrawTriangle extends JPanel {
     private void initComponent(){
         /* 111111111111111   以下为顶部标题、输入框组件   111111111111111 */
         // 创建各对象
-        x1 = new JTextField("5");
-        x2 = new JTextField("10");
-        x3 = new JTextField("60");
-        y1 = new JTextField("20");
-        y2 = new JTextField("20");
-        y3 = new JTextField("70");
+        x1 = new JTextField("");
+        x2 = new JTextField("");
+        x3 = new JTextField("");
+        y1 = new JTextField("");
+        y2 = new JTextField("");
+        y3 = new JTextField("");
         lengthAB = new JTextField();
         lengthBC = new JTextField();
         lengthCA = new JTextField();
@@ -213,12 +211,12 @@ public class DrawTriangle extends JPanel {
             String strY3 = y3.getText();
 
             // 参数合法性校验
-            if(strX1 == null || !DataCheck.isNumber(strX1)) AlertUtil.warningDialog("请正确输入A点X坐标！");
-            else if(strY1 == null || !DataCheck.isNumber(strY1)) AlertUtil.warningDialog("请正确输入A点Y坐标！");
-            else if(strX2 == null || !DataCheck.isNumber(strX2)) AlertUtil.warningDialog("请正确输入B点X坐标！");
-            else if(strY2 == null || !DataCheck.isNumber(strY2)) AlertUtil.warningDialog("请正确输入B点Y坐标！");
-            else if(strX3 == null || !DataCheck.isNumber(strX3)) AlertUtil.warningDialog("请正确输入C点X坐标！");
-            else if(strY3 == null || !DataCheck.isNumber(strY3)) AlertUtil.warningDialog("请正确输入C点Y坐标！");
+            if(!DataCheck.isNumber(strX1)) AlertUtil.warningDialog("请正确输入A点X坐标！");
+            else if(!DataCheck.isNumber(strY1)) AlertUtil.warningDialog("请正确输入A点Y坐标！");
+            else if(!DataCheck.isNumber(strX2)) AlertUtil.warningDialog("请正确输入B点X坐标！");
+            else if(!DataCheck.isNumber(strY2)) AlertUtil.warningDialog("请正确输入B点Y坐标！");
+            else if(!DataCheck.isNumber(strX3)) AlertUtil.warningDialog("请正确输入C点X坐标！");
+            else if(!DataCheck.isNumber(strY3)) AlertUtil.warningDialog("请正确输入C点Y坐标！");
             else {  // 校验通过
                 controller.onDraw1(Integer.valueOf(strX1), Integer.valueOf(strY1), Integer.valueOf(strX2), Integer.valueOf(strY2), Integer.valueOf(strX3), Integer.valueOf(strY3));
             }
@@ -232,9 +230,9 @@ public class DrawTriangle extends JPanel {
             String strLengthCA = lengthCA.getText();
 
             // 参数合法性校验
-            if(strLengthAB == null || !DataCheck.isNumber(strLengthAB)) AlertUtil.warningDialog("请正确输入AB长度！");
-            else if(strLengthBC == null || !DataCheck.isNumber(strLengthBC)) AlertUtil.warningDialog("请正确输入BC长度！");
-            else if(strLengthCA == null || !DataCheck.isNumber(strLengthCA)) AlertUtil.warningDialog("请正确输入CA长度！");
+            if(!DataCheck.isNumber(strLengthAB)) AlertUtil.warningDialog("请正确输入AB长度！");
+            else if(!DataCheck.isNumber(strLengthBC)) AlertUtil.warningDialog("请正确输入BC长度！");
+            else if(!DataCheck.isNumber(strLengthCA)) AlertUtil.warningDialog("请正确输入CA长度！");
             else {
                 // 参数转数字
                 int Lab = Integer.valueOf(strLengthAB);
@@ -242,8 +240,8 @@ public class DrawTriangle extends JPanel {
                 int Lca = Integer.valueOf(strLengthCA);
                 // 参数合理性校验
                 if(Lab > Lbc + Lca) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
-                else if(Lbc > Lab + Lca) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
-                else if(Lca > Lab + Lbc) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
+                else if(Lbc > Lab + Lca) AlertUtil.warningDialog("AB、CA边长度之和小于BC边长度，无法构成三角形！");
+                else if(Lca > Lab + Lbc) AlertUtil.warningDialog("AB、BC边长度之和小于CA边长度，无法构成三角形！");
                 else {  // 校验通过
                     controller.onDraw2(Lab, Lbc, Lca);
                 }
@@ -309,6 +307,13 @@ public class DrawTriangle extends JPanel {
         maxScale = maxScale>y1?maxScale:y1;
         maxScale = maxScale>y2?maxScale:y2;
         maxScale = maxScale>y3?maxScale:y3;
+
+        // 如果数字太大，则提示错误
+        if(maxScale>sizeY-margin*3){
+            AlertUtil.errorDialog("坐标数值大于" + (sizeY-margin*3) + ",无法进行绘制！");
+            return;
+        }
+
         mS = (sizeY-margin*3)/(maxScale);
 
         // 将三点坐标转换成实际像素坐标点
@@ -366,6 +371,30 @@ public class DrawTriangle extends JPanel {
         lengthLabelCA.setText("CA边长度：" + shapeTriangle.getLengthCA());
         perimeter.setText("周长：" + shapeTriangle.getPerimeter());
         area.setText("面积：" + String.format("%.2f", shapeTriangle.getArea()));   // 保留两位小数输出面积
+    }
+
+    @Override
+    public void clean() {
+        x1.setText("");
+        y1.setText("");
+        x2.setText("");
+        y2.setText("");
+        x3.setText("");
+        y3.setText("");
+
+        lengthAB.setText("");
+        lengthBC.setText("");
+        lengthCA.setText("");
+    }
+
+    @Override
+    public void saveToDataBase() {
+
+    }
+
+    @Override
+    public void openDataBase() {
+
     }
 
     private class ImagePanel extends JPanel{

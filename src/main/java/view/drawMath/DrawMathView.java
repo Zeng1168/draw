@@ -2,6 +2,7 @@ package view.drawMath;
 
 
 import controller.drawMath.DrawMathController;
+import utils.DrawMathMode;
 import utils.SwingUtills;
 
 import javax.swing.*;
@@ -16,7 +17,8 @@ public class DrawMathView extends JFrame {
     private DrawMathController controller;  // 持有控制器
     private TopMenuBar topMenu;    // 顶部菜单
     private LeftToolBar leftTool;    // 左侧工具条
-    private JPanel drawPanel;    // 中部画板
+    private JPanel drawPanel;    //
+    public IDraw drawComponent; // 用于数学绘图主界面操作绘图区组件
 
 
     public DrawMathView(){
@@ -26,7 +28,11 @@ public class DrawMathView extends JFrame {
         drawPanel = new JPanel();
 
         drawPanel.setLayout(new BorderLayout());
-        drawPanel.add(new DrawTriangle(),BorderLayout.CENTER);
+
+        // 添加一个默认模式
+        DrawTriangle drawTriangle = new DrawTriangle();
+        drawComponent = drawTriangle;
+        drawPanel.add(drawTriangle,BorderLayout.CENTER);
 
 
         // 向主界面添加组件
@@ -46,6 +52,23 @@ public class DrawMathView extends JFrame {
         // 设置监听
         topMenu.setTopMenuListener(controller);
         leftTool.setLeftToolListener(controller);
+    }
+
+    /** 切换绘图模式  */
+    public void modeChanged(DrawMathMode drawMathMode){
+        drawPanel.removeAll();  // 清除绘图区组件
+        drawPanel.repaint();
+
+        switch (drawMathMode){
+            case TRANGLE: {
+                DrawTriangle drawTriangle = new DrawTriangle();
+                drawComponent = drawTriangle;
+                drawPanel.add(drawTriangle, BorderLayout.CENTER);
+            }
+        }
+
+        drawPanel.revalidate();
+        System.out.println(drawMathMode.getMode());
     }
 
 

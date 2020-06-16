@@ -40,6 +40,7 @@ public class DataCheck {
 
     // 校验输入是否为数字
     public static boolean isNumber(String str){
+        if(str == null || str.equals("")) return false;
         Pattern pattern = Pattern.compile("[0-9]*");
         return pattern.matcher(str).matches();
     }
