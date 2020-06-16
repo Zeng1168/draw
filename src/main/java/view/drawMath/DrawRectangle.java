@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class DrawRectangle extends JPanel{
+public class DrawRectangle extends JPanel implements IDraw{
     private RectangleController rectangleController;
     private ImagePanel imagePanel;  // 绘图区容器
     private BufferedImage image;    // 绘制的图片
@@ -234,6 +234,22 @@ public class DrawRectangle extends JPanel{
         perimeter.setText("周长：" + shapeRectangle.getPerimeter());
         area.setText("面积：" + String.format("%.2f", shapeRectangle.getArea()));   // 保留两位小数输出面积
     }
+
+    @Override
+    public void clean() {
+
+    }
+
+    @Override
+    public void saveToDataBase() {
+
+    }
+
+    @Override
+    public void openDataBase() {
+
+    }
+
     class ImagePanel extends JPanel{
         @Override
         public void paint(Graphics g) {

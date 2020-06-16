@@ -75,6 +75,11 @@ public class DrawMathView extends JFrame {
                 drawComponent=drawCircle;
                 drawPanel.add(drawCircle,BorderLayout.CENTER);
             }
+            case RETANGLE:{
+                DrawRectangle drawRectangle=new DrawRectangle();
+                drawComponent = drawRectangle;
+                drawPanel.add(drawRectangle,BorderLayout.CENTER);
+            }
         }
 
         drawPanel.revalidate();

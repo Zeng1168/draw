@@ -400,7 +400,7 @@ public class DrawTriangle extends JPanel implements IDraw {
 
     }
 
-    private class ImagePanel extends JPanel{
+    class ImagePanel extends JPanel{
         @Override
         public void paint(Graphics g) {
             this.setSize(image.getWidth(), image.getHeight());
