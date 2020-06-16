@@ -70,6 +70,11 @@ public class DrawMathView extends JFrame {
                 drawComponent = drawCone;
                 drawPanel.add(drawCone, BorderLayout.CENTER);
             }
+            case CIRCLE:{
+                DrawCircle drawCircle=new DrawCircle();
+                drawComponent=drawCircle;
+                drawPanel.add(drawCircle,BorderLayout.CENTER);
+            }
         }
 
         drawPanel.revalidate();

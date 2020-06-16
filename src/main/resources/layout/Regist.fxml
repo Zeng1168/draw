@@ -37,7 +37,7 @@
                                 <VBox alignment="CENTER" prefHeight="111.0" prefWidth="195.0" spacing="12.0">
                                     <children>
                                         <TextField fx:id="username" />
-                                         <TextField fx:id="phone" />
+                                         <TextField id="phone" />
                                         <PasswordField fx:id="password" />
                                     </children>
                                 </VBox>
@@ -48,8 +48,8 @@
                 </VBox>
             </children>
         </FlowPane>
-              <Button fx:id="regist" layoutX="299.0" layoutY="245.0" onAction="#btnRegist" text="注册" textFill="WHITE" />
-              <Button fx:id="cancel" layoutX="386.0" layoutY="245.0" onAction="#btnCancle" text="取消" textFill="WHITE" />
+              <Button fx:id="regist" layoutX="194.0" layoutY="272.0" onAction="#btnRegist" text="注册" textFill="WHITE" />
+              <Button fx:id="cancel" layoutX="327.0" layoutY="272.0" onAction="#btnCancle" text="取消" textFill="WHITE" />
             <Label fx:id="title" alignment="center" layoutX="217.0" layoutY="32.0" style="-fx-font-size: 35;" text="用户注册" textFill="#171717">
                 <font>
                     <Font size="35.0" />
