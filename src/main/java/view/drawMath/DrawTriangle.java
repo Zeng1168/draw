@@ -8,6 +8,8 @@ import utils.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class DrawTriangle extends JPanel {
@@ -210,14 +212,41 @@ public class DrawTriangle extends JPanel {
             String strX3 = x3.getText();
             String strY3 = y3.getText();
 
+            // 参数合法性校验
             if(strX1 == null || !DataCheck.isNumber(strX1)) AlertUtil.warningDialog("请正确输入A点X坐标！");
             else if(strY1 == null || !DataCheck.isNumber(strY1)) AlertUtil.warningDialog("请正确输入A点Y坐标！");
             else if(strX2 == null || !DataCheck.isNumber(strX2)) AlertUtil.warningDialog("请正确输入B点X坐标！");
             else if(strY2 == null || !DataCheck.isNumber(strY2)) AlertUtil.warningDialog("请正确输入B点Y坐标！");
             else if(strX3 == null || !DataCheck.isNumber(strX3)) AlertUtil.warningDialog("请正确输入C点X坐标！");
             else if(strY3 == null || !DataCheck.isNumber(strY3)) AlertUtil.warningDialog("请正确输入C点Y坐标！");
-            else {
+            else {  // 校验通过
                 controller.onDraw1(Integer.valueOf(strX1), Integer.valueOf(strY1), Integer.valueOf(strX2), Integer.valueOf(strY2), Integer.valueOf(strX3), Integer.valueOf(strY3));
+            }
+
+        });
+
+        startDrawBtn2.addActionListener(e -> {
+           //  获取输入参数
+            String strLengthAB = lengthAB.getText();
+            String strLengthBC = lengthBC.getText();
+            String strLengthCA = lengthCA.getText();
+
+            // 参数合法性校验
+            if(strLengthAB == null || !DataCheck.isNumber(strLengthAB)) AlertUtil.warningDialog("请正确输入AB长度！");
+            else if(strLengthBC == null || !DataCheck.isNumber(strLengthBC)) AlertUtil.warningDialog("请正确输入BC长度！");
+            else if(strLengthCA == null || !DataCheck.isNumber(strLengthCA)) AlertUtil.warningDialog("请正确输入CA长度！");
+            else {
+                // 参数转数字
+                int Lab = Integer.valueOf(strLengthAB);
+                int Lbc = Integer.valueOf(strLengthBC);
+                int Lca = Integer.valueOf(strLengthCA);
+                // 参数合理性校验
+                if(Lab > Lbc + Lca) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
+                else if(Lbc > Lab + Lca) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
+                else if(Lca > Lab + Lbc) AlertUtil.warningDialog("BC、CA边长度之和小于AB边长度，无法构成三角形！");
+                else {  // 校验通过
+                    controller.onDraw2(Lab, Lbc, Lca);
+                }
             }
 
         });
@@ -245,13 +274,13 @@ public class DrawTriangle extends JPanel {
     }
 
     /** 画辅助线  */
-    private void drawAuxiliaryLine(Graphics2D g2, Color color, String str, int x, int y, int mS){
+    private void drawAuxiliaryLine(Graphics2D g2, Color color, String str,int x, int y, int px, int py){
         g2.setColor(color);
-        g2.drawString(str, x*mS+margin-10, sizeY-y*mS+margin-10);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin,x*mS+margin, sizeY-margin );
-        g2.drawString(String.valueOf(x), x*mS+margin-3, sizeY-margin+15);
-        g2.drawLine(x*mS+margin, sizeY-y*mS+margin,margin, sizeY-y*mS+margin );
-        g2.drawString(String.valueOf(y), margin-15, sizeY-y*mS+margin+3);
+        g2.drawString(str, px-10, py-10);
+        g2.drawLine(px, py, px, sizeY-margin );
+        g2.drawString(String.valueOf(x), px-3, sizeY-margin+15);
+        g2.drawLine(px, py, margin, py );
+        g2.drawString(String.valueOf(y), margin-15, py+3);
     }
 
     /** 画图形 */
@@ -282,24 +311,45 @@ public class DrawTriangle extends JPanel {
         maxScale = maxScale>y3?maxScale:y3;
         mS = (sizeY-margin*3)/(maxScale);
 
+        // 将三点坐标转换成实际像素坐标点
+        int px1 = x1*mS + margin;
+        int py1 = sizeY - margin - y1*mS;
+        int px2 = x2*mS + margin;
+        int py2 = sizeY - margin - y2*mS;
+        int px3= x3*mS + margin;
+        int py3 = sizeY - margin - y3*mS;
+
+
+        /**
+         * 按照先花辅助线，再画坐标轴、图形的顺序，可以避免辅助线覆盖图形和坐标轴
+         */
+        // 画三点辅助线
+        drawAuxiliaryLine(g2, Color.GREEN, "A", x1, y1, px1, py1);
+        drawAuxiliaryLine(g2, Color.BLUE, "B", x2, y2, px2, py2);
+        drawAuxiliaryLine(g2, Color.RED, "C", x3, y3, px3, py3);
+        g2.setColor(Color.BLACK);   // 恢复黑色
+
         // 画坐标轴
         coordinateDraw(g2);
 
         // 画三边
-        g2.drawLine(x1*mS+margin, sizeY-y1*mS+margin, x2*mS+margin, sizeY-y2*mS+margin);
-        g2.drawLine(x2*mS+margin, sizeY-y2*mS+margin, x3*mS+margin, sizeY-y3*mS+margin);
-        g2.drawLine(x3*mS+margin, sizeY-y3*mS+margin, x1*mS+margin, sizeY-y1*mS+margin);
-
-        // 画三点辅助线
-        drawAuxiliaryLine(g2, Color.GREEN, "A", x1, y1, mS);
-        drawAuxiliaryLine(g2, Color.BLUE, "B", x2, y2, mS);
-        drawAuxiliaryLine(g2, Color.RED, "B", x3, y3, mS);
+        g2.setStroke(new BasicStroke(2f));
+        g2.drawLine(px1, py1, px2, py2);
+        g2.drawLine(px2, py2, px3, py3);
+        g2.drawLine(px3, py3, px1, py1);
 
         imagePanel.repaint();
     }
 
-    /**  更新距离到文本框  */
-    public void updateLengthABC(ShapeTriangle shapeTriangle){
+    /**  更新ABC三点坐标、距离到文本框  */
+    public void updateABC(ShapeTriangle shapeTriangle){
+        x1.setText(String.valueOf(shapeTriangle.getX1()));
+        y1.setText(String.valueOf(shapeTriangle.getY1()));
+        x2.setText(String.valueOf(shapeTriangle.getX2()));
+        y2.setText(String.valueOf(shapeTriangle.getY2()));
+        x3.setText(String.valueOf(shapeTriangle.getX3()));
+        y3.setText(String.valueOf(shapeTriangle.getY3()));
+
         lengthAB.setText(String.valueOf(shapeTriangle.getLengthAB()));
         lengthBC.setText(String.valueOf(shapeTriangle.getLengthBC()));
         lengthCA.setText(String.valueOf(shapeTriangle.getLengthCA()));
@@ -329,5 +379,6 @@ public class DrawTriangle extends JPanel {
     // 自定义监听器
     public interface Listener{
         void onDraw1(int x1, int y1, int x2, int y2, int x3, int y3);
+        void onDraw2(int ab, int bc, int ca);
     }
 }
