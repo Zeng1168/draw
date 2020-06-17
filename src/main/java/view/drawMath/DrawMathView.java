@@ -91,13 +91,13 @@ public class DrawMathView extends JFrame {
                 DrawBox drawBox=new DrawBox();
                 drawComponent=drawBox;
                 drawPanel.add(drawBox,BorderLayout.CENTER);
-            }
+            }break;
             case ROSE:{
                 DrawRose drawRose=new DrawRose();
                 drawComponent=drawRose;
                 drawPanel.add(drawRose,BorderLayout.CENTER);
 
-            }
+            }break;
         }
 
         drawPanel.revalidate();

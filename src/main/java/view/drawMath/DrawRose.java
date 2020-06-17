@@ -10,6 +10,8 @@ import utils.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -17,7 +19,7 @@ public class DrawRose extends JPanel implements IDraw{
     private RoseController roseController;
     private ImagePanel imagePanel;  // 绘图区容器
     private BufferedImage image;    // 绘制的图片
-   private BufferedImage bufferedImage;
+
 
     // 绘图区大小、边距
     private int sizeX = 560, sizeY = 480;   // 坐标系的大小
@@ -51,8 +53,18 @@ public class DrawRose extends JPanel implements IDraw{
     private void initComponent() {
         /* 111111111111111   以下为顶部标题、输入框组件   111111111111111 */
         // 创建各对象
-        size_rose = new JTextField("5");
+        size_rose = new JTextField("大小在300-500之间");
+        size_rose.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                size_rose.setText("");
+            }
 
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
         startDrawBtn = new JButton("绘制");
 
         /**   第一行输入参数组   输入玫瑰花的大小绘制  */
@@ -226,18 +238,12 @@ public class DrawRose extends JPanel implements IDraw{
     }
     public void drawShape(ShapeRose shapeRose){
         this.s=shapeRose.getSize();
-         bufferedImage=draw(image);
         imagePanel.setSize(sizeX, sizeY);
 
         System.out.println("绘制");
-    }
 
-    // 绘制图形在image上
-    public BufferedImage draw(BufferedImage image){
-        // 复制一份用于绘制
-        BufferedImage drawImage = ImageUtil.imageCopy(image);
-        Graphics2D g2 = (Graphics2D)drawImage.getGraphics();
-        g2.fillRect(0, 0, drawImage.getWidth(),drawImage.getHeight());//先设背景颜色为白色
+        Graphics2D g2 = (Graphics2D)image.getGraphics();
+        g2.fillRect(0, 0,image.getWidth(),image.getHeight());//先设背景颜色为白色
         short zBuffer[]=new short[s * s];
         for(int j = 0;j<zBuffer.length-1;j++){
             zBuffer[j]=0;
@@ -271,13 +277,13 @@ public class DrawRose extends JPanel implements IDraw{
                     }
                 }
         }
-        return drawImage;
+
     }
     class ImagePanel extends JPanel{
         @Override
         public void paint(Graphics g) {
-            this.setSize(bufferedImage.getWidth(), bufferedImage.getHeight());
-            g.drawImage(bufferedImage, 0, 0,bufferedImage.getWidth(),bufferedImage.getHeight(),null);
+            this.setSize(image.getWidth(), image.getHeight());
+            g.drawImage(image, 0, 0,image.getWidth(),image.getHeight(),null);
         }
     }
     /**  更新信息区  */
