@@ -50,8 +50,8 @@ public class RectangleController implements  DrawRectangle.Listener{
         String name=(String) JOptionPane.showInputDialog(drawRectangle, "请输入绘制图像名称：", "图像名称", JOptionPane.PLAIN_MESSAGE);
 
         Map<String, String> params = new HashMap<>();
-        params.put("h", shapeRectangle.getX() + "");
-        params.put("l", shapeRectangle.getY() + "");
+        params.put("x", shapeRectangle.getX() + "");
+        params.put("y", shapeRectangle.getY() + "");
         params.put("length", shapeRectangle.getLength() + "");
         params.put("width", shapeRectangle.getWidth() + "");
         params.put("name", name);
