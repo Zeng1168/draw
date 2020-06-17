@@ -7,6 +7,8 @@ import view.drawMath.LeftToolBar;
 import view.drawMath.TopMenuBar;
 import view.drawPlatform.DrawPlatformView;
 
+import javax.swing.*;
+
 
 public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolBar.LeftMathToolListener  {
     DrawMathView drawMathView;  // JFram
@@ -46,7 +48,13 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
                 drawMathView.drawComponent.clean();
             }break;
             case "画板模式-平面绘图模式" : {
-                new DrawPlatformView();
+                int r= JOptionPane.showConfirmDialog(drawMathView,"是否关闭当前窗口？","是否关闭",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(r==JOptionPane.YES_OPTION){
+                    drawMathView.dispose();
+                    new DrawPlatformView();
+                }else if(r != JOptionPane.CANCEL_OPTION){
+                    new DrawPlatformView();
+                }
             }break;
             default:break;
         }

@@ -297,7 +297,13 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 //                new DemodeController();
             }break;
             case "画板模式-数学绘图模式" : {
-                new DrawMathView();
+                int r=JOptionPane.showConfirmDialog(drawPlatFormView,"是否关闭当前窗口？","是否关闭",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(r==JOptionPane.YES_OPTION){
+                    drawPlatFormView.dispose();
+                    new DrawMathView();
+                }else if(r != JOptionPane.CANCEL_OPTION){
+                    new DrawMathView();
+                }
             }break;
             default:break;
         }

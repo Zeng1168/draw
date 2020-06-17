@@ -134,6 +134,8 @@ public class DataQueryController implements DataQueryView.Listener {
                 DrawMathView drawMathView1 = new DrawMathView();
                 drawMathView1.dataLoading(dataQueryView.getDrawMathMode(), response.getData());
             }
+
+            dataQueryView.dispose();    // 关闭数据窗口
         }else{
             AlertUtil.errorDialog("服务器异常，查询失败！");
         }
