@@ -42,16 +42,26 @@ public class DrawTriangle extends JPanel implements IDraw {
     private JLabel perimeter;   // 周长
     private JLabel area;    // 面积
 
-    public DrawTriangle() {
+    public DrawTriangle(ShapeTriangle shapeTriangle) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new TriangleController(this);
+        if(shapeTriangle != null){
+            controller = new TriangleController(this, shapeTriangle);
+            controller.onDraw();
+        }else {
+            controller = new TriangleController(this);
+        }
 
         this.setVisible(true);
+    }
+
+
+    public DrawTriangle() {
+        this(null);
     }
 
     /**  初始化组件 */
@@ -376,6 +386,20 @@ public class DrawTriangle extends JPanel implements IDraw {
         area.setText("面积：" + String.format("%.2f", shapeTriangle.getArea()));   // 保留两位小数输出面积
     }
 
+
+    public void setInput(ShapeTriangle shapeTriangle) {
+        x1.setText(shapeTriangle.getX1() + "");
+        y1.setText(shapeTriangle.getY1() + "");
+        x2.setText(shapeTriangle.getX2() + "");
+        y2.setText(shapeTriangle.getY2() + "");
+        x3.setText(shapeTriangle.getX3() + "");
+        y3.setText(shapeTriangle.getY3() + "");
+
+        lengthAB.setText(shapeTriangle.getLengthAB() + "");
+        lengthBC.setText(shapeTriangle.getLengthBC() + "");
+        lengthCA.setText(shapeTriangle.getLengthCA() + "");
+    }
+
     @Override
     public void clean() {
         x1.setText("");
@@ -392,7 +416,7 @@ public class DrawTriangle extends JPanel implements IDraw {
 
     @Override
     public void saveToDataBase() {
-
+        controller.saveToDataBase();
     }
 
     @Override
@@ -412,5 +436,6 @@ public class DrawTriangle extends JPanel implements IDraw {
     public interface Listener{
         void onDraw1(int x1, int y1, int x2, int y2, int x3, int y3);
         void onDraw2(int ab, int bc, int ca);
+        void saveToDataBase();
     }
 }

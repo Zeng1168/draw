@@ -36,17 +36,24 @@ public class DrawSphere extends JPanel implements  IDraw{
     private JLabel volumeInfo;   // 体积
 
 
-    public DrawSphere() {
+    public DrawSphere(ShapeSphere shapeBox) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new SphereController(this);
+        if(shapeBox != null){
+            controller = new SphereController(this, shapeBox);
+            controller.onDraw();
+        }else {
+            controller = new SphereController(this);
+        }
         this.setVisible(true);
+    }
 
-
+    public DrawSphere() {
+        this(null);
     }
 
     public void initComponent(){
@@ -130,7 +137,7 @@ public class DrawSphere extends JPanel implements  IDraw{
             // 参数合法性校验
             if(!DataCheck.isNumber(r)) AlertUtil.warningDialog("请正确输入底面圆半径r！");
             else {
-                controller.onDraw(Float.parseFloat(r));
+                controller.onDraw(Integer.parseInt(r));
             }
         });
     }
@@ -238,15 +245,19 @@ public class DrawSphere extends JPanel implements  IDraw{
         volumeInfo.setText("体积：" + String.format("%.2f", shapeSphere.getVolume()));
     }
 
+
+    public void setInput(ShapeSphere shapeSphere) {
+        rInput.setText(shapeSphere.getR() + "");
+    }
+
     @Override
     public void clean() {
         rInput.setText("");
-
     }
 
     @Override
     public void saveToDataBase() {
-
+        controller.saveToDataBase();
     }
 
     @Override
@@ -257,6 +268,7 @@ public class DrawSphere extends JPanel implements  IDraw{
 
     // 自定义监听器
     public interface Listener{
-        void onDraw(float r);
+        void onDraw(int r);
+        void saveToDataBase();
     }
 }

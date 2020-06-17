@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mLogin" prefHeight="316.0" prefWidth="488.0" style="-fx-background-image: 12;" stylesheets="@../style/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
@@ -19,14 +17,14 @@
                   </Label>
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="135.0" prefWidth="413.0" spacing="6.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="69.0" spacing="22.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="120.0" spacing="22.0">
                      <children>
-                        <Label id="username" text="用户名">
+                        <Label id="username" text="用户名/电话">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label id="password" text="密码" textFill="#1b1a1a">
+                        <Label id="password" text="           密码" textFill="#1b1a1a">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -45,7 +43,7 @@
                      <children>
                         <Button id="login" fx:id="login" onAction="#btnLogin" text="登陆" textFill="WHITE" />
                         <Button fx:id="regist" onAction="#btnRegist" text="注册" textFill="WHITE" />
-                        <Button fx:id="cancel" onAction="#btnCancle" text="取消" textFill="WHITE" />
+                        <Button fx:id="cancel" onAction="#btnCancle" text="退出" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

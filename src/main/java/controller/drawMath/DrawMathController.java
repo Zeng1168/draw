@@ -1,10 +1,13 @@
 package controller.drawMath;
 
 import utils.DrawMathMode;
+import view.DataQueryView;
 import view.drawMath.DrawMathView;
 import view.drawMath.LeftToolBar;
 import view.drawMath.TopMenuBar;
 import view.drawPlatform.DrawPlatformView;
+
+import javax.swing.*;
 
 
 public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolBar.LeftMathToolListener  {
@@ -12,6 +15,7 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
     DrawMathMode mode;
 
     public DrawMathController(DrawMathView drawMathView) {
+        this.mode = DrawMathMode.TRIANGLE;
         this.drawMathView = drawMathView;
     }
 
@@ -29,7 +33,7 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
 //                new PasswordModifyController();
             }break;
             case "文件-打开数据库文件" : {
-                drawMathView.drawComponent.openDataBase();
+                new DataQueryView(mode);
             }break;
             case "文件-新建" : {
                 new DrawMathView();
@@ -44,7 +48,13 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
                 drawMathView.drawComponent.clean();
             }break;
             case "画板模式-平面绘图模式" : {
-                new DrawPlatformView();
+                int r= JOptionPane.showConfirmDialog(drawMathView,"是否关闭当前窗口？","是否关闭",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(r==JOptionPane.YES_OPTION){
+                    drawMathView.dispose();
+                    new DrawPlatformView();
+                }else if(r != JOptionPane.CANCEL_OPTION){
+                    new DrawPlatformView();
+                }
             }break;
             default:break;
         }

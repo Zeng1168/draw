@@ -44,18 +44,29 @@ public class DrawCone extends JPanel implements IDraw  {
     private JLabel volumeInfo;   // 体积
 
 
-    public DrawCone() {
+    public DrawCone(ShapeCone shapeCone) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new ConeController(this);
+        if(shapeCone != null){
+            controller = new ConeController(this, shapeCone);
+            controller.onDraw();
+        }else {
+            controller = new ConeController(this);
+        }
 
         this.setVisible(true);
 
 
+    }
+
+
+
+    public DrawCone() {
+        this(null);
     }
 
     public void initComponent(){
@@ -261,6 +272,11 @@ public class DrawCone extends JPanel implements IDraw  {
         volumeInfo.setText("体积：" + String.format("%.2f", shapeCone.getVolume()));
     }
 
+    public void setInput(ShapeCone shapeCone) {
+        rInput.setText(shapeCone.getR() + "");
+        hInput.setText(shapeCone.getH() + "");
+    }
+
     @Override
     public void clean() {
         rInput.setText("");
@@ -269,7 +285,7 @@ public class DrawCone extends JPanel implements IDraw  {
 
     @Override
     public void saveToDataBase() {
-
+        controller.saveToDataBase();
     }
 
     @Override
@@ -281,5 +297,6 @@ public class DrawCone extends JPanel implements IDraw  {
     // 自定义监听器
     public interface Listener{
         void onDraw(int r, int h);
+        void saveToDataBase();
     }
 }

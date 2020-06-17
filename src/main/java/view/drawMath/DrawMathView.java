@@ -1,7 +1,9 @@
 package view.drawMath;
 
 
+import com.alibaba.fastjson.JSON;
 import controller.drawMath.DrawMathController;
+import entity.*;
 import utils.DrawMathMode;
 import utils.SwingUtills;
 
@@ -60,7 +62,7 @@ public class DrawMathView extends JFrame {
         drawPanel.repaint();
 
         switch (drawMathMode){
-            case TRANGLE: {
+            case TRIANGLE: {
                 DrawTriangle drawTriangle = new DrawTriangle();
                 drawComponent = drawTriangle;
                 drawPanel.add(drawTriangle, BorderLayout.CENTER);
@@ -102,8 +104,54 @@ public class DrawMathView extends JFrame {
         System.out.println(drawMathMode.getMode());
     }
 
+    public void dataLoading(DrawMathMode drawMathMode, String jsonStr){
+        drawPanel.removeAll();  // 清除绘图区组件
+        drawPanel.repaint();
 
+        System.out.println("加载网络数据");
 
-
-
+        switch (drawMathMode) {
+            case TRIANGLE: {
+                ShapeTriangle shapeTriangle = JSON.parseObject(jsonStr, ShapeTriangle.class);
+                DrawTriangle drawTriangle = new DrawTriangle(shapeTriangle);
+                drawComponent = drawTriangle;
+                drawPanel.add(drawTriangle, BorderLayout.CENTER);
+            }
+            break;
+            case CONE: {
+                ShapeCone shapeCone = JSON.parseObject(jsonStr, ShapeCone.class);
+                DrawCone drawCone = new DrawCone(shapeCone);
+                drawComponent = drawCone;
+                drawPanel.add(drawCone, BorderLayout.CENTER);
+            }
+            break;
+            case CIRCLE: {
+                ShapeCircle shapeCircle = JSON.parseObject(jsonStr, ShapeCircle.class);
+                DrawCircle drawCircle = new DrawCircle(shapeCircle);
+                drawComponent = drawCircle;
+                drawPanel.add(drawCircle, BorderLayout.CENTER);
+            }
+            break;
+            case RETANGLE: {
+                ShapeRectangle shapeRectangle = JSON.parseObject(jsonStr, ShapeRectangle.class);
+                DrawRectangle drawRectangle = new DrawRectangle(shapeRectangle);
+                drawComponent = drawRectangle;
+                drawPanel.add(drawRectangle, BorderLayout.CENTER);
+            }
+            break;
+            case SPHERE: {
+                ShapeSphere shapeSphere = JSON.parseObject(jsonStr, ShapeSphere.class);
+                DrawSphere drawSphere = new DrawSphere(shapeSphere);
+                drawComponent = drawSphere;
+                drawPanel.add(drawSphere, BorderLayout.CENTER);
+            }
+            break;
+            case CUBOID: {
+                ShapeBox shapeBox = JSON.parseObject(jsonStr, ShapeBox.class);
+                DrawBox drawBox = new DrawBox(shapeBox);
+                drawComponent = drawBox;
+                drawPanel.add(drawBox, BorderLayout.CENTER);
+            }
+        }
+    }
 }

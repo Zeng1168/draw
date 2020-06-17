@@ -1,5 +1,6 @@
 package view.drawMath;
 
+import controller.drawMath.BoxController;
 import controller.drawMath.RectangleController;
 import entity.ShapeRectangle;
 import utils.AlertUtil;
@@ -34,16 +35,26 @@ public class DrawRectangle extends JPanel implements IDraw{
     private JLabel perimeter;   // 周长
     private JLabel area;    // 面积
 
-    public DrawRectangle() {
+    public DrawRectangle(ShapeRectangle shapeRectangle) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        rectangleController = new RectangleController(this);
+        if(shapeRectangle != null){
+            rectangleController = new RectangleController(this, shapeRectangle);
+            rectangleController.onDraw();
+        }else {
+            rectangleController = new RectangleController(this);
+        }
 
         this.setVisible(true);
+    }
+
+
+    public DrawRectangle() {
+        this(null);
     }
 
     /**
@@ -208,9 +219,17 @@ public class DrawRectangle extends JPanel implements IDraw{
         maxScale = x;
         maxScale = maxScale>x?maxScale:x;
         maxScale = maxScale>y?maxScale:y;
-        maxScale = maxScale>w?maxScale:w;
-        maxScale = maxScale>l?maxScale:l;
+        maxScale = maxScale>x+w?maxScale:x+w;
+        maxScale = maxScale>y+l?maxScale:y+l;
+
+        if(maxScale>sizeY-margin*3){
+            AlertUtil.errorDialog("坐标数值大于" + (sizeY-margin*3) + ",无法进行绘制！");
+            return;
+        }
+
+
         mS = (sizeY-margin*3)/(maxScale);
+
         // 将三点坐标转换成实际像素坐标点
         int px1 = x*mS + margin;
         int py1 = sizeY - margin - y*mS;
@@ -236,9 +255,16 @@ public class DrawRectangle extends JPanel implements IDraw{
         area.setText("面积：" + shapeRectangle.getArea());   // 保留两位小数输出面积
     }
 
+
+    public void setInput(ShapeRectangle shapeRectangle) {
+        x.setText(shapeRectangle.getX() + "");
+        y.setText(shapeRectangle.getY() + "");
+        length.setText(shapeRectangle.getLength() + "");
+        width.setText(shapeRectangle.getWidth() + "");
+    }
+
     @Override
     public void clean() {
-
         x.setText("");
         y.setText("");
         length.setText("");
@@ -247,7 +273,7 @@ public class DrawRectangle extends JPanel implements IDraw{
 
     @Override
     public void saveToDataBase() {
-
+        rectangleController.saveToDataBase();
     }
 
     @Override
@@ -266,6 +292,7 @@ public class DrawRectangle extends JPanel implements IDraw{
     // 自定义监听器
     public interface Listener{
         void onDraw1(int x, int y, int l, int w);
+        void saveToDataBase();
     }
 
 }

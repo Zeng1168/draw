@@ -75,11 +75,12 @@ public class LoginController {
      */
     @FXML
     public void btnRegist(ActionEvent e) {
+        ((Stage)username.getScene().getWindow()).close();
 
         try {
             AnchorPane page = FXMLLoader.load(getClass().getClassLoader().getResource("layout/Regist.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("注册界面");
+            stage.setTitle("ODS画板-用户注册");
             stage.setScene(new Scene(page,600,400));
             stage.show();
         }catch (Exception e1){

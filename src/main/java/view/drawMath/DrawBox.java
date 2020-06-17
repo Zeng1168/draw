@@ -38,19 +38,25 @@ public class DrawBox extends JPanel implements IDraw {
     private JLabel areaInfo;   // 长方体的面积
     private JLabel volumeInfo;   // 长方体的体积
 
-
-    public DrawBox() {
+    public DrawBox(ShapeBox shapeBox) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new BoxController(this);
+        if(shapeBox != null){
+            controller = new BoxController(this, shapeBox);
+            controller.onDraw();
+        }else {
+            controller = new BoxController(this);
+        }
 
         this.setVisible(true);
+    }
 
-
+    public DrawBox() {
+        this(null);
     }
 
     public void initComponent(){
@@ -260,6 +266,13 @@ public class DrawBox extends JPanel implements IDraw {
         volumeInfo.setText("体积：" + String.format("%.2f", shapeBox.getVolume()));
     }
 
+    /**  更新输入区 */
+    public void setInput(ShapeBox shapeBox){
+        lInput.setText(shapeBox.getL()+"");
+        wInput.setText(shapeBox.getW()+"");
+        hInput.setText(shapeBox.getH()+"");
+    }
+
     @Override
     public void clean() {
         lInput.setText("");
@@ -269,7 +282,7 @@ public class DrawBox extends JPanel implements IDraw {
 
     @Override
     public void saveToDataBase() {
-
+        controller.saveToDataBase();
     }
 
     @Override
@@ -281,5 +294,6 @@ public class DrawBox extends JPanel implements IDraw {
     // 自定义监听器
     public interface Listener{
         void onDraw(int l, int w,int h );
+        void saveToDataBase();
     }
 }
