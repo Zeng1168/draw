@@ -1,9 +1,7 @@
 package view.drawMath;
 
 import controller.drawMath.CircleController;
-import controller.drawMath.TriangleController;
 import entity.ShapeCircle;
-import entity.ShapeTriangle;
 import utils.AlertUtil;
 import utils.DataCheck;
 import utils.ImageUtil;
@@ -38,16 +36,25 @@ public class DrawCircle extends JPanel implements IDraw{
     private JLabel perimeter;   // 周长
     private JLabel area;    // 面积
 
-    public DrawCircle() {
+    public DrawCircle(ShapeCircle shapeCircle) {
         /* 初始化阶段     */
         this.initComponent();   // 初始化窗口组件
         this.setListener(); // 为按钮设置监听
         /* 初始化完成    */
 
         // 与控制层和监听器关联
-        controller = new CircleController(this);
+        if(shapeCircle != null){
+            controller = new CircleController(this, shapeCircle);
+            controller.onDraw();
+        }else {
+            controller = new CircleController(this);
+        }
 
         this.setVisible(true);
+    }
+
+    public DrawCircle() {
+        this(null);
     }
 
     /**  初始化组件 */
@@ -196,8 +203,8 @@ public class DrawCircle extends JPanel implements IDraw{
 
     /** 画图形 */
     public void drawShape(ShapeCircle shapeCircle){
-        int x1 = shapeCircle.getX1();
-        int y1 = shapeCircle.getY1();
+        int x1 = shapeCircle.getX();
+        int y1 = shapeCircle.getY();
         int radius=shapeCircle.getRadius();
         int x2=x1-radius;
         int y2=y1;
@@ -270,25 +277,30 @@ public class DrawCircle extends JPanel implements IDraw{
     /**  更新信息区  */
     public void updateInfoArea(ShapeCircle shapeCircle){
         name.setText("名称：" + shapeCircle.getName());
-        dotO.setText("圆心(" + shapeCircle.getX1() + "," + shapeCircle.getY1() + ")");
+        dotO.setText("圆心(" + shapeCircle.getX() + "," + shapeCircle.getY() + ")");
 
         labelRadius.setText("半径：" + shapeCircle.getRadius());
         perimeter.setText("周长：" + String.format("%.2f",shapeCircle.getPerimeter()));
         area.setText("面积：" + String.format("%.2f", shapeCircle.getArea()));   // 保留两位小数输出面积
     }
 
+
+    public void setInput(ShapeCircle shapeCircle) {
+        x1.setText(shapeCircle.getX() + "");
+        y1.setText(shapeCircle.getY() + "");
+        radius.setText(shapeCircle.getRadius() + "");
+    }
+
     @Override
     public void clean() {
         x1.setText("");
         y1.setText("");
-
-
         radius.setText("");
     }
 
     @Override
     public void saveToDataBase() {
-
+        controller.saveToDataBase();
     }
 
     @Override
@@ -307,6 +319,6 @@ public class DrawCircle extends JPanel implements IDraw{
     // 自定义监听器
     public interface Listener{
         void onDraw1(int x1, int y1, int radius);
-
+        void saveToDataBase();
     }
 }

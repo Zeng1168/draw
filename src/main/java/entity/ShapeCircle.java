@@ -7,8 +7,8 @@ public class ShapeCircle {
     private Integer userId;
     private String name;
     private Date time;
-    private Integer x1;
-    private Integer y1;
+    private Integer x;
+    private Integer y;
     private Integer radius;
     private Double perimeter;
     private Double area;
@@ -24,10 +24,10 @@ public class ShapeCircle {
                 .append(name).append('\"');
         sb.append(",\"time\":\"")
                 .append(time).append('\"');
-        sb.append(",\"x1\":")
-                .append(x1);
-        sb.append(",\"y1\":")
-                .append(y1);
+        sb.append(",\"x\":")
+                .append(x);
+        sb.append(",\"y\":")
+                .append(y);
         sb.append(",\"radius\":")
                 .append(radius);
         sb.append(",\"perimeter\":")
@@ -70,20 +70,20 @@ public class ShapeCircle {
         this.time = time;
     }
 
-    public Integer getX1() {
-        return x1;
+    public Integer getX() {
+        return x;
     }
 
-    public void setX1(Integer x1) {
-        this.x1 = x1;
+    public void setX(Integer x) {
+        this.x = x;
     }
 
-    public Integer getY1() {
-        return y1;
+    public Integer getY() {
+        return y;
     }
 
-    public void setY1(Integer y1) {
-        this.y1 = y1;
+    public void setY(Integer y) {
+        this.y = y;
     }
 
     public Integer getRadius() {

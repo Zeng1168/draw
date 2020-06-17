@@ -12,7 +12,7 @@ import java.awt.*;
 public enum DrawMathMode {
 
     RETANGLE("矩形", CursorTool.MOUSE_CURSOR, IconTool.retangle),
-    TRANGLE("三角形", CursorTool.RUBBER_CURSOR, IconTool.trangle),
+    TRIANGLE("三角形", CursorTool.RUBBER_CURSOR, IconTool.trangle),
     CIRCLE("圆形", CursorTool.PEN_CURSOR, IconTool.circle),
     ROSE("玫瑰", CursorTool.AIM_CURSOR, IconTool.rose),
     CONE("圆锥", CursorTool.AIM_CURSOR, IconTool.cone),

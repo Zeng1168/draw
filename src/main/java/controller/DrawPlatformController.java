@@ -1,20 +1,28 @@
 package controller;
 
+import api.DrawPlanformApi;
 import controller.drawMath.DrawMathController;
 import entity.module.DrawParams;
 import entity.module.Point;
 import sun.misc.BASE64Encoder;
+import utils.AlertUtil;
 import utils.DrawPlatformMode;
 import utils.ImageUtil;
+import utils.http.MyResponse;
+import utils.http.ResultCode;
+import view.DataQueryView;
 import view.drawMath.DrawMathView;
 import view.drawPlatform.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 平面绘图模式
@@ -262,7 +270,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 //                new PasswordModifyController();
             }break;
             case "文件-打开数据库文件" : {
-//                new ImageSaveController();
+                new DataQueryView(null);
             }break;
             case "文件-新建" : {
                 new DrawPlatformView();
@@ -271,7 +279,6 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
                 saveToDB();
             }break;
             case "文件-保存到文件" : {
-
             }break;
             case "编辑-撤销" : {
                 onOperateBack();
@@ -305,21 +312,26 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
             ImageIO.write(drawParams.getImage(), "jpeg", baos);
             byte[] bytes = baos.toByteArray();
             imageStr = encoder.encodeBuffer(bytes).trim();
+            String name=(String) JOptionPane.showInputDialog(drawPlatFormView, "请输入绘制图像名称：", "图像名称", JOptionPane.PLAIN_MESSAGE);
+
+            Map<String, String> params = new HashMap<>();
+            params.put("image", imageStr);
+            params.put("name", name);
+
+            // 请求网络数据
+            DrawPlanformApi drawPlanformApi = new DrawPlanformApi();
+
+            MyResponse response = drawPlanformApi.insert(params);
+            if(response.getStatus() == ResultCode.SUCCESS.getCode()){    // 成功
+                AlertUtil.infoDialog(response.getMsg());
+            }else { // 失败
+                AlertUtil.errorDialog(response.getMsg());
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
-//        Image image = new Image();
-//        image.setUserId(1);
-//        image.setTime(new Date());
-//        image.setImage(imageStr);
-//        ImageMapper imageMapper = new ImageMapper();
-//        if(imageMapper.insertImage(image) > 0){
-//            drawPlatform.showMessageDialog("保存成功！");
-//        }else {
-//            drawPlatform.showMessageDialog("保存失败！");
-//        }
     }
 
 

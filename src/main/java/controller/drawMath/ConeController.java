@@ -1,7 +1,16 @@
 package controller.drawMath;
 
+import api.ShapeBoxApi;
+import api.ShapeConeApi;
 import entity.ShapeCone;
+import utils.AlertUtil;
+import utils.http.MyResponse;
+import utils.http.ResultCode;
 import view.drawMath.DrawCone;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConeController implements DrawCone.Listener {
     private DrawCone drawCone;
@@ -9,6 +18,19 @@ public class ConeController implements DrawCone.Listener {
 
     public ConeController(DrawCone drawCone) {
         this.drawCone = drawCone;
+    }
+
+    public ConeController(DrawCone drawCone, ShapeCone shapeCone) {
+        this.drawCone = drawCone;
+        this.shapeCone = shapeCone;
+    }
+
+
+    public void onDraw() {
+        calculateInfo();
+        drawCone.drawShape(shapeCone);
+        drawCone.updateInfoArea(shapeCone);
+        drawCone.setInput(shapeCone);
     }
 
     @Override
@@ -23,6 +45,26 @@ public class ConeController implements DrawCone.Listener {
         // 绘制到界面
         drawCone.drawShape(shapeCone);
         drawCone.updateInfoArea(shapeCone);
+    }
+
+    @Override
+    public void saveToDataBase() {
+        String name=(String) JOptionPane.showInputDialog(drawCone, "请输入绘制图像名称：", "图像名称", JOptionPane.PLAIN_MESSAGE);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("h", shapeCone.getH() + "");
+        params.put("r", shapeCone.getR() + "");
+        params.put("name", name);
+
+        // 请求网络数据
+        ShapeConeApi api = new ShapeConeApi();
+
+        MyResponse response = api.insert(params);
+        if(response.getStatus() == ResultCode.SUCCESS.getCode()){    // 成功
+            AlertUtil.infoDialog(response.getMsg());
+        }else { // 失败
+            AlertUtil.errorDialog(response.getMsg());
+        }
     }
 
     // 信息计算

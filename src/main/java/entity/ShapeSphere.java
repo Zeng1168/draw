@@ -7,7 +7,7 @@ public class ShapeSphere {
     private Integer userId;
     private String name;
     private Date time;
-    private Float r;
+    private Integer r;
     private Double area;
     private Double volume; // 体积
 
@@ -24,8 +24,7 @@ public class ShapeSphere {
                 .append(time).append('\"');
         sb.append(",\"r\":")
                 .append(r);
-
-        sb.append(",\"superficial area\":")
+        sb.append(",\"area\":")
                 .append(area);
         sb.append(",\"volume\":")
                 .append(volume);
@@ -65,11 +64,11 @@ public class ShapeSphere {
         this.time = time;
     }
 
-    public Float getR() {
+    public Integer getR() {
         return r;
     }
 
-    public void setR(Float r) {
+    public void setR(Integer r) {
         this.r = r;
     }
 

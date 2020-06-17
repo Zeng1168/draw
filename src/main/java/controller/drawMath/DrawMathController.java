@@ -1,6 +1,7 @@
 package controller.drawMath;
 
 import utils.DrawMathMode;
+import view.DataQueryView;
 import view.drawMath.DrawMathView;
 import view.drawMath.LeftToolBar;
 import view.drawMath.TopMenuBar;
@@ -12,6 +13,7 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
     DrawMathMode mode;
 
     public DrawMathController(DrawMathView drawMathView) {
+        this.mode = DrawMathMode.TRIANGLE;
         this.drawMathView = drawMathView;
     }
 
@@ -29,7 +31,7 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
 //                new PasswordModifyController();
             }break;
             case "文件-打开数据库文件" : {
-                drawMathView.drawComponent.openDataBase();
+                new DataQueryView(mode);
             }break;
             case "文件-新建" : {
                 new DrawMathView();
