@@ -24,8 +24,8 @@ import java.util.*;
 
 public class HttpTool {
     // 设置配置请求参数
-    private static String baseUrl = "http://127.0.0.1:8086/";
-//    private static String baseUrl = "http://api.zeml.top:8086/";
+//    private static String baseUrl = "http://127.0.0.1:8086/";
+    private static String baseUrl = "http://api.zeml.top:8086/";
     private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(60000)    // 连接主机服务超时时间
             .setConnectionRequestTimeout(60000) // 请求超时时间
             .setSocketTimeout(120000)   // 数据读取超时时间
