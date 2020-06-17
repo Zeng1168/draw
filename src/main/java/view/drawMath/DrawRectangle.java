@@ -63,8 +63,8 @@ public class DrawRectangle extends JPanel implements IDraw{
     private void initComponent() {
         /* 111111111111111   以下为顶部标题、输入框组件   111111111111111 */
         // 创建各对象
-        x = new JTextField("5");
-        y = new JTextField("50");
+        x = new JTextField("");
+        y = new JTextField("");
         length = new JTextField();
         width = new JTextField();
         startDrawBtn = new JButton("绘制");
@@ -239,7 +239,7 @@ public class DrawRectangle extends JPanel implements IDraw{
         coordinateDraw(g2);
 
         // 画四条边
-       g2.drawRect(px1,py1,width,height);
+       g2.drawRect(px1,py1-height,width,height);
         // 画A点辅助线
         drawAuxiliaryLine(g2, Color.GREEN, "A", x, y, px1,py1);
 
@@ -279,6 +279,11 @@ public class DrawRectangle extends JPanel implements IDraw{
     @Override
     public void openDataBase() {
 
+    }
+
+    @Override
+    public void saveToFile() {
+        ImageUtil.saveToFile(image, this);
     }
 
     class ImagePanel extends JPanel{

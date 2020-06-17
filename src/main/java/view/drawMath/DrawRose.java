@@ -312,4 +312,9 @@ public class DrawRose extends JPanel implements IDraw{
 
     }
 
+    @Override
+    public void saveToFile() {
+        ImageUtil.saveToFile(image, this);
+    }
+
 }

@@ -4,6 +4,10 @@ import api.DrawPlanformApi;
 import controller.drawMath.DrawMathController;
 import entity.module.DrawParams;
 import entity.module.Point;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sun.misc.BASE64Encoder;
 import utils.AlertUtil;
 import utils.DrawPlatformMode;
@@ -11,6 +15,7 @@ import utils.ImageUtil;
 import utils.http.MyResponse;
 import utils.http.ResultCode;
 import view.DataQueryView;
+import view.PasswordModifyView;
 import view.drawMath.DrawMathView;
 import view.drawPlatform.*;
 
@@ -267,7 +272,10 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
     public void onMenuItemClick(String command) {
         switch (command){
             case "用户-修改密码" : {
-//                new PasswordModifyController();
+                new PasswordModifyView();
+            }break;
+            case "用户-注销" : {
+                drawPlatFormView.dispose();
             }break;
             case "文件-打开数据库文件" : {
                 new DataQueryView(null);
@@ -279,6 +287,7 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
                 saveToDB();
             }break;
             case "文件-保存到文件" : {
+                ImageUtil.saveToFile(drawParams.getImage(), drawPlatFormView);
             }break;
             case "编辑-撤销" : {
                 onOperateBack();
@@ -340,14 +349,4 @@ public class DrawPlatformController implements TopMenuBar.TopMenuListener, TopTo
 
     }
 
-
-    // 存为文件
-    private void saveToFile(String fileName,String fileSrc) {
-        try {
-            ImageIO.write(drawParams.getImage(), "jpeg", new File(fileSrc+fileName+".jpeg"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }

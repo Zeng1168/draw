@@ -23,6 +23,6 @@ public class ShapeTriangleApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("shapeTriangle/delete", params);
+        return  HttpTool.doGet("shapeTriangle/delete", params);
     }
 }

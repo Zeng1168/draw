@@ -23,6 +23,6 @@ public class ShapeRectagleApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("shapeRectagle/delete", params);
+        return  HttpTool.doGet("shapeRectagle/delete", params);
     }
 }

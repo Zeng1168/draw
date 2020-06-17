@@ -8,6 +8,7 @@ import controller.drawMath.BoxController;
 import entity.ShapeBox;
 import utils.AlertUtil;
 import utils.DataCheck;
+import utils.ImageUtil;
 
 import javax.media.j3d.*;
 import javax.swing.*;
@@ -288,6 +289,11 @@ public class DrawBox extends JPanel implements IDraw {
     @Override
     public void openDataBase() {
 
+    }
+
+    @Override
+    public void saveToFile() {
+//        ImageUtil.saveToFile(im, drawPlatFormView);
     }
 
 

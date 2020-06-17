@@ -23,6 +23,6 @@ public class ShapeSphereApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("shapeSphere/delete", params);
+        return  HttpTool.doGet("shapeSphere/delete", params);
     }
 }

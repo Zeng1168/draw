@@ -265,6 +265,11 @@ public class DrawSphere extends JPanel implements  IDraw{
 
     }
 
+    @Override
+    public void saveToFile() {
+//        ImageUtil.saveToFile(im, drawPlatFormView);
+    }
+
 
     // 自定义监听器
     public interface Listener{

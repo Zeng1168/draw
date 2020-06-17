@@ -424,6 +424,11 @@ public class DrawTriangle extends JPanel implements IDraw {
 
     }
 
+    @Override
+    public void saveToFile() {
+        ImageUtil.saveToFile(image, this);
+    }
+
     class ImagePanel extends JPanel{
         @Override
         public void paint(Graphics g) {

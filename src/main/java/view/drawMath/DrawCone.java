@@ -293,6 +293,11 @@ public class DrawCone extends JPanel implements IDraw  {
 
     }
 
+    @Override
+    public void saveToFile() {
+
+    }
+
 
     // 自定义监听器
     public interface Listener{

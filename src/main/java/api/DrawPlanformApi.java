@@ -23,7 +23,7 @@ public class DrawPlanformApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("drawPlanform/delete", params);
+        return  HttpTool.doGet("drawPlanform/delete", params);
     }
 
     // 获取协同绘图邀请码

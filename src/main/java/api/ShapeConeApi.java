@@ -23,6 +23,6 @@ public class ShapeConeApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("shapeCone/delete", params);
+        return  HttpTool.doGet("shapeCone/delete", params);
     }
 }

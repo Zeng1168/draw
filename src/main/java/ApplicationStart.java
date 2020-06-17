@@ -13,7 +13,6 @@ public class ApplicationStart extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-//        new DrawPlatformView();
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("layout/Login.fxml"));
         root.getStylesheets().add(getClass().getClassLoader().getResource("style/login.css").toExternalForm());

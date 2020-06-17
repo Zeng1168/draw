@@ -1,6 +1,11 @@
 package utils;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageUtil {
 
@@ -18,6 +23,31 @@ public class ImageUtil {
         copy.getGraphics().drawImage(image, 0, 0, image.getWidth(), image.getHeight(),null);    // 将目标image复制到新创建的image上
 
         return copy;
+    }
+
+
+    // 存为文件
+    public static void saveToFile(BufferedImage image, Component component) {
+        try {
+            int result = 0;
+            String path = null;
+            JFileChooser fileChooser = new JFileChooser();
+            FileSystemView fsv = FileSystemView.getFileSystemView();  //注意了，这里重要的一句
+            System.out.println(fsv.getHomeDirectory());                //得到桌面路径
+            fileChooser.setCurrentDirectory(fsv.getHomeDirectory());
+            fileChooser.setDialogTitle("请选择要保存的目录和文件名");
+            fileChooser.setApproveButtonText("确定");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            result = fileChooser.showOpenDialog(component);
+            if (JFileChooser.APPROVE_OPTION == result) {
+                path=fileChooser.getSelectedFile().getPath();
+                System.out.println("path: "+path);
+                ImageIO.write(image, "jpeg", new File(path+".jpeg"));
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**

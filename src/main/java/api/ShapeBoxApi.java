@@ -23,6 +23,6 @@ public class ShapeBoxApi {
 
     // 删除
     public MyResponse delete(Map<String, String> params){
-        return  HttpTool.doPost("shapeBox/delete", params);
+        return  HttpTool.doGet("shapeBox/delete", params);
     }
 }

@@ -2,6 +2,7 @@ package controller.drawMath;
 
 import utils.DrawMathMode;
 import view.DataQueryView;
+import view.PasswordModifyView;
 import view.drawMath.DrawMathView;
 import view.drawMath.LeftToolBar;
 import view.drawMath.TopMenuBar;
@@ -30,7 +31,10 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
 
         switch (command){
             case "用户-修改密码" : {
-//                new PasswordModifyController();
+                new PasswordModifyView();
+            }break;
+            case "用户-注销" : {
+                drawMathView.dispose();
             }break;
             case "文件-打开数据库文件" : {
                 new DataQueryView(mode);
@@ -42,9 +46,9 @@ public class DrawMathController implements TopMenuBar.TopMenuListener, LeftToolB
                 drawMathView.drawComponent.saveToDataBase();
             }break;
             case "文件-保存到文件" : {
-
+                drawMathView.drawComponent.saveToFile();
             }break;
-            case "编辑-清空" : {
+            case "编辑-清空输入" : {
                 drawMathView.drawComponent.clean();
             }break;
             case "画板模式-平面绘图模式" : {

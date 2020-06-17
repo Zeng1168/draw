@@ -259,8 +259,8 @@ public class DrawCircle extends JPanel implements IDraw{
         // 画三点辅助线
        // drawAuxiliaryLine(g2, Color.ORANGE, "Q", x0, y0, px0, py0);
         drawAuxiliaryLine(g2, Color.GREEN, "O", x1, y1, px1, py1);
-        drawAuxiliaryLine(g2, Color.BLUE, "A", x2, y2, px2, py2);
-       // drawAuxiliaryLine(g2, Color.RED, "B", x3, y3, px3, py3);
+//        drawAuxiliaryLine(g2, Color.BLUE, "A", x2, y2, px2, py2);
+//        drawAuxiliaryLine(g2, Color.RED, "B", x3, y3, px3, py3);
         g2.setColor(Color.BLACK);   // 恢复黑色
 
         // 画坐标轴
@@ -306,6 +306,11 @@ public class DrawCircle extends JPanel implements IDraw{
     @Override
     public void openDataBase() {
 
+    }
+
+    @Override
+    public void saveToFile() {
+        ImageUtil.saveToFile(image, this);
     }
 
     private class ImagePanel extends JPanel{

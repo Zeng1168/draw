@@ -27,14 +27,14 @@ public class TopMenuBar extends JMenuBar implements ActionListener {
 		// 添加一个菜单
 		menuItemEntityList = new ArrayList<>();
 		menuItemEntityList.add(new MenuItemEntity("修改密码"));
+		menuItemEntityList.add(new MenuItemEntity("注销"));
 		menuEntity = new MenuEntity("用户", "src/main/resources/img_source/user1.png", menuItemEntityList);
 		menuList.add(menuEntity);
 
 		// 添加一个菜单
 		menuItemEntityList = new ArrayList<>();
-		menuItemEntityList.add(new MenuItemEntity("打开本地文件"));
-		menuItemEntityList.add(new MenuItemEntity("打开数据库文件"));
 		menuItemEntityList.add(new MenuItemEntity("新建"));
+		menuItemEntityList.add(new MenuItemEntity("打开数据库文件"));
 		menuItemEntityList.add(new MenuItemEntity("保存到数据库"));
 		menuItemEntityList.add(new MenuItemEntity("保存到文件"));
 		menuEntity = new MenuEntity("文件",  menuItemEntityList);
