@@ -219,9 +219,17 @@ public class DrawRectangle extends JPanel implements IDraw{
         maxScale = x;
         maxScale = maxScale>x?maxScale:x;
         maxScale = maxScale>y?maxScale:y;
-        maxScale = maxScale>w?maxScale:w;
-        maxScale = maxScale>l?maxScale:l;
+        maxScale = maxScale>x+w?maxScale:x+w;
+        maxScale = maxScale>y+l?maxScale:y+l;
+
+        if(maxScale>sizeY-margin*3){
+            AlertUtil.errorDialog("坐标数值大于" + (sizeY-margin*3) + ",无法进行绘制！");
+            return;
+        }
+
+
         mS = (sizeY-margin*3)/(maxScale);
+
         // 将三点坐标转换成实际像素坐标点
         int px1 = x*mS + margin;
         int py1 = sizeY - margin - y*mS;
